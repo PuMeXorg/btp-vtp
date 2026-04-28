@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HomepageBlock;
 use App\Models\News;
 use App\Models\Page;
 use App\Models\Portfolio;
@@ -10,20 +11,29 @@ use App\Models\Video;
 class PageController extends Controller
 {
     public function home()
-{
-    // Берём дочерние услуги (реальные услуги, не родитель)
-    $services = Page::active()
-        ->where('type', 'service')
-        ->whereNotNull('parent_id')
-        ->orderBy('sort')
-        ->take(6)
-        ->get();
+    {
+        $blocks = HomepageBlock::active()->get();
 
-    $news      = News::active()->take(3)->get();
-    $portfolio = Portfolio::active()->take(6)->get();
+        $services = Page::active()
+            ->where('type', 'service')
+            ->whereNotNull('parent_id')
+            ->orderBy('sort')
+            ->take(6)
+            ->get();
 
-    return view('pages.home', compact('services', 'news', 'portfolio'));
-}
+        $news = News::active()->take(3)->get();
+
+        $portfolio = Portfolio::active()
+            ->take(6)
+            ->get();
+
+        return view('pages.home', compact(
+            'blocks',
+            'services',
+            'news',
+            'portfolio'
+        ));
+    }
 
     public function about()
     {
@@ -45,31 +55,51 @@ class PageController extends Controller
 
     public function services()
     {
-        $services = Page::active()->where('type', 'service')
-                        ->whereNull('parent_id')->orderBy('sort')->get();
+        $services = Page::active()
+            ->where('type', 'service')
+            ->whereNull('parent_id')
+            ->orderBy('sort')
+            ->get();
+
         return view('pages.services', compact('services'));
     }
 
     public function service(string $slug)
     {
-        $page     = Page::active()->where('type', 'service')
-                        ->where('slug', $slug)->firstOrFail();
-        $children = $page->children()->where('type', 'service')->get();
+        $page = Page::active()
+            ->where('type', 'service')
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        $children = $page->children()
+            ->where('type', 'service')
+            ->get();
+
         return view('pages.service', compact('page', 'children'));
     }
 
     public function catalog()
     {
-        $items = Page::active()->where('type', 'catalog')
-                     ->whereNull('parent_id')->orderBy('sort')->get();
+        $items = Page::active()
+            ->where('type', 'catalog')
+            ->whereNull('parent_id')
+            ->orderBy('sort')
+            ->get();
+
         return view('pages.catalog', compact('items'));
     }
 
     public function catalogItem(string $slug)
     {
-        $page     = Page::active()->where('type', 'catalog')
-                        ->where('slug', $slug)->firstOrFail();
-        $children = $page->children()->where('type', 'catalog')->get();
+        $page = Page::active()
+            ->where('type', 'catalog')
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        $children = $page->children()
+            ->where('type', 'catalog')
+            ->get();
+
         return view('pages.catalog-item', compact('page', 'children'));
     }
 
@@ -87,7 +117,10 @@ class PageController extends Controller
 
     public function newsItem(string $slug)
     {
-        $item = News::active()->where('slug', $slug)->firstOrFail();
+        $item = News::active()
+            ->where('slug', $slug)
+            ->firstOrFail();
+
         return view('pages.news-item', compact('item'));
     }
 
@@ -110,7 +143,10 @@ class PageController extends Controller
 
     public function portfolioItem(string $slug)
     {
-        $item = Portfolio::active()->where('slug', $slug)->firstOrFail();
+        $item = Portfolio::active()
+            ->where('slug', $slug)
+            ->firstOrFail();
+
         return view('pages.portfolio-item', compact('item'));
     }
 }
