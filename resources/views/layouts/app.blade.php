@@ -23,8 +23,11 @@
             }
         }
     </script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <style>
         [x-cloak] { display: none !important; }
         html { scroll-behavior: smooth; }
@@ -33,6 +36,20 @@
         /* Подменю */
         .has-dropdown:hover > .dropdown { display: block; }
         .has-submenu:hover > .submenu { display: block; }
+
+        .dropdown,
+        .submenu {
+            white-space: normal;
+        }
+
+        /* Чтобы 3-й уровень меню не обрезался */
+        nav {
+            overflow: visible;
+        }
+
+        header {
+            overflow: visible;
+        }
 
         /* Анимация подчёркивания для пунктов меню */
         .nav-link::after {
@@ -43,19 +60,36 @@
             transform: scaleX(0);
             transition: transform 0.2s;
         }
-        .nav-link:hover::after { transform: scaleX(1); }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
     </style>
 
     @if($yandexMetrika)
-    <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        var z=m[i];z.l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],
-        k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-        (window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
-        ym({{ $yandexMetrika }},"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
-    </script>
+        <script type="text/javascript">
+            (function(m,e,t,r,i,k,a){
+                m[i]=m[i]||function(){
+                    (m[i].a=m[i].a||[]).push(arguments)
+                };
+                var z=m[i];
+                z.l=1*new Date();
+                k=e.createElement(t);
+                a=e.getElementsByTagName(t)[0];
+                k.async=1;
+                k.src=r;
+                a.parentNode.insertBefore(k,a)
+            })(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+
+            ym({{ $yandexMetrika }},"init",{
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true
+            });
+        </script>
     @endif
 </head>
+
 <body class="text-gray-800 bg-white">
 
 {{-- Верхняя строка --}}
@@ -63,16 +97,18 @@
     <div class="container mx-auto max-w-7xl px-4 py-2 flex justify-between items-center">
         <div class="flex items-center gap-5">
             @if($regionAddress)
-            <span class="flex items-center gap-1">
-                <i class="fa-solid fa-location-dot text-primary"></i>
-                {{ $regionAddress }}
-            </span>
+                <span class="flex items-center gap-1">
+                    <i class="fa-solid fa-location-dot text-primary"></i>
+                    {{ $regionAddress }}
+                </span>
             @endif
+
             <span class="flex items-center gap-1">
                 <i class="fa-regular fa-clock text-primary"></i>
                 {{ $regionHours }}
             </span>
         </div>
+
         <div class="flex items-center gap-4">
             <a href="mailto:{{ $regionEmail }}" class="flex items-center gap-1 hover:text-white transition">
                 <i class="fa-regular fa-envelope"></i>
@@ -98,12 +134,17 @@
             {{-- Логотип --}}
             <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center gap-3">
                 <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L2 12h3v9h6v-6h2v6h6v-9h3L12 3z"/></svg>
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 3L2 12h3v9h6v-6h2v6h6v-9h3L12 3z"/>
+                    </svg>
                 </div>
-                <span class="text-xl font-bold text-gray-900 leading-tight">{{ $siteName }}</span>
+
+                <span class="text-xl font-bold text-gray-900 leading-tight">
+                    {{ $siteName }}
+                </span>
             </a>
 
-            {{-- Регион (desktop) --}}
+            {{-- Регион desktop --}}
             <div class="hidden lg:block flex-shrink-0" x-data="{ open: false }">
                 <button @click="open = !open"
                     class="flex items-center gap-2 text-sm text-gray-600 hover:text-primary border border-gray-200 rounded-lg px-3 py-2 transition hover:border-primary">
@@ -111,29 +152,37 @@
                     <span class="font-medium">{{ $regionName ?: 'Регион' }}</span>
                     <i class="fa-solid fa-chevron-down text-xs"></i>
                 </button>
+
                 <div x-show="open" @click.away="open = false" x-cloak
                     class="absolute mt-1 bg-white border border-gray-100 rounded-xl shadow-xl py-2 z-50 min-w-[200px]">
+
                     <form method="POST" action="{{ route('region.set') }}" class="contents">
                         @csrf
+
                         <input type="hidden" name="redirect" value="{{ url()->current() }}">
+
                         @foreach($allRegions as $region)
-                        <button type="submit" name="region" value="{{ $region->slug }}"
-                            class="flex items-center gap-3 w-full text-left px-4 py-2.5 text-sm hover:bg-blue-50 hover:text-primary transition
+                            <button type="submit" name="region" value="{{ $region->slug }}"
+                                class="flex items-center gap-3 w-full text-left px-4 py-2.5 text-sm hover:bg-blue-50 hover:text-primary transition
                                 {{ ($currentRegion && $currentRegion->slug === $region->slug) ? 'text-primary font-semibold bg-blue-50' : 'text-gray-700' }}">
-                            @if($currentRegion && $currentRegion->slug === $region->slug)
-                            <i class="fa-solid fa-check text-primary text-xs"></i>
-                            @else
-                            <span class="w-3"></span>
-                            @endif
-                            {{ $region->name }}
-                        </button>
+
+                                @if($currentRegion && $currentRegion->slug === $region->slug)
+                                    <i class="fa-solid fa-check text-primary text-xs"></i>
+                                @else
+                                    <span class="w-3"></span>
+                                @endif
+
+                                {{ $region->name }}
+                            </button>
                         @endforeach
+
                         @if($currentRegion)
-                        <hr class="my-1 border-gray-100">
-                        <button type="submit" name="region" value="default"
-                            class="w-full text-left px-4 py-2 text-xs text-gray-400 hover:text-gray-600 transition">
-                            Сбросить регион
-                        </button>
+                            <hr class="my-1 border-gray-100">
+
+                            <button type="submit" name="region" value="default"
+                                class="w-full text-left px-4 py-2 text-xs text-gray-400 hover:text-gray-600 transition">
+                                Сбросить регион
+                            </button>
                         @endif
                     </form>
                 </div>
@@ -146,7 +195,10 @@
                     <i class="fa-solid fa-phone text-primary"></i>
                     {{ $regionPhone }}
                 </a>
-                <p class="text-xs text-gray-400 mt-0.5 ml-7">{{ $regionHours }}</p>
+
+                <p class="text-xs text-gray-400 mt-0.5 ml-7">
+                    {{ $regionHours }}
+                </p>
             </div>
 
             {{-- Поиск + кнопки --}}
@@ -157,17 +209,22 @@
                     <button @click="open = !open; $nextTick(() => $refs.searchInput && $refs.searchInput.focus())"
                         class="w-9 h-9 flex items-center justify-center text-gray-500 hover:text-primary hover:bg-blue-50 rounded-lg transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </button>
+
                     <div x-show="open" @click.away="open = false" x-cloak
                         class="absolute right-0 top-full mt-2 w-72 bg-white border border-gray-200 rounded-xl shadow-xl p-3 z-50">
+
                         <form action="{{ route('services') }}" method="GET" class="flex gap-2">
                             <input x-ref="searchInput" type="text" name="q" placeholder="Поиск по сайту..."
                                 class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+
                             <button type="submit" class="bg-primary hover:bg-primary-dark text-white px-3 py-2 rounded-lg transition">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                                 </svg>
                             </button>
                         </form>
@@ -178,6 +235,7 @@
                     class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-4 py-2 rounded-lg font-medium transition text-sm whitespace-nowrap">
                     Заказать звонок
                 </button>
+
                 <button @click="modalOpen = true; modalType = 'order'"
                     class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-medium transition text-sm whitespace-nowrap shadow-md shadow-blue-200">
                     Оставить заявку
@@ -185,12 +243,17 @@
             </div>
 
             {{-- Бургер --}}
-            <button @click="mobileOpen = !mobileOpen" class="md:hidden p-2 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg transition">
+            <button @click="mobileOpen = !mobileOpen"
+                class="md:hidden p-2 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg transition">
+
                 <svg x-show="!mobileOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 6h16M4 12h16M4 18h16"/>
                 </svg>
+
                 <svg x-show="mobileOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M6 18L18 6M6 6l12 12"/>
                 </svg>
             </button>
         </div>
@@ -206,86 +269,132 @@
                     <a href="{{ route('about') }}"
                         class="nav-link flex items-center gap-1.5 text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">
                         О компании
-                        <svg class="w-3 h-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        <svg class="w-3 h-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
                     </a>
-                    <div class="dropdown hidden absolute top-full left-0 bg-white rounded-b-xl shadow-2xl py-2 z-40 min-w-[220px] border-t-2 border-primary">
-                        <a href="{{ route('about') }}"        class="flex items-center gap-2 px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50">
-                            <svg class="w-4 h-4 text-primary opacity-60" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            О компании
+
+                    <div class="dropdown hidden absolute top-full left-0 bg-white rounded-b-xl shadow-2xl py-2 z-40 min-w-[260px] border-t-2 border-primary">
+                        <a href="{{ route('about') }}"
+                            class="flex items-center gap-2 px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50">
+                            <i class="fa-solid fa-circle-info text-primary opacity-60 w-4"></i>
+                            О нас
                         </a>
-                        <a href="{{ route('certificates') }}" class="flex items-center gap-2 px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50">
-                            <svg class="w-4 h-4 text-primary opacity-60" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-                            Сертификаты
+
+                        <a href="{{ route('certificates') }}"
+                            class="flex items-center gap-2 px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50">
+                            <i class="fa-solid fa-certificate text-primary opacity-60 w-4"></i>
+                            Сертификаты ВТП
                         </a>
-                        <a href="{{ route('requisites') }}"   class="flex items-center gap-2 px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition">
-                            <svg class="w-4 h-4 text-primary opacity-60" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                            Реквизиты
+
+                        <a href="{{ url('/sobstvennoe-proizvodstvo') }}"
+                            class="flex items-center gap-2 px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition">
+                            <i class="fa-solid fa-industry text-primary opacity-60 w-4"></i>
+                            Собственное производство
                         </a>
                     </div>
                 </div>
 
-                {{-- ИТП --}}
+                {{-- Услуги --}}
                 @if($menuServices->count())
-                <div class="has-dropdown relative">
-                    <a href="{{ route('services') }}"
-                        class="nav-link flex items-center gap-1.5 text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">
-                        ИТП
-                        <svg class="w-3 h-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </a>
-                    <div class="dropdown hidden absolute top-full left-0 bg-white rounded-b-xl shadow-2xl py-2 z-40 min-w-[340px] border-t-2 border-primary">
-                        @foreach($menuServices as $service)
-                            @foreach($service->children as $child)
-                                @if($child->children->count())
-                                <div class="has-submenu relative">
-                                    <div class="flex items-center justify-between px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50 cursor-pointer group">
-                                        <a href="{{ route('service', $child->slug) }}" class="flex-1 font-medium">{{ $child->title }}</a>
-                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                                    </div>
-                                    <div class="submenu hidden absolute left-full top-0 bg-white rounded-xl shadow-2xl py-2 z-50 min-w-[360px] border-l-2 border-primary ml-0.5">
-                                        @foreach($child->children as $grandchild)
-                                        <a href="{{ route('service', $grandchild->slug) }}"
-                                            class="block px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50 leading-snug">
-                                            {{ $grandchild->title }}
-                                        </a>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                @else
-                                <a href="{{ route('service', $child->slug) }}"
-                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50">
-                                    {{ $child->title }}
-                                </a>
-                                @endif
-                            @endforeach
-                        @endforeach
-                    </div>
-                </div>
-                @endif
-
-                {{-- Шкафы автоматики --}}
-                @if($menuCatalog->count())
-                <div class="has-dropdown relative">
-                    <a href="{{ route('catalog') }}"
-                        class="nav-link flex items-center gap-1.5 text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">
-                        Шкафы автоматики
-                        <svg class="w-3 h-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </a>
-                    <div class="dropdown hidden absolute top-full left-0 bg-white rounded-b-xl shadow-2xl py-2 z-40 min-w-[300px] border-t-2 border-primary">
-                        @foreach($menuCatalog as $item)
-                        <a href="{{ route('catalog.item', $item->slug) }}"
-                            class="block px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50">
-                            {{ $item->title }}
+                    <div class="has-dropdown relative">
+                        <a href="{{ route('services') }}"
+                            class="nav-link flex items-center gap-1.5 text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">
+                            Услуги
+                            <svg class="w-3 h-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
                         </a>
-                        @endforeach
+
+                        <div class="dropdown hidden absolute top-full left-0 bg-white rounded-b-xl shadow-2xl py-2 z-40 min-w-[380px] border-t-2 border-primary">
+
+                            @foreach($menuServices as $service)
+
+                                @if($service->children->count())
+                                    <div class="has-submenu relative">
+                                        <div class="flex items-center justify-between px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50 cursor-pointer group">
+                                            <a href="{{ route('service', $service->slug) }}" class="flex-1 font-medium leading-snug">
+                                                {{ $service->title }}
+                                            </a>
+
+                                            <svg class="w-4 h-4 text-gray-400 group-hover:text-primary flex-shrink-0 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                            </svg>
+                                        </div>
+
+                                        <div class="submenu hidden absolute left-full top-0 bg-white rounded-xl shadow-2xl py-2 z-50 min-w-[380px] border-l-2 border-primary ml-0.5">
+
+                                            @foreach($service->children as $child)
+
+                                                @if($child->children->count())
+                                                    <div class="has-submenu relative">
+                                                        <div class="flex items-center justify-between px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50 cursor-pointer group">
+                                                            <a href="{{ route('service', $child->slug) }}" class="flex-1 font-medium leading-snug">
+                                                                {{ $child->title }}
+                                                            </a>
+
+                                                            <svg class="w-4 h-4 text-gray-400 group-hover:text-primary flex-shrink-0 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                                            </svg>
+                                                        </div>
+
+                                                        <div class="submenu hidden absolute left-full top-0 bg-white rounded-xl shadow-2xl py-2 z-50 min-w-[380px] border-l-2 border-primary ml-0.5">
+                                                            @foreach($child->children as $grandchild)
+                                                                <a href="{{ route('service', $grandchild->slug) }}"
+                                                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50 leading-snug">
+                                                                    {{ $grandchild->title }}
+                                                                </a>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <a href="{{ route('service', $child->slug) }}"
+                                                        class="block px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50 leading-snug">
+                                                        {{ $child->title }}
+                                                    </a>
+                                                @endif
+
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+                                @else
+                                    <a href="{{ route('service', $service->slug) }}"
+                                        class="block px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50 leading-snug">
+                                        {{ $service->title }}
+                                    </a>
+                                @endif
+
+                            @endforeach
+
+                        </div>
                     </div>
-                </div>
                 @endif
 
-                <a href="{{ route('prices') }}"    class="nav-link text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">Цены</a>
-                <a href="{{ route('news') }}"      class="nav-link text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">Новости</a>
-                <a href="{{ route('videos') }}"    class="nav-link text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">Видео</a>
-                <a href="{{ route('contacts') }}"  class="nav-link text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">Контакты</a>
-                <a href="{{ route('portfolio') }}" class="nav-link text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">Портфолио</a>
+                <a href="{{ route('prices') }}"
+                    class="nav-link text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">
+                    Цены
+                </a>
+
+                <a href="{{ route('news') }}"
+                    class="nav-link text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">
+                    Новости
+                </a>
+
+                <a href="{{ route('videos') }}"
+                    class="nav-link text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">
+                    Видео
+                </a>
+
+                <a href="{{ route('contacts') }}"
+                    class="nav-link text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">
+                    Контакты
+                </a>
+
+                <a href="{{ route('portfolio') }}"
+                    class="nav-link text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">
+                    Портфолио
+                </a>
 
             </div>
         </div>
@@ -294,39 +403,118 @@
     {{-- Мобильное меню --}}
     <div x-show="mobileOpen" x-cloak class="md:hidden border-t bg-white shadow-lg">
         <div class="px-4 py-3 space-y-1">
-            <a href="{{ route('about') }}"     class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">О компании</a>
-            <a href="{{ route('services') }}"  class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">ИТП</a>
-            <a href="{{ route('catalog') }}"   class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">Шкафы автоматики</a>
-            <a href="{{ route('prices') }}"    class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">Цены</a>
-            <a href="{{ route('news') }}"      class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">Новости</a>
-            <a href="{{ route('videos') }}"    class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">Видео</a>
-            <a href="{{ route('contacts') }}"  class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">Контакты</a>
-            <a href="{{ route('portfolio') }}" class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">Портфолио</a>
+
+            <a href="{{ route('about') }}"
+                class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
+                О компании
+            </a>
+
+            <a href="{{ route('certificates') }}"
+                class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
+                Сертификаты ВТП
+            </a>
+
+            <a href="{{ url('/sobstvennoe-proizvodstvo') }}"
+                class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
+                Собственное производство
+            </a>
+
+            <a href="{{ route('services') }}"
+                class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
+                Услуги
+            </a>
+
+            @if($menuServices->count())
+                <div class="pl-3 border-l border-blue-100 ml-3 space-y-1">
+                    @foreach($menuServices as $service)
+                        <a href="{{ route('service', $service->slug) }}"
+                            class="block px-3 py-2 text-sm rounded-lg text-gray-600 hover:bg-blue-50 hover:text-primary transition">
+                            {{ $service->title }}
+                        </a>
+
+                        @if($service->children->count())
+                            <div class="pl-3 border-l border-gray-100 ml-3">
+                                @foreach($service->children as $child)
+                                    <a href="{{ route('service', $child->slug) }}"
+                                        class="block px-3 py-1.5 text-xs rounded-lg text-gray-500 hover:bg-blue-50 hover:text-primary transition">
+                                        — {{ $child->title }}
+                                    </a>
+
+                                    @if($child->children->count())
+                                        <div class="pl-3">
+                                            @foreach($child->children as $grandchild)
+                                                <a href="{{ route('service', $grandchild->slug) }}"
+                                                    class="block px-3 py-1.5 text-xs rounded-lg text-gray-400 hover:bg-blue-50 hover:text-primary transition">
+                                                    • {{ $grandchild->title }}
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            @endif
+
+            <a href="{{ route('prices') }}"
+                class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
+                Цены
+            </a>
+
+            <a href="{{ route('news') }}"
+                class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
+                Новости
+            </a>
+
+            <a href="{{ route('videos') }}"
+                class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
+                Видео
+            </a>
+
+            <a href="{{ route('contacts') }}"
+                class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
+                Контакты
+            </a>
+
+            <a href="{{ route('portfolio') }}"
+                class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
+                Портфолио
+            </a>
         </div>
+
         <div class="px-4 pb-4 space-y-3 border-t pt-3">
             <a href="tel:{{ preg_replace('/[^+\d]/', '', $regionPhone) }}"
                 class="flex items-center justify-center gap-2 font-bold text-xl text-primary">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
                 {{ $regionPhone }}
             </a>
+
             <form method="POST" action="{{ route('region.set') }}">
                 @csrf
+
                 <input type="hidden" name="redirect" value="{{ url()->current() }}">
+
                 <select name="region" onchange="this.form.submit()"
                     class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
                     <option value="">Выбрать регион</option>
+
                     @foreach($allRegions as $region)
-                    <option value="{{ $region->slug }}"
-                        {{ ($currentRegion && $currentRegion->slug === $region->slug) ? 'selected' : '' }}>
-                        {{ $region->name }}
-                    </option>
+                        <option value="{{ $region->slug }}"
+                            {{ ($currentRegion && $currentRegion->slug === $region->slug) ? 'selected' : '' }}>
+                            {{ $region->name }}
+                        </option>
                     @endforeach
                 </select>
             </form>
+
             <button @click="modalOpen = true; modalType = 'callback'; mobileOpen = false"
                 class="w-full border-2 border-primary text-primary py-2.5 rounded-lg font-medium">
                 Заказать звонок
             </button>
+
             <button @click="modalOpen = true; modalType = 'order'; mobileOpen = false"
                 class="w-full bg-primary text-white py-2.5 rounded-lg font-medium shadow-md shadow-blue-200">
                 Оставить заявку
@@ -338,81 +526,120 @@
     <div x-show="modalOpen" x-cloak
         class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
         @click.self="modalOpen = false">
+
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 relative">
+
             <button @click="modalOpen = false"
                 class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M6 18L18 6M6 6l12 12"/>
                 </svg>
             </button>
 
+            {{-- Callback --}}
             <div x-show="modalType === 'callback'">
                 <div class="flex items-center gap-3 mb-5">
                     <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                        <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
                     </div>
+
                     <div>
                         <h3 class="text-xl font-bold">Заказать звонок</h3>
                         <p class="text-sm text-gray-500">Перезвоним в течение 15 минут</p>
                     </div>
                 </div>
+
                 <form id="callbackForm" action="{{ route('lead.callback') }}" method="POST">
                     @csrf
+
                     <input type="hidden" name="source_url" value="{{ url()->current() }}">
+
                     <div class="space-y-3">
                         <input type="text" name="name" placeholder="Ваше имя"
                             class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition">
+
                         <input type="tel" name="phone" placeholder="Ваш телефон *" required
                             class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition">
+
                         <button type="button" onclick="submitForm('callbackForm', '{{ route('lead.callback') }}', 'callback-success')"
                             class="w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-xl font-semibold transition shadow-md shadow-blue-200">
                             Перезвоните мне
                         </button>
                     </div>
-                    <p class="text-xs text-gray-400 mt-3 text-center">Нажимая кнопку, вы соглашаетесь с <a href="#" class="underline hover:text-gray-600">политикой конфиденциальности</a></p>
+
+                    <p class="text-xs text-gray-400 mt-3 text-center">
+                        Нажимая кнопку, вы соглашаетесь с
+                        <a href="#" class="underline hover:text-gray-600">политикой конфиденциальности</a>
+                    </p>
                 </form>
+
                 <div id="callback-success" class="hidden text-center py-8">
                     <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
                     </div>
+
                     <p class="font-bold text-lg">Спасибо!</p>
                     <p class="text-gray-500 mt-1">Мы перезвоним вам в ближайшее время.</p>
                 </div>
             </div>
 
+            {{-- Order --}}
             <div x-show="modalType === 'order'">
                 <div class="flex items-center gap-3 mb-5">
                     <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                        <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+                        <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
+                        </svg>
                     </div>
+
                     <div>
                         <h3 class="text-xl font-bold">Оставить заявку</h3>
                         <p class="text-sm text-gray-500">Свяжемся в течение 1 часа</p>
                     </div>
                 </div>
+
                 <form id="orderForm" action="{{ route('lead.order') }}" method="POST">
                     @csrf
+
                     <input type="hidden" name="source_url" value="{{ url()->current() }}">
+
                     <div class="space-y-3">
                         <input type="text" name="name" placeholder="Ваше имя *" required
                             class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition">
+
                         <input type="tel" name="phone" placeholder="Телефон *" required
                             class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition">
+
                         <input type="email" name="email" placeholder="Email"
                             class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition">
+
                         <textarea name="comment" placeholder="Комментарий" rows="3"
                             class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition resize-none"></textarea>
+
                         <button type="button" onclick="submitForm('orderForm', '{{ route('lead.order') }}', 'order-success')"
                             class="w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-xl font-semibold transition shadow-md shadow-blue-200">
                             Отправить заявку
                         </button>
                     </div>
-                    <p class="text-xs text-gray-400 mt-3 text-center">Нажимая кнопку, вы соглашаетесь с <a href="#" class="underline hover:text-gray-600">политикой конфиденциальности</a></p>
+
+                    <p class="text-xs text-gray-400 mt-3 text-center">
+                        Нажимая кнопку, вы соглашаетесь с
+                        <a href="#" class="underline hover:text-gray-600">политикой конфиденциальности</a>
+                    </p>
                 </form>
+
                 <div id="order-success" class="hidden text-center py-8">
                     <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
                     </div>
+
                     <p class="font-bold text-lg">Заявка принята!</p>
                     <p class="text-gray-500 mt-1">Мы свяжемся с вами в ближайшее время.</p>
                 </div>
@@ -422,87 +649,142 @@
 </header>
 
 @if(session('success'))
-<div class="bg-green-50 border-l-4 border-green-500 text-green-700 px-4 py-3 text-center text-sm">
-    ✓ {{ session('success') }}
-</div>
+    <div class="bg-green-50 border-l-4 border-green-500 text-green-700 px-4 py-3 text-center text-sm">
+        ✓ {{ session('success') }}
+    </div>
 @endif
 
-<main>@yield('content')</main>
+<main>
+    @yield('content')
+</main>
 
 {{-- Подвал --}}
 <footer class="bg-gray-900 text-gray-400 mt-16">
     <div class="container mx-auto max-w-7xl px-4 py-12">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
             <div>
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L2 12h3v9h6v-6h2v6h6v-9h3L12 3z"/></svg>
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 3L2 12h3v9h6v-6h2v6h6v-9h3L12 3z"/>
+                        </svg>
                     </div>
-                    <h4 class="text-white font-bold">{{ $siteName }}</h4>
+
+                    <h4 class="text-white font-bold">
+                        {{ $siteName }}
+                    </h4>
                 </div>
-                <p class="text-sm text-gray-500 mb-4 leading-relaxed">Проектирование, монтаж и сдача тепловых пунктов под ключ. Сдача в ПАО МОЭК и МТУ Ростехнадзора.</p>
+
+                <p class="text-sm text-gray-500 mb-4 leading-relaxed">
+                    Проектирование, монтаж и сдача тепловых пунктов под ключ. Сдача в ПАО МОЭК и МТУ Ростехнадзора.
+                </p>
+
                 @if($regionName)
-                <span class="inline-flex items-center gap-1.5 bg-primary/20 text-blue-300 text-xs px-3 py-1.5 rounded-full">
-                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-                    {{ $regionName }}
-                </span>
+                    <span class="inline-flex items-center gap-1.5 bg-primary/20 text-blue-300 text-xs px-3 py-1.5 rounded-full">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                        </svg>
+                        {{ $regionName }}
+                    </span>
                 @endif
             </div>
+
             <div>
-                <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Услуги</h4>
+                <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">
+                    Услуги
+                </h4>
+
                 <ul class="space-y-2 text-sm">
-                    @foreach($menuServices->take(1) as $service)
-                        @foreach($service->children->take(6) as $child)
-                        <li><a href="{{ route('service', $child->slug) }}" class="hover:text-white transition leading-snug block">{{ $child->title }}</a></li>
-                        @endforeach
+                    @foreach($menuServices->take(6) as $service)
+                        <li>
+                            <a href="{{ route('service', $service->slug) }}" class="hover:text-white transition leading-snug block">
+                                {{ $service->title }}
+                            </a>
+                        </li>
                     @endforeach
                 </ul>
             </div>
+
             <div>
-                <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Разделы</h4>
+                <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">
+                    Разделы
+                </h4>
+
                 <ul class="space-y-2 text-sm">
-                    <li><a href="{{ route('about') }}"     class="hover:text-white transition">О компании</a></li>
-                    <li><a href="{{ route('prices') }}"    class="hover:text-white transition">Цены</a></li>
-                    <li><a href="{{ route('news') }}"      class="hover:text-white transition">Новости</a></li>
+                    <li><a href="{{ route('about') }}" class="hover:text-white transition">О компании</a></li>
+                    <li><a href="{{ route('services') }}" class="hover:text-white transition">Услуги</a></li>
+                    <li><a href="{{ route('prices') }}" class="hover:text-white transition">Цены</a></li>
+                    <li><a href="{{ route('news') }}" class="hover:text-white transition">Новости</a></li>
                     <li><a href="{{ route('portfolio') }}" class="hover:text-white transition">Портфолио</a></li>
-                    <li><a href="{{ route('videos') }}"    class="hover:text-white transition">Видео</a></li>
-                    <li><a href="{{ route('contacts') }}"  class="hover:text-white transition">Контакты</a></li>
+                    <li><a href="{{ route('videos') }}" class="hover:text-white transition">Видео</a></li>
+                    <li><a href="{{ route('contacts') }}" class="hover:text-white transition">Контакты</a></li>
                 </ul>
             </div>
+
             <div>
-                <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Контакты</h4>
+                <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">
+                    Контакты
+                </h4>
+
                 <ul class="space-y-3 text-sm">
                     @if($regionAddress)
-                    <li class="flex items-start gap-2">
-                        <svg class="w-4 h-4 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-                        <span>{{ $regionAddress }}</span>
-                    </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                            </svg>
+                            <span>{{ $regionAddress }}</span>
+                        </li>
                     @endif
+
                     <li class="flex items-center gap-2">
-                        <svg class="w-4 h-4 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                        <a href="tel:{{ preg_replace('/[^+\d]/', '', $regionPhone) }}" class="hover:text-white transition font-medium text-gray-300">{{ $regionPhone }}</a>
+                        <svg class="w-4 h-4 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
+
+                        <a href="tel:{{ preg_replace('/[^+\d]/', '', $regionPhone) }}" class="hover:text-white transition font-medium text-gray-300">
+                            {{ $regionPhone }}
+                        </a>
                     </li>
+
                     <li class="flex items-center gap-2">
-                        <svg class="w-4 h-4 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                        <a href="mailto:{{ $regionEmail }}" class="hover:text-white transition">{{ $regionEmail }}</a>
+                        <svg class="w-4 h-4 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+
+                        <a href="mailto:{{ $regionEmail }}" class="hover:text-white transition">
+                            {{ $regionEmail }}
+                        </a>
                     </li>
+
                     <li class="flex items-center gap-2">
-                        <svg class="w-4 h-4 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+                        <svg class="w-4 h-4 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/>
+                        </svg>
+
                         <span>{{ $regionHours }}</span>
                     </li>
                 </ul>
+
                 <button @click="modalOpen = true; modalType = 'callback'"
                     class="mt-5 w-full bg-primary hover:bg-primary-dark text-white py-2.5 rounded-lg text-sm font-medium transition"
                     x-data>
                     Заказать звонок
                 </button>
             </div>
+
         </div>
     </div>
+
     <div class="border-t border-gray-800">
         <div class="container mx-auto max-w-7xl px-4 py-4 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 gap-2">
-            <p>{{ $footerText ?: '© ' . date('Y') . ' ' . $siteName . '. Все права защищены.' }}</p>
-            <a href="/privacy" class="hover:text-gray-400 transition">Политика конфиденциальности</a>
+            <p>
+                {{ $footerText ?: '© ' . date('Y') . ' ' . $siteName . '. Все права защищены.' }}
+            </p>
+
+            <a href="/privacy" class="hover:text-gray-400 transition">
+                Политика конфиденциальности
+            </a>
         </div>
     </div>
 </footer>
@@ -510,7 +792,14 @@
 <script>
 async function submitForm(formId, url, successId) {
     const form = document.getElementById(formId);
+
+    if (!form) {
+        console.error('Form not found:', formId);
+        return;
+    }
+
     const data = new FormData(form);
+
     try {
         const resp = await fetch(url, {
             method: 'POST',
@@ -520,13 +809,23 @@ async function submitForm(formId, url, successId) {
             },
             body: data
         });
+
         const json = await resp.json();
+
         if (json.success) {
             form.classList.add('hidden');
-            document.getElementById(successId).classList.remove('hidden');
+
+            const successBlock = document.getElementById(successId);
+
+            if (successBlock) {
+                successBlock.classList.remove('hidden');
+            }
         }
-    } catch(e) { console.error(e); }
+    } catch(e) {
+        console.error(e);
+    }
 }
 </script>
+
 </body>
 </html>
