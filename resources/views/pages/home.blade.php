@@ -359,37 +359,146 @@
 </section>
 
 {{-- ОТЗЫВЫ --}}
-<section class="py-20 bg-gray-50">
+@php
+    $reviewImages = [
+        [
+            'title' => 'Благодарственное письмо №1',
+            'image' => '/public/images/reviews/review-1.jpg',
+        ],
+        [
+            'title' => 'Благодарственное письмо №2',
+            'image' => '/public/images/reviews/review-2.jpg',
+        ],
+        [
+            'title' => 'Благодарственное письмо №3',
+            'image' => '/public/images/reviews/review-3.jpg',
+        ],
+        [
+            'title' => 'Благодарственное письмо №4',
+            'image' => '/public/images/reviews/review-4.jpg',
+        ],
+        [
+            'title' => 'Благодарственное письмо №5',
+            'image' => '/public/images/reviews/review-5.jpg',
+        ],
+        [
+            'title' => 'Благодарственное письмо №6',
+            'image' => '/public/images/reviews/review-6.jpg',
+        ],
+        [
+            'title' => 'Благодарственное письмо №7',
+            'image' => '/public/images/reviews/review-7.jpg',
+        ],
+        [
+            'title' => 'Благодарственное письмо №8',
+            'image' => '/public/images/reviews/review-8.jpg',
+        ],
+        [
+            'title' => 'Благодарственное письмо №9',
+            'image' => '/public/images/reviews/review-9.png',
+            'pdf' => '/public/images/reviews/review-9.pdf',
+        ],
+    ];
+@endphp
+
+<section class="py-20 bg-gray-50" x-data="{ open: false, image: '', title: '', pdf: '' }">
     <div class="container mx-auto max-w-7xl px-4">
         <div class="text-center mb-14">
-            <span class="text-primary font-semibold text-sm uppercase tracking-widest">Отзывы</span>
-            <h2 class="text-4xl font-bold mt-2 mb-4">Что ценят заказчики</h2>
+            <span class="text-primary font-semibold text-sm uppercase tracking-widest">
+                Отзывы
+            </span>
+
+            <h2 class="text-4xl font-bold mt-2 mb-4">
+                Благодарственные письма
+            </h2>
+
             <p class="text-gray-500 max-w-2xl mx-auto">
-                Можно заменить эти отзывы на реальные письма, благодарности или короткие комментарии клиентов.
+                Документы и отзывы заказчиков, подтверждающие опыт и качество работы ВТП Инжиниринг.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            @foreach([
-                ['name' => 'Управляющая компания', 'text' => 'Получили понятное техническое предложение и быстро согласовали параметры оборудования под объект.'],
-                ['name' => 'Подрядная организация', 'text' => 'Команда помогла подобрать решение и оперативно подготовила информацию для расчёта бюджета.'],
-                ['name' => 'Коммерческий объект', 'text' => 'Понравился системный подход: сначала разобрали задачу, потом предложили несколько вариантов решения.'],
-            ] as $review)
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                    <div class="flex gap-1 text-primary mb-4">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($reviewImages as $review)
+                <button
+                    type="button"
+                    @click="
+                        open = true;
+                        image = '{{ $review['image'] }}';
+                        title = '{{ $review['title'] }}';
+                        pdf = '{{ $review['pdf'] ?? '' }}';
+                    "
+                    class="group text-left bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300"
+                >
+                    <div class="aspect-[3/4] bg-gray-100 overflow-hidden">
+                        <img
+                            src="{{ $review['image'] }}"
+                            alt="{{ $review['title'] }}"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                            loading="lazy"
+                        >
                     </div>
-                    <p class="text-gray-600 leading-relaxed mb-5">“{{ $review['text'] }}”</p>
-                    <div class="font-bold text-gray-900">{{ $review['name'] }}</div>
-                </div>
+
+                    <div class="p-5">
+                        <div class="flex items-center justify-between gap-4">
+                            <h3 class="font-bold text-gray-900">
+                                {{ $review['title'] }}
+                            </h3>
+
+                            <span class="w-10 h-10 rounded-full bg-red-50 text-primary flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </span>
+                        </div>
+                    </div>
+                </button>
             @endforeach
         </div>
     </div>
+
+    {{-- Лайтбокс --}}
+    <div
+        x-show="open"
+        x-cloak
+        class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+        @click.self="open = false"
+        @keydown.escape.window="open = false"
+    >
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[92vh] overflow-hidden flex flex-col">
+            <div class="flex items-center justify-between gap-4 px-5 py-4 border-b border-gray-100">
+                <h3 class="font-bold text-gray-900" x-text="title"></h3>
+
+                <div class="flex items-center gap-2">
+                    <template x-if="pdf">
+                        <a
+                            :href="pdf"
+                            target="_blank"
+                            class="hidden sm:inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-xl font-semibold transition"
+                        >
+                            <i class="fa-solid fa-file-pdf"></i>
+                            Открыть PDF
+                        </a>
+                    </template>
+
+                    <button
+                        type="button"
+                        @click="open = false"
+                        class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-gray-100 overflow-auto p-4">
+                <img
+                    :src="image"
+                    :alt="title"
+                    class="mx-auto max-h-[78vh] w-auto max-w-full rounded-xl shadow-lg"
+                >
+            </div>
+        </div>
+    </div>
 </section>
+
 
 {{-- ПОРТФОЛИО --}}
 @if($portfolio->count())
