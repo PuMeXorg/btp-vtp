@@ -363,36 +363,36 @@
     $reviewImages = [
         [
             'title' => 'Благодарственное письмо №1',
-            'image' => '/images/reviews/review-1.jpg',
+            'image' => '/public/images/reviews/review-1.jpg',
         ],
         [
             'title' => 'Благодарственное письмо №2',
-            'image' => '/images/reviews/review-2.jpg',
+            'image' => '/public/images/reviews/review-2.jpg',
         ],
         [
             'title' => 'Благодарственное письмо №3',
-            'image' => '/images/reviews/review-3.jpg',
+            'image' => '/public/images/reviews/review-3.jpg',
         ],
         [
             'title' => 'Благодарственное письмо №4',
-            'image' => '/images/reviews/review-4.jpg',
+            'image' => '/public/images/reviews/review-4.jpg',
         ],
         [
             'title' => 'Благодарственное письмо №5',
-            'image' => '/images/reviews/review-5.jpg',
+            'image' => '/public/images/reviews/review-5.jpg',
         ],
         [
             'title' => 'Благодарственное письмо №6',
-            'image' => '/images/reviews/review-6.jpg',
+            'image' => '/public/images/reviews/review-6.jpg',
         ],
         [
             'title' => 'Благодарственное письмо №7',
-            'image' => '/images/reviews/review-7.jpg',
+            'image' => '/public/images/reviews/review-7.jpg',
         ],
         [
             'title' => 'Благодарственное письмо №8',
-            'image' => '/images/reviews/review-9.png',
-            'pdf' => '/images/reviews/review-9.pdf',
+            'image' => '/public/images/reviews/review-9.png',
+            'pdf' => '/public/images/reviews/review-9.pdf',
         ],
     ];
 @endphp
