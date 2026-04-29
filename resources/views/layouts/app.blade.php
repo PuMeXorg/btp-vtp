@@ -13,9 +13,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1773cf',
-                        'primary-dark': '#1260b0',
-                    },
+                        primary: '#cc0000',
+                        'primary-dark': '#990000',
+},
                     fontFamily: {
                         sans: ['"Trebuchet MS"', 'Arial', 'Tahoma', 'Verdana', 'sans-serif'],
                     }
