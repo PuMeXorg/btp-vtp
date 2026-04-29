@@ -38,11 +38,11 @@
             @foreach($certificates as $certificate)
                 <div class="group bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300">
 
-                    <a href="{{ asset($certificate['file']) }}"
+                    <a href="{{ '/' . ltrim($certificate['file'], '/') }}"
                        target="_blank"
                        class="block bg-gray-100 aspect-[4/5] overflow-hidden">
                         <img
-                            src="{{ asset($certificate['preview']) }}"
+                            src="{{ '/' . ltrim($certificate['preview'], '/') }}"
                             alt="{{ $certificate['title'] }}"
                             class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                         >
@@ -58,14 +58,14 @@
                         </p>
 
                         <div class="flex flex-wrap gap-3">
-                            <a href="{{ asset($certificate['file']) }}"
+                            <a href="{{ '/' . ltrim($certificate['file'], '/') }}"
                                target="_blank"
                                class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-xl font-semibold transition">
                                 <i class="fa-solid fa-eye"></i>
                                 Открыть
                             </a>
 
-                            <a href="{{ asset($certificate['file']) }}"
+                            <a href="{{ '/' . ltrim($certificate['file'], '/') }}"
                                download
                                class="inline-flex items-center justify-center gap-2 border border-gray-300 text-gray-700 hover:border-primary hover:text-primary px-6 py-3 rounded-xl font-semibold transition">
                                 <i class="fa-solid fa-download"></i>
