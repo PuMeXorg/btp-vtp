@@ -6,6 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', $siteName) | {{ $siteName }}</title>
     <meta name="description" content="@yield('description', '')">
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon-vtp.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('images/favicon-vtp.png') }}">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -132,17 +134,12 @@
         <div class="flex items-center justify-between py-4 gap-4">
 
             {{-- Логотип --}}
-            <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center gap-3">
-                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 3L2 12h3v9h6v-6h2v6h6v-9h3L12 3z"/>
-                    </svg>
-                </div>
-
-                <span class="text-xl font-bold text-gray-900 leading-tight">
-                    {{ $siteName }}
-                </span>
-            </a>
+        <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center">
+            <img
+        src="{{ asset('images/logo_nadpis.png') }}"
+        alt="ВТП Инжиниринг"
+        class="h-[52px] w-auto">
+        </a>
 
             {{-- Регион desktop --}}
             <div class="hidden lg:block flex-shrink-0" x-data="{ open: false }">
