@@ -46,18 +46,18 @@ class PageController extends Controller
         $certificates = [
             [
                 'title' => 'Сертификат ВТП №1',
-                'preview' => 'storage/certificates/previews/sertifikat-vtp-1.png',
-                'file' => 'storage/certificates/sertifikat-vtp-1.pdf',
+                'preview' => 'certificates/previews/sertifikat-vtp-1.png',
+                'file' => 'certificates/sertifikat-vtp-1.pdf',
             ],
             [
                 'title' => 'Сертификат ВТП №2',
-                'preview' => 'storage/certificates/previews/sertifikat-vtp-2.png',
-                'file' => 'storage/certificates/sertifikat-vtp-2.pdf',
+                'preview' => 'certificates/previews/sertifikat-vtp-2.png',
+                'file' => 'certificates/sertifikat-vtp-2.pdf',
             ],
             [
                 'title' => 'Сертификат ВТП №3',
-                'preview' => 'storage/certificates/previews/sertifikat-vtp-3.png',
-                'file' => 'storage/certificates/sertifikat-vtp-3.pdf',
+                'preview' => 'certificates/previews/sertifikat-vtp-3.png',
+                'file' => 'certificates/sertifikat-vtp-3.pdf',
             ],
         ];
 
