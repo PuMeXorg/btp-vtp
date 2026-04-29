@@ -252,7 +252,7 @@
 
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
                 В стоимость услуг входит продукция, доставка, монтаж и пусконаладка. 
-                Присылайте проекты для просчета на почту <a href="mailto:region@vtp-inz.ru">region@vtp-inz.ru</a>
+                Присылайте проекты для просчета на почту <a class="text-primary" href="mailto:region@vtp-inz.ru">region@vtp-inz.ru</a>
             </h2>
         </div>
 
