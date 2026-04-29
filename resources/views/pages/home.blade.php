@@ -15,23 +15,26 @@
 @endphp
 
 {{-- HERO --}}
-<section class="relative overflow-hidden bg-gray-950">
+<section class="relative overflow-hidden bg-gray-950 min-h-[720px] flex items-center">
     {{-- Фоновое изображение из админки --}}
     <div class="absolute inset-0">
         @if($hero?->image)
             <img
                 src="{{ asset('storage/' . $hero->image) }}"
                 alt="{{ $hero->title ?? 'ВТП Инжиниринг' }}"
-                class="w-full h-full object-cover opacity-35"
+                class="w-full h-full object-cover opacity-100"
             >
-            <div class="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/90 to-red-950/75"></div>
+
+            {{-- Затемнение слева под текст + лёгкий красный оттенок справа --}}
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/70 to-red-950/25"></div>
+            <div class="absolute inset-0 bg-black/20"></div>
         @else
             <div class="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-red-950"></div>
         @endif
     </div>
 
-    {{-- Декоративные пятна --}}
-    <div class="absolute inset-0 opacity-30">
+    {{-- Декор, но слабее, чтобы не забивал фото --}}
+    <div class="absolute inset-0 opacity-15 pointer-events-none">
         <div class="absolute -top-32 -right-32 w-[520px] h-[520px] bg-red-600 rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-[420px] h-[420px] bg-red-700 rounded-full blur-3xl"></div>
     </div>
@@ -39,16 +42,16 @@
     <div class="container mx-auto max-w-7xl px-4 relative z-10 py-20 lg:py-28">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-                <div class="inline-flex items-center gap-2 bg-red-500/10 border border-red-400/30 text-red-100 rounded-full px-4 py-2 text-sm font-semibold mb-6">
+                <div class="inline-flex items-center gap-2 bg-red-500/15 border border-red-400/40 text-red-100 rounded-full px-4 py-2 text-sm font-semibold mb-6 backdrop-blur">
                     <i class="fa-solid fa-circle-check text-red-400"></i>
                     Инженерные решения для коммерческих и промышленных объектов
                 </div>
 
-                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
+                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-2xl">
                     {!! nl2br(e($hero?->title ?: 'БТП, ИТП, ЦТП и насосные станции под ваш объект')) !!}
                 </h1>
 
-                <p class="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl">
+                <p class="text-xl text-gray-100 mb-8 leading-relaxed max-w-2xl drop-shadow">
                     {!! nl2br(e($hero?->subtitle ?: 'Проектируем, производим и поставляем инженерное оборудование для управляющих компаний, застройщиков, подрядчиков, промышленных и коммерческих объектов.')) !!}
                 </p>
 
@@ -60,31 +63,31 @@
                     </a>
 
                     <a href="{{ route('prices') }}"
-                       class="inline-flex items-center justify-center gap-2 border-2 border-white/25 text-white hover:border-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition">
+                       class="inline-flex items-center justify-center gap-2 border-2 border-white/35 text-white hover:border-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition backdrop-blur">
                         <i class="fa-solid fa-calculator"></i>
                         Рассчитать стоимость
                     </a>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">
-                    <div class="bg-white/10 border border-white/10 rounded-2xl p-4 backdrop-blur">
+                    <div class="bg-white/12 border border-white/15 rounded-2xl p-4 backdrop-blur">
                         <div class="text-3xl font-bold text-white">500+</div>
-                        <div class="text-sm text-gray-300">объектов</div>
+                        <div class="text-sm text-gray-200">объектов</div>
                     </div>
-                    <div class="bg-white/10 border border-white/10 rounded-2xl p-4 backdrop-blur">
+                    <div class="bg-white/12 border border-white/15 rounded-2xl p-4 backdrop-blur">
                         <div class="text-3xl font-bold text-white">15+</div>
-                        <div class="text-sm text-gray-300">лет опыта</div>
+                        <div class="text-sm text-gray-200">лет опыта</div>
                     </div>
-                    <div class="bg-white/10 border border-white/10 rounded-2xl p-4 backdrop-blur">
+                    <div class="bg-white/12 border border-white/15 rounded-2xl p-4 backdrop-blur">
                         <div class="text-3xl font-bold text-white">4</div>
-                        <div class="text-sm text-gray-300">ключевых направления</div>
+                        <div class="text-sm text-gray-200">ключевых направления</div>
                     </div>
                 </div>
             </div>
 
             <div class="relative">
-                <div class="bg-white/10 border border-white/10 rounded-3xl p-6 lg:p-8 backdrop-blur shadow-2xl">
-                    <div class="bg-white rounded-2xl p-6">
+                <div class="bg-white/10 border border-white/15 rounded-3xl p-6 lg:p-8 backdrop-blur-md shadow-2xl">
+                    <div class="bg-white/95 rounded-2xl p-6 shadow-xl">
                         <div class="text-sm font-bold text-primary uppercase tracking-widest mb-3">
                             Основные направления
                         </div>
