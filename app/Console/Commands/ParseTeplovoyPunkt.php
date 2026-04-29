@@ -122,7 +122,7 @@ class ParseTeplovoyPunkt extends Command
             ['url' => '/portfolio/montazh-itp-koptevskaya-65/itp-balashikha-ulitsa-tvardovskogo-26/',      'category' => 'Монтаж ИТП'],
             ['url' => '/portfolio/montazh-itp-koptevskaya-65/itp-ulitsa-gazgoldernaya-8-str-8/',           'category' => 'Монтаж ИТП'],
             // Шкафы автоматики
-            ['url' => '/portfolio/shkafy-avtomatiki/shkaf-upravleniya-nasosami-s-chastotnymi-preobrazovatelyami-danfoss/', 'category' => 'Шкафы автоматики'],
+            ['url' => '/portfolio/shkafy-avtomatiki/shkaf-upravleniya-nasosami-s-chastotnymi-preobrazovatelyami-Ridan/', 'category' => 'Шкафы автоматики'],
             ['url' => '/portfolio/shkafy-avtomatiki/shkaf-upravleniya-elektroprivodom-regada-sto/',        'category' => 'Шкафы автоматики'],
             ['url' => '/portfolio/shkafy-avtomatiki/dk-klenovo/',                                          'category' => 'Шкафы автоматики'],
             ['url' => '/portfolio/shkafy-avtomatiki/zhk-klenovo/',                                         'category' => 'Шкафы автоматики'],

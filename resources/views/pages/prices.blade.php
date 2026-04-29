@@ -98,10 +98,10 @@
                                     <option value="project_itp_ctp">Проектирование ИТП / ЦТП</option>
                                     <option value="project_internal">Проектирование внутренних инженерных систем</option>
                                     <option value="puskonaladka">Пусконаладка</option>
-                                    <option value="automation_oven">Автоматизация — Овен</option>
+                                    <option value="automation_oven">Автоматизация — ОВЕН</option>
                                     <option value="automation_transformer">Автоматизация — Трансформер</option>
-                                    <option value="automation_danfoss">Автоматизация — Danfoss</option>
-                                    <option value="automation_request">Автоматизация — Текон / Сигнетик / другое</option>
+                                    <option value="automation_Ridan">Автоматизация — Ridan</option>
+                                    <option value="automation_request">Автоматизация — ТЕКОН / Segnetics / другое</option>
                                 </select>
                             </div>
 
@@ -324,7 +324,7 @@
 
                         <tr>
                             <td class="px-6 py-4 font-semibold">Автоматизация ИТП / ЦТП</td>
-                            <td class="px-6 py-4 text-gray-600">Овен</td>
+                            <td class="px-6 py-4 text-gray-600">ОВЕН</td>
                             <td class="px-6 py-4 font-bold text-primary">от 350 000 ₽</td>
                         </tr>
 
@@ -336,7 +336,7 @@
 
                         <tr>
                             <td class="px-6 py-4 font-semibold">Автоматизация ИТП / ЦТП</td>
-                            <td class="px-6 py-4 text-gray-600">Danfoss</td>
+                            <td class="px-6 py-4 text-gray-600">Ridan</td>
                             <td class="px-6 py-4 font-bold text-primary">от 750 000 ₽</td>
                         </tr>
                     </tbody>
@@ -393,7 +393,7 @@ function calculatePrice() {
 
     if (service === 'automation_oven') {
         price = 350000;
-        text = 'Ориентир для автоматизации на базе Овен.';
+        text = 'Ориентир для автоматизации на базе ОВЕН.';
     }
 
     if (service === 'automation_transformer') {
@@ -401,14 +401,14 @@ function calculatePrice() {
         text = 'Ориентир для автоматизации на базе Трансформер.';
     }
 
-    if (service === 'automation_danfoss') {
+    if (service === 'automation_Ridan') {
         price = 750000;
-        text = 'Ориентир для автоматизации на базе Danfoss.';
+        text = 'Ориентир для автоматизации на базе Ridan.';
     }
 
     if (service === 'automation_request') {
         result.textContent = 'по запросу';
-        hint.textContent = 'Для Текон, Сигнетик и других решений нужна индивидуальная оценка.';
+        hint.textContent = 'Для ТЕКОН, Segnetics и других решений нужна индивидуальная оценка.';
         preparePriceCalcComment();
         return;
     }

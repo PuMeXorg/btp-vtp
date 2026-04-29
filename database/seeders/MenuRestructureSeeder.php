@@ -188,11 +188,11 @@ class MenuRestructureSeeder extends Seeder
         );
 
         $automationBrands = [
-            ['title' => 'Текон', 'slug' => 'tekon', 'sort' => 1],
+            ['title' => 'ТЕКОН', 'slug' => 'tekon', 'sort' => 1],
             ['title' => 'Трансформер', 'slug' => 'transformer', 'sort' => 2],
-            ['title' => 'Овен', 'slug' => 'oven', 'sort' => 3],
-            ['title' => 'Сигнетик', 'slug' => 'signetik', 'sort' => 4],
-            ['title' => 'Данфос', 'slug' => 'danfos', 'sort' => 5],
+            ['title' => 'ОВЕН', 'slug' => 'oven', 'sort' => 3],
+            ['title' => 'Segnetics', 'slug' => 'Segnetics', 'sort' => 4],
+            ['title' => 'Ridan / Ридан', 'slug' => 'danfos', 'sort' => 5],
         ];
 
         foreach ($automationBrands as $brand) {

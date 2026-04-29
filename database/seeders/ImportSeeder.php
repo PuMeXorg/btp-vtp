@@ -81,7 +81,7 @@ class ImportSeeder extends Seeder
             ['title' => 'ИТП Балашиха, улица Твардовского, 26',       'slug' => 'itp-balashikha-tvardovskogo-26',  'category' => 'Монтаж ИТП'],
             ['title' => 'ИТП, улица Газгольдерная, 8 стр. 8',         'slug' => 'itp-gazgoldernaya-8',             'category' => 'Монтаж ИТП'],
             // Шкафы автоматики
-            ['title' => 'Шкаф управления насосами Danfoss',            'slug' => 'shkaf-danfoss',                   'category' => 'Шкафы автоматики'],
+            ['title' => 'Шкаф управления насосами Ridan',            'slug' => 'shkaf-Ridan',                   'category' => 'Шкафы автоматики'],
             ['title' => 'Шкаф управления электроприводом Regada STO',  'slug' => 'shkaf-regada-sto',                'category' => 'Шкафы автоматики'],
             ['title' => 'ДК «Кленово»',                                'slug' => 'dk-klenovo',                      'category' => 'Шкафы автоматики'],
             ['title' => 'ЖК «Кленово»',                                'slug' => 'zhk-klenovo',                     'category' => 'Шкафы автоматики'],

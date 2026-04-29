@@ -119,7 +119,7 @@
                                 </div>
                                 <div>
                                     <div class="font-bold text-gray-900">Автоматизация ИТП и ЦТП</div>
-                                    <div class="text-sm text-gray-500">Текон, Овен, Данфос, Сигнетик и другие решения</div>
+                                    <div class="text-sm text-gray-500">ТЕКОН, ОВЕН, Ridan / Ридан, Segnetics и другие решения</div>
                                 </div>
                             </div>
 
