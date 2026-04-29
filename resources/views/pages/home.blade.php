@@ -15,7 +15,22 @@
 @endphp
 
 {{-- HERO --}}
-<section class="relative overflow-hidden bg-gradient-to-br from-gray-950 via-gray-900 to-red-950">
+<section class="relative overflow-hidden bg-gray-950">
+    {{-- Фоновое изображение из админки --}}
+    <div class="absolute inset-0">
+        @if($hero?->image)
+            <img
+                src="{{ asset('storage/' . $hero->image) }}"
+                alt="{{ $hero->title ?? 'ВТП Инжиниринг' }}"
+                class="w-full h-full object-cover opacity-35"
+            >
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/90 to-red-950/75"></div>
+        @else
+            <div class="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-red-950"></div>
+        @endif
+    </div>
+
+    {{-- Декоративные пятна --}}
     <div class="absolute inset-0 opacity-30">
         <div class="absolute -top-32 -right-32 w-[520px] h-[520px] bg-red-600 rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-[420px] h-[420px] bg-red-700 rounded-full blur-3xl"></div>
