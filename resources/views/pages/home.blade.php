@@ -1,363 +1,300 @@
 @extends('layouts.app')
 
-@section('title', 'Цены на БТП, насосные станции и проектирование')
-@section('description', 'Базовые цены на БТП, насосные станции, проектирование и внутренние инженерные системы. Оставьте заявку на расчёт стоимости под ваш объект.')
+@section('title', 'Проектирование и поставка БТП, ИТП, ЦТП и насосных станций')
+@section('description', 'ВТП Инжиниринг — проектирование, производство и поставка БТП, ИТП, ЦТП, насосных станций и систем автоматизации.')
 
 @section('content')
 
+@php
+    $blocksByType = isset($blocks) ? $blocks->keyBy('type') : collect();
+
+    $hero = $blocksByType->get('hero');
+    $cta = $blocksByType->get('cta');
+    $advantagesBlock = $blocksByType->get('advantages');
+    $processBlock = $blocksByType->get('process');
+@endphp
+
 {{-- HERO --}}
-<section class="relative overflow-hidden bg-gray-950 py-20 md:py-28">
-    <div class="absolute inset-0">
-        <div class="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-red-950"></div>
-        <div class="absolute right-0 top-0 w-[520px] h-[520px] bg-primary/25 rounded-full blur-3xl"></div>
-        <div class="absolute left-0 bottom-0 w-[420px] h-[420px] bg-white/5 rounded-full blur-3xl"></div>
+<section class="relative overflow-hidden bg-gradient-to-br from-gray-950 via-gray-900 to-red-950">
+    <div class="absolute inset-0 opacity-30">
+        <div class="absolute -top-32 -right-32 w-[520px] h-[520px] bg-red-600 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-[420px] h-[420px] bg-red-700 rounded-full blur-3xl"></div>
     </div>
 
-    <div class="container mx-auto max-w-7xl px-4 relative z-10">
-        <div class="max-w-4xl">
-            <span class="inline-flex items-center gap-2 bg-primary/15 border border-primary/35 text-red-100 rounded-full px-4 py-2 text-sm font-semibold mb-6">
-                <i class="fa-solid fa-calculator text-primary"></i>
-                Расчёт стоимости под объект
-            </span>
+    <div class="container mx-auto max-w-7xl px-4 relative z-10 py-20 lg:py-28">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 bg-red-500/10 border border-red-400/30 text-red-100 rounded-full px-4 py-2 text-sm font-semibold mb-6">
+                    <i class="fa-solid fa-circle-check text-red-400"></i>
+                    Инженерные решения для коммерческих и промышленных объектов
+                </div>
 
-            <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
-                Цены на БТП, насосные станции и проектирование
-            </h1>
+                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
+                    {!! nl2br(e($hero?->title ?: 'БТП, ИТП, ЦТП и насосные станции под ваш объект')) !!}
+                </h1>
 
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl">
-                Укажите параметры объекта — мы подготовим предварительный расчёт стоимости и подскажем оптимальное решение под ваши задачи.
-            </p>
+                <p class="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl">
+                    {!! nl2br(e($hero?->subtitle ?: 'Проектируем, производим и поставляем инженерное оборудование для управляющих компаний, застройщиков, подрядчиков, промышленных и коммерческих объектов.')) !!}
+                </p>
 
-            <div class="flex flex-col sm:flex-row gap-4 mt-8">
-                <a href="#calculator"
-                   class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-lg">
-                    Рассчитать стоимость
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <a href="{{ $hero?->button_url ?: route('contacts') }}"
+                       class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-xl shadow-red-900/30">
+                        {{ $hero?->button_text ?: 'Оставить заявку' }}
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
 
-                <a href="{{ route('contacts') }}"
-                   class="inline-flex items-center justify-center gap-2 border-2 border-white/25 text-white hover:border-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition">
-                    Связаться с нами
-                </a>
+                    <a href="{{ route('prices') }}"
+                       class="inline-flex items-center justify-center gap-2 border-2 border-white/25 text-white hover:border-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition">
+                        <i class="fa-solid fa-calculator"></i>
+                        Рассчитать стоимость
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">
+                    <div class="bg-white/10 border border-white/10 rounded-2xl p-4 backdrop-blur">
+                        <div class="text-3xl font-bold text-white">500+</div>
+                        <div class="text-sm text-gray-300">объектов</div>
+                    </div>
+                    <div class="bg-white/10 border border-white/10 rounded-2xl p-4 backdrop-blur">
+                        <div class="text-3xl font-bold text-white">15+</div>
+                        <div class="text-sm text-gray-300">лет опыта</div>
+                    </div>
+                    <div class="bg-white/10 border border-white/10 rounded-2xl p-4 backdrop-blur">
+                        <div class="text-3xl font-bold text-white">4</div>
+                        <div class="text-sm text-gray-300">ключевых направления</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative">
+                <div class="bg-white/10 border border-white/10 rounded-3xl p-6 lg:p-8 backdrop-blur shadow-2xl">
+                    <div class="bg-white rounded-2xl p-6">
+                        <div class="text-sm font-bold text-primary uppercase tracking-widest mb-3">
+                            Основные направления
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                                <div class="w-11 h-11 rounded-xl bg-red-100 text-primary flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-industry"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-900">БТП и тепловые пункты</div>
+                                    <div class="text-sm text-gray-500">ИТП, ЦТП, блочные тепловые пункты</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                                <div class="w-11 h-11 rounded-xl bg-red-100 text-primary flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-water"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-900">Насосные станции</div>
+                                    <div class="text-sm text-gray-500">Повысительные, пожаротушения, канализационные</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                                <div class="w-11 h-11 rounded-xl bg-red-100 text-primary flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-microchip"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-900">Автоматизация ИТП и ЦТП</div>
+                                    <div class="text-sm text-gray-500">Текон, Овен, Данфос, Сигнетик и другие решения</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                                <div class="w-11 h-11 rounded-xl bg-red-100 text-primary flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-pen-ruler"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-900">Проектирование</div>
+                                    <div class="text-sm text-gray-500">Инженерные решения под параметры объекта</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-{{-- БАЗОВЫЕ ЦЕНЫ --}}
-<section class="py-20 bg-white">
+{{-- ПРЕИМУЩЕСТВА --}}
+<section class="py-6 bg-primary">
     <div class="container mx-auto max-w-7xl px-4">
-        <div class="text-center mb-14">
-            <span class="text-primary font-semibold text-sm uppercase tracking-widest">Базовые ориентиры</span>
-            <h2 class="text-4xl font-bold mt-2 mb-4">Стоимость основных направлений</h2>
-            <p class="text-gray-500 max-w-3xl mx-auto">
-                Ниже указаны стартовые цены. Итоговая стоимость зависит от состава оборудования, мощности, требований к автоматизации и особенностей объекта.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-white">
             @foreach([
-                [
-                    'icon' => 'fa-industry',
-                    'title' => 'БТП',
-                    'price' => 'от 800 000 ₽',
-                    'desc' => 'Блочные тепловые пункты под задачи объекта.'
-                ],
-                [
-                    'icon' => 'fa-water',
-                    'title' => 'Насосные станции',
-                    'price' => 'от 300 000 ₽',
-                    'desc' => 'Повысительные, пожарные и канализационные насосные станции.'
-                ],
-                [
-                    'icon' => 'fa-drafting-compass',
-                    'title' => 'Проектирование',
-                    'price' => 'по расчёту',
-                    'desc' => 'Проектная документация под требования объекта.'
-                ],
-                [
-                    'icon' => 'fa-building',
-                    'title' => 'Внутренние системы',
-                    'price' => 'от 210 000 ₽',
-                    'desc' => 'Проектирование внутренних инженерных систем.'
-                ],
+                ['icon' => 'fa-building', 'title' => 'Для УК и застройщиков', 'desc' => 'решения под объект'],
+                ['icon' => 'fa-industry', 'title' => 'Собственное производство', 'desc' => 'электрощитов и узлов'],
+                ['icon' => 'fa-file-signature', 'title' => 'Проектирование', 'desc' => 'под требования заказчика'],
+                ['icon' => 'fa-handshake', 'title' => 'Поставки', 'desc' => 'для подрядчиков и объектов'],
             ] as $item)
-                <div class="group bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:border-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition">
-                        <i class="fa-solid {{ $item['icon'] }} text-primary text-2xl group-hover:text-white transition"></i>
+                <div class="flex items-center gap-3 py-3">
+                    <div class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid {{ $item['icon'] }} text-white"></i>
                     </div>
-
-                    <h3 class="text-xl font-bold mb-2">{{ $item['title'] }}</h3>
-
-                    <div class="text-2xl font-bold text-primary mb-3">
-                        {{ $item['price'] }}
+                    <div>
+                        <div class="font-bold text-sm">{{ $item['title'] }}</div>
+                        <div class="text-red-100 text-xs">{{ $item['desc'] }}</div>
                     </div>
-
-                    <p class="text-gray-500 text-sm leading-relaxed">
-                        {{ $item['desc'] }}
-                    </p>
                 </div>
             @endforeach
         </div>
     </div>
 </section>
 
-{{-- ВАЖНО --}}
-<section class="py-10 bg-gray-50">
-    <div class="container mx-auto max-w-7xl px-4">
-        <div class="bg-white border border-gray-100 rounded-2xl p-6 md:p-8 shadow-sm">
-            <div class="flex flex-col md:flex-row gap-5">
-                <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <i class="fa-solid fa-circle-info text-primary text-2xl"></i>
-                </div>
-
-                <div>
-                    <h2 class="text-2xl font-bold mb-3">Почему цена рассчитывается индивидуально</h2>
-                    <p class="text-gray-600 leading-relaxed">
-                        БТП, насосные станции и инженерное проектирование нельзя корректно посчитать только по названию услуги.
-                        На стоимость влияет мощность, комплектация, автоматика, производители оборудования, требования объекта,
-                        сроки поставки и объём проектной документации. Поэтому мы даём базовые ориентиры и готовим точный расчёт после уточнения параметров.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-{{-- КАЛЬКУЛЯТОР / ЗАЯВКА --}}
-<section id="calculator" class="py-20 bg-white">
-    <div class="container mx-auto max-w-7xl px-4">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-
-            {{-- Левая часть --}}
-            <div>
-                <span class="text-primary font-semibold text-sm uppercase tracking-widest">Калькулятор</span>
-
-                <h2 class="text-4xl font-bold mt-2 mb-5">
-                    Рассчитать стоимость под ваш объект
-                </h2>
-
-                <p class="text-gray-600 text-lg leading-relaxed mb-8">
-                    Заполните форму — инженер изучит вводные и подготовит предварительный расчёт. 
-                    Чем подробнее вы опишете объект, тем точнее будет оценка.
-                </p>
-
-                <div class="space-y-4">
-                    @foreach([
-                        'Подберём подходящее техническое решение',
-                        'Учтём назначение и параметры объекта',
-                        'Сориентируем по бюджету и срокам',
-                        'Подскажем, какие данные нужны для точного расчёта',
-                    ] as $benefit)
-                        <div class="flex items-start gap-3">
-                            <div class="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <i class="fa-solid fa-check text-primary text-sm"></i>
-                            </div>
-                            <span class="text-gray-700">{{ $benefit }}</span>
-                        </div>
-                    @endforeach
-                </div>
-
-                <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100">
-                        <div class="text-3xl font-bold text-primary mb-1">15 мин</div>
-                        <div class="text-sm text-gray-500">среднее время первичного ответа</div>
-                    </div>
-
-                    <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100">
-                        <div class="text-3xl font-bold text-primary mb-1">4+</div>
-                        <div class="text-sm text-gray-500">основных направления для расчёта</div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Форма --}}
-            <div class="bg-gray-50 rounded-3xl p-6 md:p-8 border border-gray-100 shadow-xl">
-                <h3 class="text-2xl font-bold mb-2">Параметры для расчёта</h3>
-                <p class="text-gray-500 text-sm mb-6">
-                    Заполните форму, и мы свяжемся с вами для уточнения деталей.
-                </p>
-
-                <form id="priceCalcForm" action="{{ route('lead.order') }}" method="POST" class="space-y-4">
-                    @csrf
-                    <input type="hidden" name="source_url" value="{{ url()->current() }}#calculator">
-
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Что нужно рассчитать?</label>
-                        <select name="service" required
-                                class="w-full border border-gray-200 rounded-xl px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-primary">
-                            <option value="">Выберите направление</option>
-                            <option value="БТП">БТП</option>
-                            <option value="Насосная станция">Насосная станция</option>
-                            <option value="ИТП / ЦТП">ИТП / ЦТП</option>
-                            <option value="Проектирование">Проектирование</option>
-                            <option value="Проектирование внутренних инженерных систем">Проектирование внутренних инженерных систем</option>
-                            <option value="Производство электрощитового оборудования">Производство электрощитового оборудования</option>
-                            <option value="Автоматизация ИТП / ЦТП">Автоматизация ИТП / ЦТП</option>
-                            <option value="Другое">Другое</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Тип объекта</label>
-                        <select name="object_type"
-                                class="w-full border border-gray-200 rounded-xl px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-primary">
-                            <option value="">Выберите тип объекта</option>
-                            <option value="Жилой комплекс">Жилой комплекс</option>
-                            <option value="Коммерческая недвижимость">Коммерческая недвижимость</option>
-                            <option value="Промышленный объект">Промышленный объект</option>
-                            <option value="Государственный / тендерный объект">Государственный / тендерный объект</option>
-                            <option value="Управляющая компания">Управляющая компания</option>
-                            <option value="Другое">Другое</option>
-                        </select>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Мощность / параметры</label>
-                            <input type="text" name="power" placeholder="Например: 1,5 МВт"
-                                   class="w-full border border-gray-200 rounded-xl px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-primary">
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Город / регион</label>
-                            <input type="text" name="city" placeholder="Например: Москва"
-                                   class="w-full border border-gray-200 rounded-xl px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-primary">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Комментарий по объекту</label>
-                        <textarea name="comment" rows="4" placeholder="Опишите задачу, объект, сроки, требования к оборудованию или автоматизации"
-                                  class="w-full border border-gray-200 rounded-xl px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-primary resize-none"></textarea>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Ваше имя</label>
-                            <input type="text" name="name" required placeholder="Имя"
-                                   class="w-full border border-gray-200 rounded-xl px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-primary">
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Телефон</label>
-                            <input type="tel" name="phone" required placeholder="+7..."
-                                   class="w-full border border-gray-200 rounded-xl px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-primary">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
-                        <input type="email" name="email" placeholder="email@example.ru"
-                               class="w-full border border-gray-200 rounded-xl px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-primary">
-                    </div>
-
-                    <button type="button"
-                            onclick="submitForm('priceCalcForm','{{ route('lead.order') }}','price-calc-success')"
-                            class="w-full bg-primary hover:bg-primary-dark text-white py-4 rounded-xl font-bold text-lg transition shadow-lg">
-                        Отправить на расчёт
-                    </button>
-
-                    <p class="text-xs text-gray-400 text-center">
-                        Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.
-                    </p>
-                </form>
-
-                <div id="price-calc-success" class="hidden text-center py-10">
-                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fa-solid fa-check text-green-500 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Заявка отправлена!</h3>
-                    <p class="text-gray-500">Наш специалист свяжется с вами в ближайшее время.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-{{-- ЧТО ВЛИЯЕТ НА СТОИМОСТЬ --}}
+{{-- УСЛУГИ --}}
+@if($services->count())
 <section class="py-20 bg-gray-50">
     <div class="container mx-auto max-w-7xl px-4">
         <div class="text-center mb-14">
-            <span class="text-primary font-semibold text-sm uppercase tracking-widest">Факторы стоимости</span>
-            <h2 class="text-4xl font-bold mt-2 mb-4">Что влияет на итоговую цену</h2>
-            <p class="text-gray-500 max-w-3xl mx-auto">
-                Стоимость формируется не только из оборудования. Важно учитывать проектные требования, автоматику, условия объекта и комплектацию.
+            <span class="text-primary font-semibold text-sm uppercase tracking-widest">Что мы делаем</span>
+            <h2 class="text-4xl font-bold mt-2 mb-4">Основные направления</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">
+                Подбираем инженерное решение под задачи объекта, бюджет и технические требования.
             </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach([
-                [
-                    'icon' => 'fa-gauge-high',
-                    'title' => 'Мощность и производительность',
-                    'desc' => 'Чем выше нагрузка и требования к производительности, тем больше состав оборудования.'
-                ],
-                [
-                    'icon' => 'fa-microchip',
-                    'title' => 'Автоматизация',
-                    'desc' => 'Контроллеры, диспетчеризация, сценарии управления и требования к мониторингу влияют на бюджет.'
-                ],
-                [
-                    'icon' => 'fa-screwdriver-wrench',
-                    'title' => 'Комплектация',
-                    'desc' => 'Итоговая цена зависит от насосов, теплообменников, шкафов, датчиков, арматуры и прочих узлов.'
-                ],
-                [
-                    'icon' => 'fa-file-lines',
-                    'title' => 'Проектная документация',
-                    'desc' => 'Объём документации и требования к согласованию влияют на сроки и стоимость работ.'
-                ],
-                [
-                    'icon' => 'fa-truck-fast',
-                    'title' => 'Сроки и поставка',
-                    'desc' => 'Срочные поставки и нестандартные позиции могут менять итоговый бюджет проекта.'
-                ],
-                [
-                    'icon' => 'fa-building-circle-check',
-                    'title' => 'Особенности объекта',
-                    'desc' => 'Тип здания, инженерная инфраструктура и условия размещения оборудования учитываются при расчёте.'
-                ],
-            ] as $item)
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
-                        <i class="fa-solid {{ $item['icon'] }} text-primary text-xl"></i>
+            @foreach($services as $i => $service)
+                <a href="{{ route('service', $service->slug) }}"
+                   class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary/30 hover:-translate-y-1">
+                    <div class="relative h-48 overflow-hidden bg-gradient-to-br from-red-50 to-gray-100">
+                        @if($service->image)
+                            <img src="{{ str_starts_with($service->image, 'http') ? $service->image : asset('storage/' . $service->image) }}"
+                                 alt="{{ $service->title }}"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        @else
+                            <div class="w-full h-full flex items-center justify-center">
+                                <i class="fa-solid fa-gears text-primary/30 text-6xl"></i>
+                            </div>
+                        @endif
+
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                                {{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}
+                            </span>
+                        </div>
                     </div>
 
-                    <h3 class="text-lg font-bold mb-2">{{ $item['title'] }}</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">{{ $item['desc'] }}</p>
-                </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg mb-2 group-hover:text-primary transition leading-snug">
+                            {{ $service->title }}
+                        </h3>
+
+                        @if($service->excerpt)
+                            <p class="text-gray-500 text-sm leading-relaxed">
+                                {{ $service->excerpt }}
+                            </p>
+                        @endif
+
+                        <div class="mt-4 flex items-center text-primary text-sm font-semibold">
+                            Подробнее
+                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+                        </div>
+                    </div>
+                </a>
             @endforeach
+        </div>
+
+        <div class="text-center mt-10">
+            <a href="{{ route('services') }}"
+               class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-8 py-3.5 rounded-xl font-semibold transition shadow-md">
+                Все услуги
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+@endif
+
+{{-- ДЛЯ КОГО --}}
+<section class="py-20 bg-white">
+    <div class="container mx-auto max-w-7xl px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-primary font-semibold text-sm uppercase tracking-widest">Кому подходим</span>
+                <h2 class="text-4xl font-bold mt-2 mb-6">Работаем с объектами, где важны сроки, надёжность и понятная смета</h2>
+                <p class="text-gray-500 text-lg leading-relaxed mb-8">
+                    ВТП Инжиниринг помогает заказчикам подобрать и реализовать инженерное решение под конкретный объект — без лишних согласований и непонятных технических формулировок.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    @foreach([
+                        'Управляющие компании',
+                        'Застройщики',
+                        'Подрядчики',
+                        'Промышленные объекты',
+                        'Коммерческая недвижимость',
+                        'Госзаказчики и тендеры',
+                    ] as $target)
+                        <div class="flex items-center gap-3 bg-gray-50 border border-gray-100 rounded-xl p-4">
+                            <div class="w-8 h-8 rounded-full bg-red-100 text-primary flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-check text-sm"></i>
+                            </div>
+                            <div class="font-semibold text-gray-800">{{ $target }}</div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100">
+                <h3 class="text-2xl font-bold mb-6">Что показываем в проектах</h3>
+
+                <div class="space-y-4">
+                    @foreach([
+                        ['title' => 'Что сделали', 'desc' => 'Какое оборудование или инженерное решение было реализовано.'],
+                        ['title' => 'Для кого', 'desc' => 'Тип заказчика: УК, застройщик, подрядчик, производство или коммерческий объект.'],
+                        ['title' => 'Где', 'desc' => 'Город, объект или направление поставки.'],
+                        ['title' => 'Какой результат', 'desc' => 'Что получил заказчик: поставку, проект, автоматизацию или готовое решение.'],
+                    ] as $item)
+                        <div class="flex gap-4 bg-white rounded-2xl p-5 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-900">{{ $item['title'] }}</div>
+                                <div class="text-sm text-gray-500 mt-1">{{ $item['desc'] }}</div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-{{-- CTA --}}
-<section class="py-20 bg-white">
-    <div class="container mx-auto max-w-7xl px-4">
-        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-950 via-gray-900 to-red-950 p-8 md:p-12 shadow-2xl">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(204,0,0,0.35),transparent_35%)]"></div>
+{{-- ПЕРЕХОД НА КАЛЬКУЛЯТОР --}}
+<section class="py-20 bg-gray-950 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-40">
+        <div class="absolute top-0 right-0 w-[420px] h-[420px] bg-red-700 rounded-full blur-3xl"></div>
+    </div>
 
-            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+    <div class="container mx-auto max-w-7xl px-4 relative z-10">
+        <div class="bg-gradient-to-br from-gray-900 via-gray-900 to-red-950 border border-white/10 rounded-3xl p-8 md:p-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 <div>
-                    <h2 class="text-3xl md:text-5xl font-bold text-white leading-tight mb-5">
-                        Нужен точный расчёт по вашему объекту?
+                    <span class="text-red-300 font-semibold text-sm uppercase tracking-widest">Расчёт стоимости</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mt-3 mb-4">
+                        Подберите решение под ваш объект
                     </h2>
-
                     <p class="text-gray-300 text-lg leading-relaxed">
-                        Оставьте заявку — уточним параметры и подготовим коммерческое предложение.
+                        Заполните параметры на странице цен — инженер изучит вводные и подготовит предварительный расчёт.
                     </p>
                 </div>
 
                 <div class="flex flex-col sm:flex-row lg:justify-end gap-4">
-                    <a href="#calculator"
-                       class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-lg">
+                    <a href="{{ route('prices') }}"
+                       class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-xl font-bold transition shadow-xl">
                         Рассчитать стоимость
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="fa-solid fa-calculator"></i>
                     </a>
 
                     <a href="tel:{{ preg_replace('/[^+\d]/', '', $regionPhone) }}"
-                       class="inline-flex items-center justify-center gap-2 border-2 border-white/25 text-white hover:border-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition">
+                       class="inline-flex items-center justify-center gap-2 border-2 border-white/25 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold transition">
                         <i class="fa-solid fa-phone"></i>
                         Позвонить
                     </a>
@@ -366,5 +303,207 @@
         </div>
     </div>
 </section>
+
+{{-- ПРОЦЕСС --}}
+<section class="py-20 bg-white">
+    <div class="container mx-auto max-w-7xl px-4">
+        <div class="text-center mb-14">
+            <span class="text-primary font-semibold text-sm uppercase tracking-widest">Как работаем</span>
+            <h2 class="text-4xl font-bold mt-2 mb-4">
+                {{ $processBlock?->title ?: 'От заявки до готового решения' }}
+            </h2>
+            <p class="text-gray-500">
+                {{ $processBlock?->subtitle ?: 'Помогаем пройти путь от первичных вводных до понятного технического и коммерческого предложения.' }}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach([
+                ['step' => '01', 'icon' => 'fa-phone', 'title' => 'Заявка', 'desc' => 'Вы оставляете заявку или звоните — уточняем задачу и тип объекта.'],
+                ['step' => '02', 'icon' => 'fa-list-check', 'title' => 'Сбор вводных', 'desc' => 'Фиксируем параметры, назначение объекта, требования и ограничения.'],
+                ['step' => '03', 'icon' => 'fa-calculator', 'title' => 'Расчёт', 'desc' => 'Подбираем техническое решение и готовим предварительную оценку.'],
+                ['step' => '04', 'icon' => 'fa-file-signature', 'title' => 'Предложение', 'desc' => 'Передаём коммерческое предложение и обсуждаем дальнейшие шаги.'],
+            ] as $step)
+                <div class="relative text-center bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition">
+                    <div class="w-20 h-20 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 relative">
+                        <i class="fa-solid {{ $step['icon'] }} text-primary text-2xl"></i>
+                        <span class="absolute -top-2 -right-2 w-7 h-7 bg-primary text-white text-xs font-bold rounded-full flex items-center justify-center">
+                            {{ $step['step'] }}
+                        </span>
+                    </div>
+
+                    <h3 class="font-bold text-lg mb-2">{{ $step['title'] }}</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">{{ $step['desc'] }}</p>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- ОТЗЫВЫ --}}
+<section class="py-20 bg-gray-50">
+    <div class="container mx-auto max-w-7xl px-4">
+        <div class="text-center mb-14">
+            <span class="text-primary font-semibold text-sm uppercase tracking-widest">Отзывы</span>
+            <h2 class="text-4xl font-bold mt-2 mb-4">Что ценят заказчики</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">
+                Можно заменить эти отзывы на реальные письма, благодарности или короткие комментарии клиентов.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            @foreach([
+                ['name' => 'Управляющая компания', 'text' => 'Получили понятное техническое предложение и быстро согласовали параметры оборудования под объект.'],
+                ['name' => 'Подрядная организация', 'text' => 'Команда помогла подобрать решение и оперативно подготовила информацию для расчёта бюджета.'],
+                ['name' => 'Коммерческий объект', 'text' => 'Понравился системный подход: сначала разобрали задачу, потом предложили несколько вариантов решения.'],
+            ] as $review)
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                    <div class="flex gap-1 text-primary mb-4">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed mb-5">“{{ $review['text'] }}”</p>
+                    <div class="font-bold text-gray-900">{{ $review['name'] }}</div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- ПОРТФОЛИО --}}
+@if($portfolio->count())
+<section class="py-20 bg-white">
+    <div class="container mx-auto max-w-7xl px-4">
+        <div class="flex items-end justify-between mb-14">
+            <div>
+                <span class="text-primary font-semibold text-sm uppercase tracking-widest">Наши работы</span>
+                <h2 class="text-4xl font-bold mt-2">Выполненные проекты</h2>
+            </div>
+
+            <a href="{{ route('portfolio') }}" class="hidden md:flex items-center gap-2 text-primary font-semibold">
+                Все проекты
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($portfolio as $item)
+                <a href="{{ route('portfolio.item', $item->slug) }}"
+                   class="group relative rounded-2xl overflow-hidden aspect-[4/3] bg-gray-200 shadow-sm hover:shadow-xl transition-all duration-300">
+                    @if($item->image)
+                        <img src="{{ str_starts_with($item->image, 'http') ? $item->image : asset('storage/' . $item->image) }}"
+                             alt="{{ $item->title }}"
+                             class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    @else
+                        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-100 to-gray-100">
+                            <i class="fa-solid fa-building text-primary/30 text-6xl"></i>
+                        </div>
+                    @endif
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
+
+                    <div class="absolute bottom-0 left-0 right-0 p-5 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition">
+                        @if($item->category)
+                            <span class="text-red-300 text-xs font-semibold uppercase tracking-wider">
+                                {{ $item->category }}
+                            </span>
+                        @endif
+
+                        <h3 class="text-white font-bold mt-1">{{ $item->title }}</h3>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
+{{-- CTA --}}
+<section class="py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary to-red-900"></div>
+
+    <div class="container mx-auto max-w-7xl px-4 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="text-white">
+                <h2 class="text-4xl font-bold mb-4">
+                    {{ $cta?->title ?: 'Получите предварительный расчёт' }}
+                </h2>
+
+                <p class="text-red-100 text-lg mb-8 leading-relaxed">
+                    {{ $cta?->subtitle ?: 'Оставьте заявку — инженер уточнит параметры объекта и подготовит предложение.' }}
+                </p>
+
+                <div class="space-y-4">
+                    @foreach([
+                        'Подбор решения под параметры объекта',
+                        'Предварительная оценка бюджета',
+                        'Рекомендации по оборудованию',
+                        'Работа с коммерческими и промышленными объектами',
+                    ] as $benefit)
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-check text-white text-xs"></i>
+                            </div>
+                            <span class="text-red-100">{{ $benefit }}</span>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-8 shadow-2xl">
+                <h3 class="text-xl font-bold mb-1">Оставить заявку</h3>
+                <p class="text-gray-500 text-sm mb-6">Ответим в рабочее время</p>
+
+                <form id="ctaForm" action="{{ route('lead.order') }}" method="POST" class="space-y-4">
+                    @csrf
+                    <input type="hidden" name="source_url" value="{{ url()->current() }}">
+
+                    <input type="text" name="name" required placeholder="Ваше имя"
+                           class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+
+                    <input type="tel" name="phone" required placeholder="Телефон"
+                           class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+
+                    <input type="email" name="email" placeholder="Email"
+                           class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+
+                    <textarea name="comment" rows="3" placeholder="Кратко опишите задачу"
+                              class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary resize-none"></textarea>
+
+                    <button type="button" onclick="submitForm('ctaForm','{{ route('lead.order') }}','cta-success')"
+                            class="w-full bg-primary hover:bg-primary-dark text-white py-4 rounded-xl font-bold text-lg transition shadow-lg">
+                        {{ $cta?->button_text ?: 'Отправить заявку' }}
+                    </button>
+                </form>
+
+                <div id="cta-success" class="hidden text-center py-8">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-check text-green-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Заявка принята!</h3>
+                    <p class="text-gray-500">Наш специалист свяжется с вами в ближайшее время</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- ДОПОЛНИТЕЛЬНЫЕ HTML-БЛОКИ ИЗ АДМИНКИ --}}
+@if(isset($blocks))
+    @foreach($blocks->where('type', 'html') as $htmlBlock)
+    <section class="py-16 bg-white">
+        <div class="container mx-auto max-w-7xl px-4">
+            @if($htmlBlock->title)
+                <h2 class="text-3xl font-bold mb-6">{{ $htmlBlock->title }}</h2>
+            @endif
+
+            {!! $htmlBlock->settings['custom_html'] ?? $htmlBlock->content !!}
+        </div>
+    </section>
+    @endforeach
+@endif
 
 @endsection
