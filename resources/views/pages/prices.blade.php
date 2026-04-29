@@ -247,11 +247,11 @@
     <div class="container mx-auto max-w-7xl px-4">
         <div class="mb-10">
             <div class="text-primary font-semibold uppercase tracking-[0.2em] text-sm mb-3">
-                Ориентиры
+                В стоимость услуг входит продукция, доставка, монтаж и пусконаладка. Присылайте проекты для просчета на почту <a href="mailto:region@vtp-inz.ru">region@vtp-inz.ru</a>
             </div>
 
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-                Базовые цены «от»
+                Стоимость услуг
             </h2>
         </div>
 
