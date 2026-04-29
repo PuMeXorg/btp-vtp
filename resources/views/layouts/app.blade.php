@@ -127,7 +127,8 @@
     modalType: 'callback',
     searchOpen: false,
     searchQuery: ''
-}">
+}"
+    @open-callback-modal.window="modalOpen = true; modalType = 'callback'">
 
     {{-- Основная шапка --}}
     <div class="container mx-auto max-w-7xl px-4">
@@ -661,16 +662,10 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
             <div>
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 3L2 12h3v9h6v-6h2v6h6v-9h3L12 3z"/>
-                        </svg>
-                    </div>
-
-                    <h4 class="text-white font-bold">
-                        {{ $siteName }}
-                    </h4>
+                <div class="flex items-center gap-[10px] mb-4">
+                    <img src="/public/images/logo-vtp-transparent.png"
+                         alt="ВТП Инжиниринг"
+                         class="h-12 w-auto object-contain flex-shrink-0">
                 </div>
 
                 <p class="text-sm text-gray-500 mb-4 leading-relaxed">
@@ -763,9 +758,9 @@
                     </li>
                 </ul>
 
-                <button @click="modalOpen = true; modalType = 'callback'"
-                    class="mt-5 w-full bg-primary hover:bg-primary-dark text-white py-2.5 rounded-lg text-sm font-medium transition"
-                    x-data>
+                <button type="button"
+                    onclick="window.dispatchEvent(new CustomEvent('open-callback-modal'))"
+                    class="mt-5 w-full bg-primary hover:bg-primary-dark text-white py-2.5 rounded-lg text-sm font-medium transition">
                     Заказать звонок
                 </button>
             </div>
