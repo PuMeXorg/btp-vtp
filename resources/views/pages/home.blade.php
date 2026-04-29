@@ -363,93 +363,127 @@
     $reviewImages = [
         [
             'title' => 'Благодарственное письмо №1',
-            'image' => '/public/images/reviews/review-1.jpg',
+            'image' => '/images/reviews/review-1.jpg',
         ],
         [
             'title' => 'Благодарственное письмо №2',
-            'image' => '/public/images/reviews/review-2.jpg',
+            'image' => '/images/reviews/review-2.jpg',
         ],
         [
             'title' => 'Благодарственное письмо №3',
-            'image' => '/public/images/reviews/review-3.jpg',
+            'image' => '/images/reviews/review-3.jpg',
         ],
         [
             'title' => 'Благодарственное письмо №4',
-            'image' => '/public/images/reviews/review-4.jpg',
+            'image' => '/images/reviews/review-4.jpg',
         ],
         [
             'title' => 'Благодарственное письмо №5',
-            'image' => '/public/images/reviews/review-5.jpg',
+            'image' => '/images/reviews/review-5.jpg',
         ],
         [
             'title' => 'Благодарственное письмо №6',
-            'image' => '/public/images/reviews/review-6.jpg',
+            'image' => '/images/reviews/review-6.jpg',
         ],
         [
             'title' => 'Благодарственное письмо №7',
-            'image' => '/public/images/reviews/review-7.jpg',
+            'image' => '/images/reviews/review-7.jpg',
         ],
         [
             'title' => 'Благодарственное письмо №8',
-            'image' => '/public/images/reviews/review-8.jpg',
-        ],
-        [
-            'title' => 'Благодарственное письмо №9',
-            'image' => '/public/images/reviews/review-9.png',
-            'pdf' => '/public/images/reviews/review-9.pdf',
+            'image' => '/images/reviews/review-9.png',
+            'pdf' => '/images/reviews/review-9.pdf',
         ],
     ];
 @endphp
 
-<section class="py-20 bg-gray-50" x-data="{ open: false, image: '', title: '', pdf: '' }">
+<section
+    class="py-20 bg-gray-50"
+    x-data='{
+        open: false,
+        selectedIndex: 0,
+        items: @json($reviewImages),
+        openReview(index) {
+            this.selectedIndex = index;
+            this.open = true;
+            document.body.classList.add("overflow-hidden");
+        },
+        closeReview() {
+            this.open = false;
+            document.body.classList.remove("overflow-hidden");
+        },
+        prevSlide() {
+            this.$refs.reviewsTrack.scrollBy({ left: -380, behavior: "smooth" });
+        },
+        nextSlide() {
+            this.$refs.reviewsTrack.scrollBy({ left: 380, behavior: "smooth" });
+        }
+    }'
+>
     <div class="container mx-auto max-w-7xl px-4">
-        <div class="text-center mb-14">
-            <span class="text-primary font-semibold text-sm uppercase tracking-widest">
-                Отзывы
-            </span>
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div>
+                <span class="text-primary font-semibold text-sm uppercase tracking-widest">Отзывы</span>
+                <h2 class="text-4xl font-bold mt-2 mb-4">Благодарственные письма</h2>
+                <p class="text-gray-500 max-w-2xl">
+                    Реальные отзывы и благодарственные письма от клиентов и партнёров компании.
+                </p>
+            </div>
 
-            <h2 class="text-4xl font-bold mt-2 mb-4">
-                Благодарственные письма
-            </h2>
-
-            <p class="text-gray-500 max-w-2xl mx-auto">
-                Документы и отзывы заказчиков, подтверждающие опыт и качество работы ВТП Инжиниринг.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach($reviewImages as $review)
+            <div class="flex items-center gap-3">
                 <button
                     type="button"
-                    @click="
-                        open = true;
-                        image = '{{ $review['image'] }}';
-                        title = '{{ $review['title'] }}';
-                        pdf = '{{ $review['pdf'] ?? '' }}';
-                    "
-                    class="group text-left bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300"
+                    @click="prevSlide()"
+                    class="w-12 h-12 rounded-full border border-gray-200 bg-white hover:bg-gray-100 text-gray-700 transition flex items-center justify-center shadow-sm"
+                    aria-label="Предыдущий слайд"
                 >
-                    <div class="aspect-[3/4] bg-gray-100 overflow-hidden">
-                        <img
-                            src="{{ $review['image'] }}"
-                            alt="{{ $review['title'] }}"
-                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                            loading="lazy"
-                        >
-                    </div>
-
-                    <div class="p-5">
-                        <div class="flex items-center justify-between gap-4">
-                            <h3 class="font-bold text-gray-900">
-                                {{ $review['title'] }}
-                            </h3>
-
-                            <span class="w-10 h-10 rounded-full bg-red-50 text-primary flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-magnifying-glass-plus"></i>
-                            </span>
-                        </div>
-                    </div>
+                    <i class="fa-solid fa-arrow-left"></i>
                 </button>
+
+                <button
+                    type="button"
+                    @click="nextSlide()"
+                    class="w-12 h-12 rounded-full border border-gray-200 bg-white hover:bg-gray-100 text-gray-700 transition flex items-center justify-center shadow-sm"
+                    aria-label="Следующий слайд"
+                >
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div
+            x-ref="reviewsTrack"
+            class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+            @foreach($reviewImages as $index => $review)
+                <div class="snap-start shrink-0 w-[280px] sm:w-[320px] lg:w-[360px]">
+                    <div class="group bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 h-full">
+                        <button
+                            type="button"
+                            @click="openReview({{ $index }})"
+                            class="block w-full text-left"
+                        >
+                            <div class="aspect-[3/4] bg-gray-100 overflow-hidden flex items-center justify-center">
+                                <img
+                                    src="{{ $review['image'] }}"
+                                    alt="{{ $review['title'] }}"
+                                    class="w-full h-full object-contain bg-white group-hover:scale-[1.02] transition duration-300"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="p-5 flex items-center justify-between gap-4">
+                                <h3 class="font-bold text-gray-900 leading-snug">
+                                    {{ $review['title'] }}
+                                </h3>
+
+                                <span class="w-11 h-11 rounded-full bg-red-50 text-primary flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
             @endforeach
         </div>
     </div>
@@ -459,19 +493,19 @@
         x-show="open"
         x-cloak
         class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-        @click.self="open = false"
-        @keydown.escape.window="open = false"
+        @click.self="closeReview()"
+        @keydown.escape.window="closeReview()"
     >
-        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[92vh] overflow-hidden flex flex-col">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl max-h-[94vh] overflow-hidden flex flex-col">
             <div class="flex items-center justify-between gap-4 px-5 py-4 border-b border-gray-100">
-                <h3 class="font-bold text-gray-900" x-text="title"></h3>
+                <h3 class="font-bold text-gray-900" x-text="items[selectedIndex]?.title || ''"></h3>
 
                 <div class="flex items-center gap-2">
-                    <template x-if="pdf">
+                    <template x-if="items[selectedIndex] && items[selectedIndex].pdf">
                         <a
-                            :href="pdf"
+                            :href="items[selectedIndex].pdf"
                             target="_blank"
-                            class="hidden sm:inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-xl font-semibold transition"
+                            class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-xl font-semibold transition"
                         >
                             <i class="fa-solid fa-file-pdf"></i>
                             Открыть PDF
@@ -480,8 +514,9 @@
 
                     <button
                         type="button"
-                        @click="open = false"
+                        @click="closeReview()"
                         class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition"
+                        aria-label="Закрыть"
                     >
                         <i class="fa-solid fa-xmark"></i>
                     </button>
@@ -490,9 +525,9 @@
 
             <div class="bg-gray-100 overflow-auto p-4">
                 <img
-                    :src="image"
-                    :alt="title"
-                    class="mx-auto max-h-[78vh] w-auto max-w-full rounded-xl shadow-lg"
+                    :src="items[selectedIndex]?.image || ''"
+                    :alt="items[selectedIndex]?.title || ''"
+                    class="mx-auto max-h-[78vh] w-auto max-w-full object-contain rounded-xl shadow-lg bg-white"
                 >
             </div>
         </div>
