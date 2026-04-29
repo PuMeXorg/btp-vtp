@@ -44,7 +44,8 @@ class PageController extends Controller
     public function certificates()
     {
         $page = Page::active()->where('slug', 'sertifikaty')->firstOrFail();
-        return view('pages.page', compact('page'));
+
+        return view('pages.certificates', compact('page'));
     }
 
     public function requisites()
