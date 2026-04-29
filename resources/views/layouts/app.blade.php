@@ -6,8 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', $siteName) | {{ $siteName }}</title>
     <meta name="description" content="@yield('description', '')">
-    <link rel="icon" type="image/png" href="{{ asset('/public/images/favicon-vtp.png') }}">
-    <link rel="shortcut icon" type="image/png" href="{{ asset('/public/images/favicon-vtp.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('/public/images/favicon-vtp-transparent.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('/public/images/favicon-vtp-transparent.png') }}">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -136,7 +136,7 @@
             {{-- Логотип --}}
         <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center">
             <img
-        src="{{ asset('/public/images/logo_nadpis.png') }}"
+        src="{{ asset('/public/images/logo-vtp-transparent.png') }}"
         alt="ВТП Инжиниринг"
         class="h-[52px] w-auto">
         </a>
