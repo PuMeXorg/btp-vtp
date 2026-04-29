@@ -43,9 +43,25 @@ class PageController extends Controller
 
     public function certificates()
     {
-        $page = Page::active()->where('slug', 'sertifikaty')->firstOrFail();
+        $certificates = [
+            [
+                'title' => 'Сертификат ВТП №1',
+                'preview' => 'storage/certificates/previews/sertifikat-vtp-1.png',
+                'file' => 'storage/certificates/sertifikat-vtp-1.pdf',
+            ],
+            [
+                'title' => 'Сертификат ВТП №2',
+                'preview' => 'storage/certificates/previews/sertifikat-vtp-2.png',
+                'file' => 'storage/certificates/sertifikat-vtp-2.pdf',
+            ],
+            [
+                'title' => 'Сертификат ВТП №3',
+                'preview' => 'storage/certificates/previews/sertifikat-vtp-3.png',
+                'file' => 'storage/certificates/sertifikat-vtp-3.pdf',
+            ],
+        ];
 
-        return view('pages.certificates', compact('page'));
+        return view('pages.certificates', compact('certificates'));
     }
 
     public function requisites()
