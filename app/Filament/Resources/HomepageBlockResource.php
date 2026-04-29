@@ -56,9 +56,18 @@ class HomepageBlockResource extends Resource
                     Forms\Components\FileUpload::make('image')
                         ->label('Изображение')
                         ->image()
+                        ->imagePreviewHeight('180')
+                        ->loadingIndicatorPosition('left')
+                        ->panelAspectRatio('16:9')
+                        ->panelLayout('integrated')
+                        ->removeUploadedFileButtonPosition('right')
+                        ->uploadButtonPosition('left')
+                        ->uploadProgressIndicatorPosition('left')
                         ->directory('homepage')
                         ->disk('public')
-                        ->visibility('public'),
+                        ->visibility('public')
+                        ->maxSize(5120)
+                        ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp']),
 
                     Forms\Components\TextInput::make('button_text')
                         ->label('Текст кнопки'),
