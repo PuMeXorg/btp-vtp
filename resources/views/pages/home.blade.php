@@ -362,37 +362,62 @@
 @php
     $reviewImages = [
         [
-            'title' => 'Благодарственное письмо №1',
-            'image' => '/public/images/reviews/review-1.jpg',
+            'title' => 'Благодарственное письмо "Центр образования "САМСОН"',
+            'image' => '/public/images/reviews/rev1.jpg',
         ],
         [
-            'title' => 'Благодарственное письмо №2',
-            'image' => '/public/images/reviews/review-2.jpg',
+            'title' => 'Благодарственное письмо "СЗ "Земельные активы""',
+            'image' => '/public/images/reviews/rev2.jpg',
         ],
         [
-            'title' => 'Благодарственное письмо №3',
-            'image' => '/public/images/reviews/review-3.jpg',
+            'title' => 'Благодарственное письмо ПСК Калибр',
+            'image' => '/public/images/reviews/rev3.jpg',
         ],
         [
-            'title' => 'Благодарственное письмо №4',
-            'image' => '/public/images/reviews/review-4.jpg',
+            'title' => 'Благодарственное письмо ООО «Строй Ресурс»',
+            'image' => '/public/images/reviews/rev4.jpg',
         ],
         [
-            'title' => 'Благодарственное письмо №5',
-            'image' => '/public/images/reviews/review-5.jpg',
+            'title' => 'Благодарственное письмо ГУП "ФИНАНСОВО-ХОЗЯЙСТВЕННОЕ УПРАВЛЕНИЕ
+КОМПЛЕКСА АРХИТЕКТУРЫ, СТРОИТЕЛЬСТВА, РАЗВИТИЯ И РЕКОНСТРУКЦИИ ГОРОДА',
+            'image' => '/public/images/reviews/rev5.jpg',
         ],
         [
-            'title' => 'Благодарственное письмо №6',
-            'image' => '/public/images/reviews/review-6.jpg',
+            'title' => 'Благодарственное письмо ООО "ЮBECA"',
+            'image' => '/public/images/reviews/rev6.jpg',
         ],
         [
-            'title' => 'Благодарственное письмо №7',
-            'image' => '/public/images/reviews/review-7.jpg',
+            'title' => 'Благодарственное письмо ООО «Данфосс»',
+            'image' => '/public/images/reviews/rev7.jpg',
         ],
         [
-            'title' => 'Благодарственное письмо №8',
-            'image' => '/public/images/reviews/review-9.png',
-            'pdf' => '/public/images/reviews/review-9.pdf',
+            'title' => 'Благодарственное письмо ООО «Санекст»',
+            'image' => '/public/images/reviews/rev8.jpg',
+        ],
+        [
+            'title' => 'Благодарственное письмо ООО «БРОЕН»',
+            'image' => '/public/images/reviews/rev9.jpg',
+        ],
+        [
+            'title' => 'Благодарственное письмо ООО «ВИЛО РУС»',
+            'image' => '/public/images/reviews/rev10.jpg',
+        ],
+        [
+            'title' => 'Благодарственное письмо ООО «Медиа Проект Групп»',
+            'image' => '/public/images/reviews/rev11.jpg',
+        ],
+        [
+            'title' => 'Благодарственное письмо ООО «ЭкоДом»',
+            'image' => '/public/images/reviews/rev12.jpg',
+        ],
+        [
+            'title' => 'Благодарственное письмо ГБУ «Детская музыкальная школа имени А.М.Иванова-Крамского»',
+            'image' => '/public/images/reviews/rev13.jpg',
+        ],    
+        [
+            'title' => 'Благодарственное письмо ООО «Альтстрой»',
+            'image' => '/public/images/reviews/rev14.png',
+            'pdf' => '/public/images/reviews/rev14.pdf',
         ],
     ];
 @endphp
