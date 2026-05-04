@@ -37,8 +37,7 @@ class PageController extends Controller
 
     public function about()
     {
-        $page = Page::active()->where('slug', 'o-kompanii')->firstOrFail();
-        return view('pages.page', compact('page'));
+        return view('pages.about');
     }
 
     public function certificates()
