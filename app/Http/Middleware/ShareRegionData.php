@@ -21,13 +21,14 @@ class ShareRegionData
         View::share('regionHours',    RegionHelper::workingHours());
         View::share('regionName',     RegionHelper::name());
 
-        View::share('menuServices',
-            Page::active()->where('type', 'service')
-                ->whereNull('parent_id')
-                ->orderBy('sort')
-                ->with('children.children')
-                ->get()
-        );
+        $allTopServices = Page::active()->where('type', 'service')
+            ->whereNull('parent_id')
+            ->orderBy('sort')
+            ->with('children.children')
+            ->get();
+
+        View::share('menuServices', $allTopServices->filter(fn($p) => !str_contains(mb_strtolower($p->title), 'проектир'))->values());
+        View::share('menuProektirovanie', $allTopServices->filter(fn($p) => str_contains(mb_strtolower($p->title), 'проектир'))->values());
         View::share('menuCatalog',
             Page::active()->where('type', 'catalog')
                 ->whereNull('parent_id')
