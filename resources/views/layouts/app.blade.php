@@ -285,10 +285,10 @@
                             Сертификаты ВТП
                         </a>
 
-                        <a href="{{ url('/sobstvennoe-proizvodstvo') }}"
+                        <a href="{{ route('requisites') }}"
                             class="flex items-center gap-2 px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition">
-                            <i class="fa-solid fa-industry text-primary opacity-60 w-4"></i>
-                            Собственное производство
+                            <i class="fa-solid fa-file-lines text-primary opacity-60 w-4"></i>
+                            Реквизиты
                         </a>
                     </div>
                 </div>
@@ -412,9 +412,9 @@
                 Сертификаты ВТП
             </a>
 
-            <a href="{{ url('/sobstvennoe-proizvodstvo') }}"
+            <a href="{{ route('requisites') }}"
                 class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
-                Собственное производство
+                Реквизиты
             </a>
 
             <a href="{{ route('services') }}"

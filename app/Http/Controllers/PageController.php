@@ -66,8 +66,7 @@ class PageController extends Controller
 
     public function requisites()
     {
-        $page = Page::active()->where('slug', 'rekvizity')->firstOrFail();
-        return view('pages.page', compact('page'));
+        return view('pages.requisites');
     }
 
     public function services()
