@@ -7,7 +7,7 @@
 
 {{-- Hero --}}
 <section class="relative bg-gray-900 text-white overflow-hidden">
-    <img src="{{ asset('images/about/company-photo.jpg') }}"
+    <img src="{{ asset('/public/images/about/company-photo.jpg') }}"
          alt="ВТП Инжиниринг — монтаж тепловых пунктов"
          class="absolute inset-0 w-full h-full object-cover opacity-30">
 
@@ -58,7 +58,7 @@
             </div>
 
             <div class="relative">
-                <img src="{{ asset('images/about/sotrudniki.jpg') }}"
+                <img src="{{ asset('/public/images/about/sotrudniki.jpg') }}"
                      alt="Команда ВТП Инжиниринг"
                      class="rounded-2xl shadow-xl w-full object-cover max-h-80">
 
@@ -118,7 +118,7 @@
                 </div>
                 <div>
                     <h3 class="font-semibold text-gray-900 mb-1">Более 10 лет опыта</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Проектируем, монтируем и сдаём тепловые пункты с 2014 года. Знаем все требования МОЭК и Ростехнадзора.</p>
+                    <p class="text-sm text-gray-500 leading-relaxed">Проектируем, монтируем и сдаём тепловые пункты с 2014 года. Знаем все нормативные требования и регламенты.</p>
                 </div>
             </div>
 
@@ -239,7 +239,7 @@
 
             @foreach($works as $work)
             <div class="group relative rounded-xl overflow-hidden shadow-sm border border-gray-100">
-                <img src="{{ asset('images/about/' . $work['img']) }}"
+                <img src="{{ asset('/public/images/about/' . $work['img']) }}"
                      alt="{{ $work['title'] }}"
                      class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
