@@ -58,11 +58,9 @@
             </div>
 
             <div class="relative">
-                {{-- TODO: заменить на фото сотрудников/команды --}}
-                <div class="rounded-2xl bg-gray-100 border-2 border-dashed border-gray-300 w-full h-72 flex flex-col items-center justify-center text-gray-400 gap-3">
-                    <i class="fa-solid fa-users text-5xl"></i>
-                    <span class="text-sm font-medium">Здесь будет фото команды</span>
-                </div>
+                <img src="{{ asset('images/about/sotrudniki.jpg') }}"
+                     alt="Команда ВТП Инжиниринг"
+                     class="rounded-2xl shadow-xl w-full object-cover max-h-80">
 
                 <div class="absolute -bottom-4 -left-4 bg-primary text-white rounded-xl px-6 py-4 shadow-lg">
                     <div class="text-3xl font-bold">10+</div>
