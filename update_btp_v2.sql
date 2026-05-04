@@ -1,7 +1,7 @@
 UPDATE pages SET
-image = 'public/images/about/work-2.jpg',
+image = NULL,
 content = '
-<img src="/public/images/about/work-2.jpg" alt="Блочный тепловой пункт — ВТП Инжиниринг" style="width:100%;border-radius:12px;margin-bottom:24px;max-height:420px;object-fit:cover;">
+<img src="/public/images/about/btp-main.webp" alt="Блочный тепловой пункт — ВТП Инжиниринг" style="width:100%;border-radius:12px;margin-bottom:24px;max-height:420px;object-fit:cover;">
 
 <p style="font-size:1.05em;color:#374151;line-height:1.75">Блочные тепловые пункты (БТП) созданы для обеспечения надёжной и бесперебойной работы систем теплоснабжения и горячего водоснабжения (ГВС), рационального использования энергетических ресурсов, а также для упрощения дальнейшей модернизации инженерных систем.</p>
 
