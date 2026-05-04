@@ -7,9 +7,6 @@
 
 {{-- Hero --}}
 <section class="relative bg-gray-900 text-white overflow-hidden">
-    <img src="{{ asset('/public/images/about/company-photo.jpg') }}"
-         alt="ВТП Инжиниринг — монтаж тепловых пунктов"
-         class="absolute inset-0 w-full h-full object-cover opacity-30">
 
     <div class="relative container mx-auto max-w-7xl px-4 py-20">
         <nav class="text-sm text-gray-400 mb-6 flex items-center gap-2">
