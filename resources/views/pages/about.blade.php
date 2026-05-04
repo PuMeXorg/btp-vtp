@@ -48,8 +48,7 @@
 
                 <p class="text-gray-600 leading-relaxed mb-4">
                     Мы выполняем весь цикл работ: от получения технических условий и разработки
-                    проектной документации до монтажа, пуско-наладки и сдачи объекта в
-                    ПАО МОЭК и МТУ Ростехнадзора. Работаем под ключ.
+                    проектной документации до монтажа, пуско-наладки и сдачи объекта. Работаем под ключ.
                 </p>
 
                 <p class="text-gray-600 leading-relaxed">
@@ -59,9 +58,11 @@
             </div>
 
             <div class="relative">
-                <img src="{{ asset('images/about/company-photo.jpg') }}"
-                     alt="Монтаж теплового пункта — ВТП Инжиниринг"
-                     class="rounded-2xl shadow-xl w-full object-cover max-h-80">
+                {{-- TODO: заменить на фото сотрудников/команды --}}
+                <div class="rounded-2xl bg-gray-100 border-2 border-dashed border-gray-300 w-full h-72 flex flex-col items-center justify-center text-gray-400 gap-3">
+                    <i class="fa-solid fa-users text-5xl"></i>
+                    <span class="text-sm font-medium">Здесь будет фото команды</span>
+                </div>
 
                 <div class="absolute -bottom-4 -left-4 bg-primary text-white rounded-xl px-6 py-4 shadow-lg">
                     <div class="text-3xl font-bold">10+</div>
@@ -169,7 +170,7 @@
                 </div>
                 <div>
                     <h3 class="font-semibold text-gray-900 mb-1">Сдача под ключ</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Берём на себя сдачу объекта в ПАО МОЭК и МТУ Ростехнадзора — клиент получает готовый сданный тепловой пункт.</p>
+                    <p class="text-sm text-gray-500 leading-relaxed">Берём на себя все согласования и сдачу объекта — клиент получает готовый, сданный тепловой пункт.</p>
                 </div>
             </div>
 
