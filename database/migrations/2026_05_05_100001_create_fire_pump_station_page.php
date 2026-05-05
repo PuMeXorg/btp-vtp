@@ -1,0 +1,259 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        $content = '
+<img src="/public/images/fire/stancia1.jpg" alt="Насосная станция пожаротушения" style="width:100%;border-radius:12px;margin-bottom:24px;max-height:460px;object-fit:cover;object-position:center top">
+
+<p style="font-size:1.05em;color:#374151;line-height:1.75">Насосные станции пожаротушения обеспечивают надёжную подачу воды к спринклерным, дренчерным системам и внутреннему противопожарному водопроводу. Станции полностью собираются на производстве, проходят заводские испытания и поставляются готовыми к подключению.</p>
+<p style="color:#374151;line-height:1.75;margin-bottom:32px">ООО «ВТП Инжиниринг» проектирует и поставляет насосные станции пожаротушения под требования конкретного объекта — с учётом СП 485.1311500.2020, СП 10.13130.2020 и ТР ЕАЭС 043/2017. Обеспечиваем полное сопровождение: от расчёта параметров до пусконаладки и передачи документации.</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:40px">
+  <div style="background:#fff5f5;border-left:4px solid #cc0000;padding:14px 16px;border-radius:8px">
+    <div style="font-weight:700;color:#111827;font-size:.9em">Спринклерные системы</div>
+    <div style="color:#6b7280;font-size:.82em;margin-top:4px">Автоматическое тушение при срабатывании спринклера</div>
+  </div>
+  <div style="background:#fff5f5;border-left:4px solid #cc0000;padding:14px 16px;border-radius:8px">
+    <div style="font-weight:700;color:#111827;font-size:.9em">Дренчерные системы</div>
+    <div style="color:#6b7280;font-size:.82em;margin-top:4px">Орошение по площади по команде от извещателя</div>
+  </div>
+  <div style="background:#fff5f5;border-left:4px solid #cc0000;padding:14px 16px;border-radius:8px">
+    <div style="font-weight:700;color:#111827;font-size:.9em">Внутренний ПВ</div>
+    <div style="color:#6b7280;font-size:.82em;margin-top:4px">Подача воды к пожарным кранам и лафетным стволам</div>
+  </div>
+  <div style="background:#fff5f5;border-left:4px solid #cc0000;padding:14px 16px;border-radius:8px">
+    <div style="font-weight:700;color:#111827;font-size:.9em">Объекты любого типа</div>
+    <div style="color:#6b7280;font-size:.82em;margin-top:4px">Жилые, офисные, складские, паркинги, БЦ</div>
+  </div>
+</div>
+
+<h2 style="font-size:1.5em;font-weight:700;color:#111827;margin:0 0 6px;text-align:center">Что входит в состав станции?</h2>
+<p style="text-align:center;color:#6b7280;margin-bottom:24px;font-size:.9em">Нажмите на метку, чтобы узнать подробнее</p>
+
+<div style="position:relative;max-width:680px;margin:0 auto 40px;user-select:none">
+  <img src="/public/images/fire/stancia1.jpg" alt="Состав насосной станции пожаротушения" style="width:100%;border-radius:16px;display:block;box-shadow:0 8px 32px rgba(0,0,0,.15);object-fit:cover;object-position:center top">
+
+  <!-- Гидропневматический бак — красный цилиндр слева -->
+  <button onclick="fireShow(\'tank\')" title="Гидропневматический бак" style="position:absolute;left:14%;top:43%;transform:translate(-50%,-50%);background:none;border:none;cursor:pointer;padding:0;z-index:10">
+    <span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;background:#cc0000;border-radius:50%;box-shadow:0 0 0 5px rgba(204,0,0,.2),0 0 0 10px rgba(204,0,0,.08);animation:firePulse 2s ease-in-out infinite">
+      <i class="fas fa-database" style="color:#fff;font-size:.65em"></i>
+    </span>
+  </button>
+
+  <!-- Электродвигатель — синий мотор по центру -->
+  <button onclick="fireShow(\'motor\')" title="Электродвигатель" style="position:absolute;left:42%;top:36%;transform:translate(-50%,-50%);background:none;border:none;cursor:pointer;padding:0;z-index:10">
+    <span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;background:#2563eb;border-radius:50%;box-shadow:0 0 0 5px rgba(37,99,235,.2),0 0 0 10px rgba(37,99,235,.08);animation:firePulse 2s ease-in-out infinite .3s">
+      <i class="fas fa-bolt" style="color:#fff;font-size:.65em"></i>
+    </span>
+  </button>
+
+  <!-- Насос пожарный — внизу по центру -->
+  <button onclick="fireShow(\'pump\')" title="Насос пожарный" style="position:absolute;left:44%;top:70%;transform:translate(-50%,-50%);background:none;border:none;cursor:pointer;padding:0;z-index:10">
+    <span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;background:#ea580c;border-radius:50%;box-shadow:0 0 0 5px rgba(234,88,12,.2),0 0 0 10px rgba(234,88,12,.08);animation:firePulse 2s ease-in-out infinite .6s">
+      <i class="fas fa-gears" style="color:#fff;font-size:.65em"></i>
+    </span>
+  </button>
+
+  <!-- Щит управления ППУ — справа -->
+  <button onclick="fireShow(\'panel\')" title="Шкаф управления ППУ" style="position:absolute;left:80%;top:40%;transform:translate(-50%,-50%);background:none;border:none;cursor:pointer;padding:0;z-index:10">
+    <span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;background:#7c3aed;border-radius:50%;box-shadow:0 0 0 5px rgba(124,58,237,.2),0 0 0 10px rgba(124,58,237,.08);animation:firePulse 2s ease-in-out infinite .9s">
+      <i class="fas fa-microchip" style="color:#fff;font-size:.65em"></i>
+    </span>
+  </button>
+
+  <!-- Манометры — вверху -->
+  <button onclick="fireShow(\'gauge\')" title="Манометры" style="position:absolute;left:50%;top:13%;transform:translate(-50%,-50%);background:none;border:none;cursor:pointer;padding:0;z-index:10">
+    <span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;background:#ca8a04;border-radius:50%;box-shadow:0 0 0 5px rgba(202,138,4,.2),0 0 0 10px rgba(202,138,4,.08);animation:firePulse 2s ease-in-out infinite 1.2s">
+      <i class="fas fa-gauge-high" style="color:#fff;font-size:.65em"></i>
+    </span>
+  </button>
+
+  <!-- Запорная арматура — вверху справа -->
+  <button onclick="fireShow(\'valve\')" title="Запорная арматура" style="position:absolute;left:70%;top:17%;transform:translate(-50%,-50%);background:none;border:none;cursor:pointer;padding:0;z-index:10">
+    <span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;background:#16a34a;border-radius:50%;box-shadow:0 0 0 5px rgba(22,163,74,.2),0 0 0 10px rgba(22,163,74,.08);animation:firePulse 2s ease-in-out infinite 1.5s">
+      <i class="fas fa-faucet" style="color:#fff;font-size:.65em"></i>
+    </span>
+  </button>
+
+  <!-- Жокей-насос — малый насос подпитки -->
+  <button onclick="fireShow(\'jockey\')" title="Жокей-насос" style="position:absolute;left:23%;top:78%;transform:translate(-50%,-50%);background:none;border:none;cursor:pointer;padding:0;z-index:10">
+    <span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;background:#0891b2;border-radius:50%;box-shadow:0 0 0 5px rgba(8,145,178,.2),0 0 0 10px rgba(8,145,178,.08);animation:firePulse 2s ease-in-out infinite 1.8s">
+      <i class="fas fa-droplet" style="color:#fff;font-size:.65em"></i>
+    </span>
+  </button>
+</div>
+
+<style>
+@keyframes firePulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:.85; transform:scale(1.12); }
+}
+</style>
+
+<div id="fire-overlay" onclick="fireClose()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9998;backdrop-filter:blur(2px)"></div>
+<div id="fire-popup" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:20px;max-width:500px;width:92%;z-index:9999;box-shadow:0 24px 80px rgba(0,0,0,.3);overflow:hidden">
+  <div id="fire-popup-header" style="padding:24px 24px 20px;display:flex;align-items:center;gap:16px">
+    <div id="fire-popup-icon-wrap" style="width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.5em"></div>
+    <div style="flex:1;min-width:0">
+      <div id="fire-popup-title" style="font-size:1.15em;font-weight:700;color:#111827"></div>
+      <div id="fire-popup-sub" style="font-size:.82em;color:#6b7280;margin-top:2px"></div>
+    </div>
+    <button onclick="fireClose()" style="background:#f3f4f6;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;color:#6b7280;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <i class="fas fa-xmark"></i>
+    </button>
+  </div>
+  <div style="height:1px;background:#f3f4f6;margin:0 24px"></div>
+  <div id="fire-popup-text" style="padding:20px 24px;color:#374151;line-height:1.75;font-size:.93em"></div>
+  <div id="fire-popup-props" style="padding:0 24px 24px;display:flex;flex-wrap:wrap;gap:8px"></div>
+</div>
+
+<script>
+var _fireData = {
+  tank: {
+    faIcon: "fa-database", bg: "#fff1f0", color: "#cc0000",
+    title: "Гидропневматический бак",
+    sub: "Поддержание давления в режиме ожидания",
+    text: "Обеспечивает поддержание рабочего давления в системе между пусками жокей-насоса. При падении давления ниже уставки автоматически включается жокей-насос, а при пожаре — основной пожарный насос. Исключает ложные запуски при незначительных утечках.",
+    props: ["Мембранная конструкция","Объём 50–500 л","Рабочее давление до 10 бар","Нержавеющий корпус"]
+  },
+  motor: {
+    faIcon: "fa-bolt", bg: "#eff6ff", color: "#2563eb",
+    title: "Электродвигатель насоса",
+    sub: "Привод основного пожарного насоса",
+    text: "Приводит в действие основной пожарный насос. Класс защиты IP55 обеспечивает работу в условиях повышенной влажности. Мощность подбирается по гидравлическим характеристикам системы. Подключается к шкафу управления ППУ через огнестойкие кабели FRLS.",
+    props: ["Класс защиты IP55","Огнестойкие кабели FRLS","Тепловая защита обмоток","АВР — автозапуск от ДГУ"]
+  },
+  pump: {
+    faIcon: "fa-gears", bg: "#fff7ed", color: "#ea580c",
+    title: "Насос пожарный",
+    sub: "Основной насос водоподачи",
+    text: "Обеспечивает требуемый расход и давление воды к спринклерам, дренчерам или пожарным кранам. Горизонтальное или вертикальное исполнение в зависимости от компоновки. Запускается автоматически при пожаре или вручную с щита управления.",
+    props: ["Расход до 3000 л/мин","Напор до 160 м","Чугун / нержавеющая сталь","Ручной аварийный запуск"]
+  },
+  panel: {
+    faIcon: "fa-microchip", bg: "#f5f3ff", color: "#7c3aed",
+    title: "Шкаф управления ППУ",
+    sub: "Прибор пожарный управления насосами",
+    text: "Автоматически запускает насосы при получении сигнала от пожарной сигнализации или падении давления в системе. Управляет основным насосом, резервным и жокей-насосом. Фиксирует все события в журнал, выдаёт сигналы неисправности на пожарный пост.",
+    props: ["Автозапуск по сигналу АУПС","Контроль сухого хода","Журнал событий","Световая и звуковая сигнализация"]
+  },
+  gauge: {
+    faIcon: "fa-gauge-high", bg: "#fefce8", color: "#ca8a04",
+    title: "Манометры",
+    sub: "Визуальный контроль давления",
+    text: "Установлены на коллекторах всасывания и нагнетания насосов, а также до и после запорной арматуры. Позволяют персоналу визуально контролировать давление в каждом узле без обращения к щиту управления. Класс точности 1,6.",
+    props: ["Класс точности 1,6","На каждом узле","Диапазон до 16 бар","Гликолиновое исполнение"]
+  },
+  valve: {
+    faIcon: "fa-faucet", bg: "#f0fdf4", color: "#16a34a",
+    title: "Запорная арматура",
+    sub: "Затворы и обратные клапаны",
+    text: "Сертифицированные затворы с датчиками положения обеспечивают контроль состояния каждой задвижки на шкафу управления. Обратные клапаны предотвращают гидравлический удар при запуске насосов. Всё оборудование соответствует требованиям СП 485.",
+    props: ["Датчики положения затворов","Обратные клапаны","СП 485 сертифицировано","Фланцевое исполнение"]
+  },
+  jockey: {
+    faIcon: "fa-droplet", bg: "#ecfeff", color: "#0891b2",
+    title: "Жокей-насос",
+    sub: "Насос поддержания давления",
+    text: "Малопроизводительный насос, постоянно поддерживающий давление в трубопроводах системы пожаротушения в режиме ожидания. Компенсирует незначительные утечки, предотвращая ложные запуски основного насоса. При реальном пожаре автоматически отключается.",
+    props: ["Малая мощность (0,5–5 кВт)","Непрерывная работа","Защита от сухого хода","Автоотключение при пожаре"]
+  }
+};
+function fireShow(k) {
+  var d = _fireData[k];
+  document.getElementById("fire-popup-header").style.background = d.bg;
+  var wrap = document.getElementById("fire-popup-icon-wrap");
+  wrap.style.background = d.bg;
+  wrap.innerHTML = "<i class=\"fas " + d.faIcon + "\" style=\"color:" + d.color + "\"></i>";
+  document.getElementById("fire-popup-title").textContent = d.title;
+  document.getElementById("fire-popup-sub").textContent = d.sub;
+  document.getElementById("fire-popup-text").textContent = d.text;
+  document.getElementById("fire-popup-props").innerHTML = d.props.map(function(p){
+    return "<span style=\"background:#f3f4f6;border-radius:20px;padding:4px 12px;font-size:.8em;color:#374151;font-weight:500\"><i class=\"fas fa-check\" style=\"color:#16a34a;margin-right:5px\"></i>" + p + "</span>";
+  }).join("");
+  document.getElementById("fire-popup").style.display = "block";
+  document.getElementById("fire-overlay").style.display = "block";
+}
+function fireClose() {
+  document.getElementById("fire-popup").style.display = "none";
+  document.getElementById("fire-overlay").style.display = "none";
+}
+document.addEventListener("keydown", function(e){ if(e.key==="Escape") fireClose(); });
+</script>
+
+<h2 style="font-size:1.4em;font-weight:700;color:#111827;margin:40px 0 20px">Фотографии станций</h2>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:40px">
+  <img src="/public/images/fire/stancia1.jpg" alt="Насосная станция пожаротушения" style="width:100%;border-radius:10px;aspect-ratio:3/4;object-fit:cover;object-position:center top;cursor:pointer" onclick="this.requestFullscreen&&this.requestFullscreen()">
+  <img src="/public/images/fire/stancia2.jpg" alt="Насосная станция пожаротушения" style="width:100%;border-radius:10px;aspect-ratio:3/4;object-fit:cover;object-position:center top;cursor:pointer" onclick="this.requestFullscreen&&this.requestFullscreen()">
+  <img src="/public/images/fire/stancia3.jpg" alt="Насосная станция пожаротушения" style="width:100%;border-radius:10px;aspect-ratio:3/4;object-fit:cover;object-position:center top;cursor:pointer" onclick="this.requestFullscreen&&this.requestFullscreen()">
+  <img src="/public/images/fire/stancia4.jpg" alt="Насосная станция пожаротушения" style="width:100%;border-radius:10px;aspect-ratio:3/4;object-fit:cover;object-position:center top;cursor:pointer" onclick="this.requestFullscreen&&this.requestFullscreen()">
+</div>
+
+<h2 style="font-size:1.4em;font-weight:700;color:#111827;margin:32px 0 16px">Этапы работы</h2>
+<div style="display:flex;flex-direction:column;gap:0">
+  <div style="display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #f3f4f6">
+    <div style="background:#cc0000;color:#fff;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9em;flex-shrink:0">01</div>
+    <div><div style="font-weight:600;color:#111827;margin-bottom:3px">Заявка и исходные данные</div><div style="color:#6b7280;font-size:.9em">Принимаем ТЗ: тип системы, расход, давление, категория объекта</div></div>
+  </div>
+  <div style="display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #f3f4f6">
+    <div style="background:#cc0000;color:#fff;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9em;flex-shrink:0">02</div>
+    <div><div style="font-weight:600;color:#111827;margin-bottom:3px">Гидравлический расчёт и подбор</div><div style="color:#6b7280;font-size:.9em">Подбираем насосы, бак, арматуру — по СП 485 и СП 10</div></div>
+  </div>
+  <div style="display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #f3f4f6">
+    <div style="background:#cc0000;color:#fff;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9em;flex-shrink:0">03</div>
+    <div><div style="font-weight:600;color:#111827;margin-bottom:3px">Коммерческое предложение</div><div style="color:#6b7280;font-size:.9em">Готовим КП с полным составом оборудования и сроками</div></div>
+  </div>
+  <div style="display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #f3f4f6">
+    <div style="background:#cc0000;color:#fff;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9em;flex-shrink:0">04</div>
+    <div><div style="font-weight:600;color:#111827;margin-bottom:3px">Сборка и заводские испытания</div><div style="color:#6b7280;font-size:.9em">Станция собирается на производстве и проходит полный цикл испытаний</div></div>
+  </div>
+  <div style="display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #f3f4f6">
+    <div style="background:#cc0000;color:#fff;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9em;flex-shrink:0">05</div>
+    <div><div style="font-weight:600;color:#111827;margin-bottom:3px">Поставка и монтаж</div><div style="color:#6b7280;font-size:.9em">Доставляем в насосную станцию объекта, подключаем к сетям</div></div>
+  </div>
+  <div style="display:flex;gap:16px;align-items:flex-start;padding:16px 0">
+    <div style="background:#cc0000;color:#fff;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9em;flex-shrink:0">06</div>
+    <div><div style="font-weight:600;color:#111827;margin-bottom:3px">Пусконаладка и сдача</div><div style="color:#6b7280;font-size:.9em">Настраиваем ППУ, проверяем автозапуск, сдаём с комплектом документов</div></div>
+  </div>
+</div>
+
+<div style="background:#fff5f5;border:1px solid #fecaca;border-radius:12px;padding:20px;margin-top:28px;display:flex;align-items:center;gap:16px">
+  <i class="fas fa-shield-halved" style="font-size:2.2em;color:#cc0000;flex-shrink:0"></i>
+  <div>
+    <div style="font-weight:700;color:#111827;margin-bottom:4px">Гарантия 60 месяцев</div>
+    <div style="color:#6b7280;font-size:.9em">На все выполненные работы и оборудование — 5 лет с момента подписания акта приёмки.</div>
+  </div>
+</div>
+';
+
+        // Check if page already exists
+        $exists = DB::table('pages')->where('slug', 'nasosnye-stantsii-pozharotusheniya')->exists();
+        if ($exists) return;
+
+        DB::table('pages')->insert([
+            'title'            => 'Насосные станции пожаротушения',
+            'slug'             => 'nasosnye-stantsii-pozharotusheniya',
+            'type'             => 'service',
+            'content'          => $content,
+            'excerpt'          => 'Проектирование и поставка насосных станций пожаротушения под ключ. Спринклер, дренчер, ПВ. Соответствие СП 485, гарантия 60 месяцев.',
+            'meta_title'       => 'Насосные станции пожаротушения — ВТП Инжиниринг',
+            'meta_description' => 'Поставка насосных станций пожаротушения в Москве. Спринклерные и дренчерные системы, ВПВ. Под ключ, гарантия 5 лет.',
+            'is_active'        => 1,
+            'sort'             => 10,
+            'parent_id'        => null,
+            'image'            => null,
+            'created_at'       => now(),
+            'updated_at'       => now(),
+        ]);
+    }
+
+    public function down(): void
+    {
+        DB::table('pages')->where('slug', 'nasosnye-stantsii-pozharotusheniya')->delete();
+    }
+};
