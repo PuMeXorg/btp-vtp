@@ -7,22 +7,31 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // 1. Create parent section "Насосные станции"
-        $parentId = DB::table('pages')->insertGetId([
-            'title'            => 'Насосные станции',
-            'slug'             => 'nasosnye-stantsii',
-            'type'             => 'service',
-            'parent_id'        => null,
-            'content'          => '',
-            'excerpt'          => 'Повысительные, противопожарные и насосные станции поддержания давления — проектирование и поставка под ключ.',
-            'meta_title'       => 'Насосные станции — ВТП Инжиниринг',
-            'meta_description' => 'Проектирование и поставка насосных станций в Москве. Повысительные, пожаротушения, поддержания давления.',
-            'is_active'        => 1,
-            'sort'             => 20,
-            'image'            => null,
-            'created_at'       => now(),
-            'updated_at'       => now(),
-        ]);
+        // 1. Create parent section "Насосные станции" (safe upsert)
+        $existing = DB::table('pages')->where('slug', 'nasosnye-stantsii')->first();
+        if ($existing) {
+            $parentId = $existing->id;
+            DB::table('pages')->where('id', $parentId)->update([
+                'title' => 'Насосные станции', 'type' => 'service',
+                'parent_id' => null, 'is_active' => 1, 'sort' => 20, 'updated_at' => now(),
+            ]);
+        } else {
+            $parentId = DB::table('pages')->insertGetId([
+                'title'            => 'Насосные станции',
+                'slug'             => 'nasosnye-stantsii',
+                'type'             => 'service',
+                'parent_id'        => null,
+                'content'          => '',
+                'excerpt'          => 'Повысительные, противопожарные и насосные станции поддержания давления — проектирование и поставка под ключ.',
+                'meta_title'       => 'Насосные станции — ВТП Инжиниринг',
+                'meta_description' => 'Проектирование и поставка насосных станций в Москве. Повысительные, пожаротушения, поддержания давления.',
+                'is_active'        => 1,
+                'sort'             => 20,
+                'image'            => null,
+                'created_at'       => now(),
+                'updated_at'       => now(),
+            ]);
+        }
 
         // 2. Move "Насосные станции пожаротушения" under the new parent
         DB::table('pages')
@@ -53,6 +62,7 @@ return new class extends Migration
             . '<div><div style="font-weight:700;color:#111827;margin-bottom:4px">Гарантия 60 месяцев</div><div style="color:#6b7280;font-size:.9em">На все выполненные работы и оборудование — 5 лет с момента подписания акта приёмки.</div></div>'
             . '</div>';
 
+        DB::table('pages')->where('slug', 'nasosnye-stantsii-podderzhania-davlenia')->delete();
         DB::table('pages')->insert([
             'title'            => 'Насосные станции поддержания давления',
             'slug'             => 'nasosnye-stantsii-podderzhania-davlenia',
@@ -93,6 +103,7 @@ return new class extends Migration
             . '<div><div style="font-weight:700;color:#111827;margin-bottom:4px">Гарантия 60 месяцев</div><div style="color:#6b7280;font-size:.9em">На все выполненные работы и оборудование — 5 лет с момента подписания акта приёмки.</div></div>'
             . '</div>';
 
+        DB::table('pages')->where('slug', 'povysitelnye-nasosnye-stantsii')->delete();
         DB::table('pages')->insert([
             'title'            => 'Повысительные насосные станции',
             'slug'             => 'povysitelnye-nasosnye-stantsii',
