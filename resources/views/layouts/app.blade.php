@@ -444,50 +444,90 @@
             </a>
 
             @if($menuServices->count())
-                <div class="pl-3 border-l border-blue-100 ml-3 space-y-1">
+                <div class="ml-3 space-y-0.5">
                     @foreach($menuServices as $service)
-                        <a href="{{ route('service', $service->slug) }}"
-                            class="block px-3 py-2 text-sm rounded-lg text-gray-600 hover:bg-blue-50 hover:text-primary transition">
-                            {{ $service->title }}
-                        </a>
-
                         @if($service->children->count())
-                            <div class="pl-3 border-l border-gray-100 ml-3">
-                                @foreach($service->children as $child)
-                                    <a href="{{ route('service', $child->slug) }}"
-                                        class="block px-3 py-1.5 text-xs rounded-lg text-gray-500 hover:bg-blue-50 hover:text-primary transition">
-                                        — {{ $child->title }}
+                            <div x-data="{ open: false }">
+                                <div class="flex items-center">
+                                    <a href="{{ route('service', $service->slug) }}"
+                                        class="flex-1 px-3 py-2 text-sm rounded-l-lg text-gray-600 hover:bg-blue-50 hover:text-primary transition">
+                                        {{ $service->title }}
                                     </a>
-
-                                    @if($child->children->count())
-                                        <div class="pl-3">
-                                            @foreach($child->children as $grandchild)
-                                                <a href="{{ route('service', $grandchild->slug) }}"
-                                                    class="block px-3 py-1.5 text-xs rounded-lg text-gray-400 hover:bg-blue-50 hover:text-primary transition">
-                                                    • {{ $grandchild->title }}
-                                                </a>
-                                            @endforeach
-                                        </div>
-                                    @endif
-                                @endforeach
+                                    <button @click="open = !open"
+                                        class="px-2 py-2 text-gray-400 hover:text-primary transition"
+                                        :aria-expanded="open">
+                                        <svg class="w-4 h-4 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div x-show="open" class="ml-3 border-l border-blue-100 pl-2 space-y-0.5">
+                                    @foreach($service->children as $child)
+                                        @if($child->children->count())
+                                            <div x-data="{ open: false }">
+                                                <div class="flex items-center">
+                                                    <a href="{{ route('service', $child->slug) }}"
+                                                        class="flex-1 px-2 py-1.5 text-xs rounded-l-lg text-gray-500 hover:bg-blue-50 hover:text-primary transition">
+                                                        {{ $child->title }}
+                                                    </a>
+                                                    <button @click="open = !open"
+                                                        class="px-2 py-1.5 text-gray-400 hover:text-primary transition">
+                                                        <svg class="w-3 h-3 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                                <div x-show="open" class="ml-3 border-l border-gray-100 pl-2 space-y-0.5">
+                                                    @foreach($child->children as $grandchild)
+                                                        <a href="{{ route('service', $grandchild->slug) }}"
+                                                            class="block px-2 py-1 text-xs rounded-lg text-gray-400 hover:bg-blue-50 hover:text-primary transition">
+                                                            {{ $grandchild->title }}
+                                                        </a>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        @else
+                                            <a href="{{ route('service', $child->slug) }}"
+                                                class="block px-2 py-1.5 text-xs rounded-lg text-gray-500 hover:bg-blue-50 hover:text-primary transition">
+                                                {{ $child->title }}
+                                            </a>
+                                        @endif
+                                    @endforeach
+                                </div>
                             </div>
+                        @else
+                            <a href="{{ route('service', $service->slug) }}"
+                                class="block px-3 py-2 text-sm rounded-lg text-gray-600 hover:bg-blue-50 hover:text-primary transition">
+                                {{ $service->title }}
+                            </a>
                         @endif
                     @endforeach
                 </div>
             @endif
 
             @if($menuProektirovanie->count())
-                <a href="{{ route('services') }}"
-                    class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
-                    Проектирование
-                </a>
-                <div class="pl-3 border-l border-blue-100 ml-3 space-y-1">
-                    @foreach($menuProektirovanie as $service)
-                        <a href="{{ route('service', $service->slug) }}"
-                            class="block px-3 py-2 text-sm rounded-lg text-gray-600 hover:bg-blue-50 hover:text-primary transition">
-                            {{ $service->title }}
+                <div x-data="{ open: false }">
+                    <div class="flex items-center">
+                        <a href="{{ route('services') }}"
+                            class="flex-1 px-3 py-2.5 rounded-l-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
+                            Проектирование
                         </a>
-                    @endforeach
+                        <button @click="open = !open"
+                            class="px-2 py-2.5 text-gray-400 hover:text-primary transition"
+                            :aria-expanded="open">
+                            <svg class="w-4 h-4 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div x-show="open" class="ml-3 border-l border-blue-100 pl-2 space-y-0.5">
+                        @foreach($menuProektirovanie as $service)
+                            <a href="{{ route('service', $service->slug) }}"
+                                class="block px-3 py-2 text-sm rounded-lg text-gray-600 hover:bg-blue-50 hover:text-primary transition">
+                                {{ $service->title }}
+                            </a>
+                        @endforeach
+                    </div>
                 </div>
             @endif
 
