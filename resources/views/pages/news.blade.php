@@ -14,7 +14,9 @@
             @if($item->image)
                 <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="w-full h-48 object-cover rounded-xl mb-3">
             @else
-                <div class="w-full h-48 bg-gray-100 rounded-xl mb-3 flex items-center justify-center text-4xl">📰</div>
+                <div class="w-full h-48 bg-gray-100 rounded-xl mb-3 flex items-center justify-center text-gray-300">
+                    <i class="fas fa-newspaper text-5xl"></i>
+                </div>
             @endif
             <p class="text-gray-400 text-sm">{{ $item->published_at?->format('d.m.Y') }}</p>
             <h2 class="font-bold mt-1 group-hover:text-primary transition">{{ $item->title }}</h2>
