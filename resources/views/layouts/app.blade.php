@@ -237,7 +237,7 @@
                 <a href="{{ route('prices') }}"
                     class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-medium transition text-sm whitespace-nowrap shadow-md shadow-blue-200 flex items-center gap-1.5">
                     <i class="fas fa-calculator"></i>
-                    Калькулятор
+                    Подбор онлайн
                 </a>
             </div>
 
@@ -593,7 +593,7 @@
             <a href="{{ route('prices') }}"
                 class="w-full bg-primary text-white py-2.5 rounded-lg font-medium shadow-md shadow-blue-200 flex items-center justify-center gap-2">
                 <i class="fas fa-calculator"></i>
-                Калькулятор
+                Подбор онлайн
             </a>
         </div>
     </div>
