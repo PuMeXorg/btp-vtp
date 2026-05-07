@@ -320,7 +320,7 @@
                                             </svg>
                                         </div>
 
-                                        <div class="submenu hidden absolute left-full top-0 bg-white rounded-xl shadow-2xl py-2 z-50 min-w-[380px] border-l-2 border-primary ml-0.5">
+                                        <div class="submenu hidden absolute left-full top-0 bg-white rounded-xl shadow-2xl py-2 z-50 min-w-[380px] border-l-2 border-primary ml-0.5 overflow-y-auto" style="max-height:calc(100vh - 100px)">
 
                                             @foreach($service->children as $child)
 
@@ -420,7 +420,7 @@
     </nav>
 
     {{-- Мобильное меню --}}
-    <div x-show="mobileOpen" x-cloak class="md:hidden border-t bg-white shadow-lg">
+    <div x-show="mobileOpen" x-cloak class="md:hidden border-t bg-white shadow-lg overflow-y-auto" style="max-height:calc(100vh - 80px)">
         <div class="px-4 py-3 space-y-1">
 
             <a href="{{ route('about') }}"
