@@ -27,8 +27,8 @@ class ShareRegionData
             ->with('children.children')
             ->get();
 
-        View::share('menuServices', $allTopServices->filter(fn($p) => !str_contains(mb_strtolower($p->title), 'проектир'))->values());
-        View::share('menuProektirovanie', $allTopServices->filter(fn($p) => str_contains(mb_strtolower($p->title), 'проектир'))->values());
+        View::share('menuServices', $allTopServices->filter(fn($p) => $p->slug !== 'proektirovanie')->values());
+        View::share('menuProektirovanie', $allTopServices->filter(fn($p) => $p->slug === 'proektirovanie')->values());
         View::share('menuCatalog',
             Page::active()->where('type', 'catalog')
                 ->whereNull('parent_id')
