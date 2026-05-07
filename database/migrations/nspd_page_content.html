@@ -110,31 +110,90 @@
     </div>
   </div>
 
+  <!-- Hotspot -->
+  <h3 style="font-size:1.15em;font-weight:700;color:#111827;margin-bottom:6px;text-align:center">Состав установки</h3>
+  <p style="text-align:center;color:#6b7280;margin-bottom:20px;font-size:.9em">Нажмите на метку, чтобы узнать подробнее</p>
+  <div style="position:relative;max-width:600px;margin:0 auto 40px;user-select:none">
+    <img src="/public/images/nspd/aypd.jpeg" alt="Автоматическая установка поддержания давления" style="width:100%;border-radius:16px;display:block;box-shadow:0 8px 32px rgba(0,0,0,.15)">
+
+    <!-- Большой расширительный бак -->
+    <button onclick="aupdShow('tank')" style="position:absolute;left:25%;top:32%;transform:translate(-50%,-50%);background:none;border:none;cursor:pointer;padding:0;z-index:10">
+      <span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;background:#0891b2;border-radius:50%;box-shadow:0 0 0 5px rgba(8,145,178,.2),0 0 0 10px rgba(8,145,178,.08);animation:aupdPulse 2s ease-in-out infinite">
+        <i class="fas fa-database" style="color:#fff;font-size:.65em"></i>
+      </span>
+    </button>
+
+    <!-- Малый сепаратор/деаэратор -->
+    <button onclick="aupdShow('sep')" style="position:absolute;left:53%;top:55%;transform:translate(-50%,-50%);background:none;border:none;cursor:pointer;padding:0;z-index:10">
+      <span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;background:#7c3aed;border-radius:50%;box-shadow:0 0 0 5px rgba(124,58,237,.2),0 0 0 10px rgba(124,58,237,.08);animation:aupdPulse 2s ease-in-out infinite .3s">
+        <i class="fas fa-filter" style="color:#fff;font-size:.65em"></i>
+      </span>
+    </button>
+
+    <!-- Насосные агрегаты -->
+    <button onclick="aupdShow('pump')" style="position:absolute;left:76%;top:68%;transform:translate(-50%,-50%);background:none;border:none;cursor:pointer;padding:0;z-index:10">
+      <span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;background:#2563eb;border-radius:50%;box-shadow:0 0 0 5px rgba(37,99,235,.2),0 0 0 10px rgba(37,99,235,.08);animation:aupdPulse 2s ease-in-out infinite .6s">
+        <i class="fas fa-gears" style="color:#fff;font-size:.65em"></i>
+      </span>
+    </button>
+
+    <!-- Шкаф управления -->
+    <button onclick="aupdShow('panel')" style="position:absolute;left:84%;top:30%;transform:translate(-50%,-50%);background:none;border:none;cursor:pointer;padding:0;z-index:10">
+      <span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;background:#7c3aed;border-radius:50%;box-shadow:0 0 0 5px rgba(124,58,237,.2),0 0 0 10px rgba(124,58,237,.08);animation:aupdPulse 2s ease-in-out infinite .9s">
+        <i class="fas fa-microchip" style="color:#fff;font-size:.65em"></i>
+      </span>
+    </button>
+
+    <!-- Датчик/счётчик -->
+    <button onclick="aupdShow('sensor')" style="position:absolute;left:42%;top:75%;transform:translate(-50%,-50%);background:none;border:none;cursor:pointer;padding:0;z-index:10">
+      <span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;background:#ca8a04;border-radius:50%;box-shadow:0 0 0 5px rgba(202,138,4,.2),0 0 0 10px rgba(202,138,4,.08);animation:aupdPulse 2s ease-in-out infinite 1.2s">
+        <i class="fas fa-gauge-high" style="color:#fff;font-size:.65em"></i>
+      </span>
+    </button>
+
+    <!-- Трубопровод/коллектор -->
+    <button onclick="aupdShow('pipe')" style="position:absolute;left:62%;top:80%;transform:translate(-50%,-50%);background:none;border:none;cursor:pointer;padding:0;z-index:10">
+      <span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;background:#16a34a;border-radius:50%;box-shadow:0 0 0 5px rgba(22,163,74,.2),0 0 0 10px rgba(22,163,74,.08);animation:aupdPulse 2s ease-in-out infinite 1.5s">
+        <i class="fas fa-faucet" style="color:#fff;font-size:.65em"></i>
+      </span>
+    </button>
+  </div>
+
+  <style>@keyframes aupdPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.85;transform:scale(1.12)}}</style>
+  <div id="aupd-overlay" onclick="aupdClose()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9998;backdrop-filter:blur(2px)"></div>
+  <div id="aupd-popup" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:20px;max-width:500px;width:92%;z-index:9999;box-shadow:0 24px 80px rgba(0,0,0,.3);overflow:hidden">
+    <div id="aupd-popup-header" style="padding:24px 24px 20px;display:flex;align-items:center;gap:16px">
+      <div id="aupd-popup-icon-wrap" style="width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.5em"></div>
+      <div style="flex:1;min-width:0">
+        <div id="aupd-popup-title" style="font-size:1.15em;font-weight:700;color:#111827"></div>
+        <div id="aupd-popup-sub" style="font-size:.82em;color:#6b7280;margin-top:2px"></div>
+      </div>
+      <button onclick="aupdClose()" style="background:#f3f4f6;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;color:#6b7280;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div style="height:1px;background:#f3f4f6;margin:0 24px"></div>
+    <div id="aupd-popup-text" style="padding:20px 24px;color:#374151;line-height:1.75;font-size:.93em"></div>
+    <div id="aupd-popup-props" style="padding:0 24px 24px;display:flex;flex-wrap:wrap;gap:8px"></div>
+  </div>
+  <script>
+  var _aupdData={
+    tank:{faIcon:"fa-database",bg:"#ecfeff",color:"#0891b2",title:"Расширительный бак",sub:"Компенсация объёма теплоносителя",text:"Принимает избыточный объём теплоносителя при его тепловом расширении. Поддерживает стабильное давление в системе, предотвращает срабатывание предохранительных клапанов и гидравлические удары.",props:["Объём 50–10 000 л","До 10 бар","Мембрана EPDM","Сертификат ТР ТС"]},
+    sep:{faIcon:"fa-filter",bg:"#f5f3ff",color:"#7c3aed",title:"Сепаратор-деаэратор",sub:"Удаление воздуха и шлама",text:"Отделяет растворённые газы и механические примеси из теплоносителя. Предотвращает кавитацию насосов, коррозию трубопроводов и образование воздушных пробок в системе.",props:["Деаэрация онлайн","Удаление шлама","DN25–DN200","Нержавеющая сталь"]},
+    pump:{faIcon:"fa-gears",bg:"#eff6ff",color:"#2563eb",title:"Насосные агрегаты",sub:"Подпитка и поддержание давления",text:"Подпиточные насосы автоматически восполняют потери теплоносителя в системе. Работают в режиме поддержания заданного давления с управлением по сигналу датчика давления.",props:["Grundfos / Wilo","1 рабочий + 1 резервный","Частотный привод","Расход 0,5–50 м³/ч"]},
+    panel:{faIcon:"fa-microchip",bg:"#f5f3ff",color:"#7c3aed",title:"Шкаф управления",sub:"Автоматическое регулирование",text:"Управляет работой насосов и арматуры в автоматическом режиме. Контролирует давление подпитки, ведёт журнал событий, поддерживает интерфейс диспетчеризации по ModBus.",props:["Сенсорный экран","ModBus RTU","Защита от сухого хода","Диспетчеризация"]},
+    sensor:{faIcon:"fa-gauge-high",bg:"#fefce8",color:"#ca8a04",title:"Датчики давления",sub:"Мониторинг и управление",text:"Датчики давления непрерывно измеряют давление в системе и передают сигнал на контроллер. При снижении давления ниже уставки автоматически включается подпиточный насос.",props:["Точность ±0,1%","4–20 мА","До 25 бар","Нержавеющий корпус"]},
+    pipe:{faIcon:"fa-faucet",bg:"#f0fdf4",color:"#16a34a",title:"Трубопроводная обвязка",sub:"Коллекторы и арматура",text:"Медные или стальные коллекторы объединяют все компоненты установки в единую гидравлическую схему. Шаровые краны обеспечивают возможность сервисного обслуживания без остановки системы.",props:["Медь / нержавейка","Полнопроходная арматура","DN15–DN100","Заводская сборка"]}
+  };
+  function aupdShow(k){var d=_aupdData[k];document.getElementById("aupd-popup-header").style.background=d.bg;var w=document.getElementById("aupd-popup-icon-wrap");w.style.background=d.bg;w.innerHTML="<i class=\"fas "+d.faIcon+"\" style=\"color:"+d.color+"\"></i>";document.getElementById("aupd-popup-title").textContent=d.title;document.getElementById("aupd-popup-sub").textContent=d.sub;document.getElementById("aupd-popup-text").textContent=d.text;document.getElementById("aupd-popup-props").innerHTML=d.props.map(function(p){return"<span style=\"background:#f3f4f6;border-radius:20px;padding:4px 12px;font-size:.8em;color:#374151;font-weight:500\"><i class=\"fas fa-check\" style=\"color:#16a34a;margin-right:5px\"></i>"+p+"</span>";}).join("");document.getElementById("aupd-popup").style.display="block";document.getElementById("aupd-overlay").style.display="block";}
+  function aupdClose(){document.getElementById("aupd-popup").style.display="none";document.getElementById("aupd-overlay").style.display="none";}
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")aupdClose();});
+  </script>
+
   <!-- Гарантия -->
-  <div style="background:linear-gradient(135deg,#fef2f2,#fff5f5);border:1px solid #fecaca;border-radius:14px;padding:24px;margin-bottom:36px;display:flex;align-items:flex-start;gap:16px">
+  <div style="background:linear-gradient(135deg,#fef2f2,#fff5f5);border:1px solid #fecaca;border-radius:14px;padding:24px;display:flex;align-items:flex-start;gap:16px">
     <i class="fa-solid fa-award" style="color:#cc0000;font-size:1.8em;flex-shrink:0;margin-top:2px"></i>
     <div>
       <div style="font-weight:700;color:#111827;font-size:1.05em;margin-bottom:6px">Гарантия 24 месяца</div>
-      <div style="color:#374151;font-size:0.93em;line-height:1.6">На все насосные станции поддержания давления собственного производства предоставляем гарантию 24 месяца. В гарантийный период выезд сервисного инженера и замена вышедших из строя компонентов — бесплатно.</div>
-    </div>
-  </div>
-
-  <!-- Галерея -->
-  <div style="margin-top:40px">
-    <h3 style="font-size:1.15em;font-weight:700;color:#111827;margin-bottom:16px">Фотогалерея</h3>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px">
-      <div style="border-radius:10px;overflow:hidden;background:#f1f5f9">
-        <img src="/public/images/nspd/nspd1.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
-      </div>
-      <div style="border-radius:10px;overflow:hidden;background:#f1f5f9">
-        <img src="/public/images/nspd/nspd2.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
-      </div>
-      <div style="border-radius:10px;overflow:hidden;background:#f1f5f9">
-        <img src="/public/images/nspd/nspd3.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
-      </div>
-      <div style="border-radius:10px;overflow:hidden;background:#f1f5f9">
-        <img src="/public/images/nspd/nspd4.jpg" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
-      </div>
+      <div style="color:#374151;font-size:0.93em;line-height:1.6">На все установки поддержания давления собственного производства предоставляем гарантию 24 месяца. В гарантийный период выезд сервисного инженера и замена вышедших из строя компонентов — бесплатно.</div>
     </div>
   </div>
 
