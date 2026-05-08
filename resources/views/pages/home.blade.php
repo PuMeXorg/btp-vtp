@@ -109,7 +109,7 @@
                                 </div>
                                 <div>
                                     <div class="font-bold text-gray-900">Насосные станции</div>
-                                    <div class="text-sm text-gray-500">Повысительные, пожаротушения, канализационные</div>
+                                    <div class="text-sm text-gray-500">Повысительные, пожаротушения</div>
                                 </div>
                             </div>
 
@@ -118,8 +118,8 @@
                                     <i class="fa-solid fa-microchip"></i>
                                 </div>
                                 <div>
-                                    <div class="font-bold text-gray-900">Автоматизация ИТП и ЦТП</div>
-                                    <div class="text-sm text-gray-500">ТЕКОН, ОВЕН, Ridan / Ридан, Segnetics и другие решения</div>
+                                    <div class="font-bold text-gray-900">Автоматические установки поддержания давления</div>
+                                    <div class="text-sm text-gray-500"></div>
                                 </div>
                             </div>
 
@@ -128,8 +128,8 @@
                                     <i class="fa-solid fa-pen-ruler"></i>
                                 </div>
                                 <div>
-                                    <div class="font-bold text-gray-900">Проектирование</div>
-                                    <div class="text-sm text-gray-500">Инженерные решения под параметры объекта</div>
+                                    <div class="font-bold text-gray-900">НКУ</div>
+                                    <div class="text-sm text-gray-500">Электрощитовое оборудование для автоматизации инженерных систем</div>
                                 </div>
                             </div>
                         </div>
@@ -146,7 +146,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-white">
             @foreach([
                 ['icon' => 'fa-building', 'title' => 'Для УК и застройщиков', 'desc' => 'решения под объект'],
-                ['icon' => 'fa-industry', 'title' => 'Собственное производство', 'desc' => 'электрощитов и узлов'],
+                ['icon' => 'fa-industry', 'title' => 'Собственное производство', 'desc' => ''],
                 ['icon' => 'fa-file-signature', 'title' => 'Проектирование', 'desc' => 'под требования заказчика'],
                 ['icon' => 'fa-handshake', 'title' => 'Поставки', 'desc' => 'для подрядчиков и объектов'],
             ] as $item)
