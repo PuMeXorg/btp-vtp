@@ -98,8 +98,7 @@
                                     <i class="fa-solid fa-industry"></i>
                                 </div>
                                 <div>
-                                    <div class="font-bold text-gray-900">БТП и тепловые пункты</div>
-                                    <div class="text-sm text-gray-500">ИТП, ЦТП, блочные тепловые пункты</div>
+                                    <div class="font-bold text-gray-900">Блочные тепловые пункты</div>
                                 </div>
                             </div>
 
@@ -163,71 +162,6 @@
         </div>
     </div>
 </section>
-
-{{-- УСЛУГИ --}}
-@if($services->count())
-<section class="py-20 bg-gray-50">
-    <div class="container mx-auto max-w-7xl px-4">
-        <div class="text-center mb-14">
-            <span class="text-primary font-semibold text-sm uppercase tracking-widest">Что мы делаем</span>
-            <h2 class="text-4xl font-bold mt-2 mb-4">Основные направления</h2>
-            <p class="text-gray-500 max-w-2xl mx-auto">
-                Подбираем инженерное решение под задачи объекта, бюджет и технические требования.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach($services as $i => $service)
-                <a href="{{ route('service', $service->slug) }}"
-                   class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary/30 hover:-translate-y-1">
-                    <div class="relative h-48 overflow-hidden bg-gradient-to-br from-red-50 to-gray-100">
-                        @if($service->image)
-                            <img src="{{ str_starts_with($service->image, 'http') ? $service->image : asset('storage/' . $service->image) }}"
-                                 alt="{{ $service->title }}"
-                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        @else
-                            <div class="w-full h-full flex items-center justify-center">
-                                <i class="fa-solid fa-gears text-primary/30 text-6xl"></i>
-                            </div>
-                        @endif
-
-                        <div class="absolute top-4 left-4">
-                            <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
-                                {{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="p-6">
-                        <h3 class="font-bold text-lg mb-2 group-hover:text-primary transition leading-snug">
-                            {{ $service->title }}
-                        </h3>
-
-                        @if($service->excerpt)
-                            <p class="text-gray-500 text-sm leading-relaxed">
-                                {{ $service->excerpt }}
-                            </p>
-                        @endif
-
-                        <div class="mt-4 flex items-center text-primary text-sm font-semibold">
-                            Подробнее
-                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
-                        </div>
-                    </div>
-                </a>
-            @endforeach
-        </div>
-
-        <div class="text-center mt-10">
-            <a href="{{ route('services') }}"
-               class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-8 py-3.5 rounded-xl font-semibold transition shadow-md">
-                Все услуги
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-        </div>
-    </div>
-</section>
-@endif
 
 {{-- ДЛЯ КОГО --}}
 <section class="py-20 bg-white">
