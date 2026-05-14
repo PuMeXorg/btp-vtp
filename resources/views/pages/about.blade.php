@@ -36,19 +36,24 @@
                 </h2>
 
                 <p class="text-gray-600 leading-relaxed mb-4">
-                    ООО «ВТП Инжиниринг» заслужило репутацию надёжной компании по комплексу работ,
-                    связанных с проектированием и сдачей тепловых пунктов. Работаем с ведущими
-                    застройщиками и генеральными подрядчиками Москвы и Подмосковья.
+                    ООО «ВТП Инжиниринг» — надёжный российский производитель насосных станций,
+                    установок поддержания давления, блочных тепловых пунктов, НКУ. Мы — динамично
+                    развивающаяся компания с многолетним опытом в сфере инженерных решений. Наша
+                    цель — обеспечивать надёжность и энергоэффективность объектов наших клиентов.
+                    Производственные мощности в г. Подольск и г. Москва, оснащённые современным
+                    оборудованием и высококвалифицированными специалистами. Производим и поставляем
+                    наше оборудование по всей территории РФ.
                 </p>
 
                 <p class="text-gray-600 leading-relaxed mb-4">
-                    Мы выполняем весь цикл работ: от получения технических условий и разработки
-                    проектной документации до пуско-наладки и сдачи объекта. Работаем под ключ.
+                    Мы также предоставляем услуги по комплексу работ, связанных с проектированием
+                    и сдачей тепловых пунктов. Работаем с ведущими застройщиками и генеральными
+                    подрядчиками Москвы и Подмосковья.
                 </p>
 
                 <p class="text-gray-600 leading-relaxed">
-                    Наличие собственного производственного участка позволяет нам контролировать
-                    качество на каждом этапе и сокращать сроки выполнения работ.
+                    Мы выполняем весь цикл работ: от получения технических условий и разработки
+                    проектной документации до пуско-наладки и сдачи объекта. Работаем под ключ.
                 </p>
             </div>
 
@@ -112,6 +117,16 @@
                     <i class="fa-solid fa-check text-primary text-sm"></i>
                 </div>
                 <div>
+                    <h3 class="font-semibold text-gray-900 mb-1">Собственное производство</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed">Производственные мощности в г. Подольск и г. Москва, ул. Дорожная 60Б. Блочные тепловые пункты, насосные станции повышения давления, пожаротушения, АУПД, электрощитовое оборудование.</p>
+                </div>
+            </div>
+
+            <div class="flex gap-4 p-6 rounded-2xl border border-gray-100 hover:border-primary/30 hover:shadow-md transition">
+                <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <i class="fa-solid fa-check text-primary text-sm"></i>
+                </div>
+                <div>
                     <h3 class="font-semibold text-gray-900 mb-1">Более 10 лет опыта</h3>
                     <p class="text-sm text-gray-500 leading-relaxed">Проектируем, монтируем и сдаём тепловые пункты с 2014 года. Знаем все нормативные требования и регламенты.</p>
                 </div>
@@ -124,46 +139,6 @@
                 <div>
                     <h3 class="font-semibold text-gray-900 mb-1">Масштаб без потери качества</h3>
                     <p class="text-sm text-gray-500 leading-relaxed">Одновременно ведём разностадийные работы более чем на 25 тепловых пунктах по всей Москве и области.</p>
-                </div>
-            </div>
-
-            <div class="flex gap-4 p-6 rounded-2xl border border-gray-100 hover:border-primary/30 hover:shadow-md transition">
-                <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <i class="fa-solid fa-check text-primary text-sm"></i>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-900 mb-1">Собственное производство</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Сертифицированный производственный участок по сборке и программированию щитового оборудования — всё под одной крышей.</p>
-                </div>
-            </div>
-
-            <div class="flex gap-4 p-6 rounded-2xl border border-gray-100 hover:border-primary/30 hover:shadow-md transition">
-                <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <i class="fa-solid fa-check text-primary text-sm"></i>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-900 mb-1">Сильная команда</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">6 бригад сварщиков и слесарей, 4 бригады электромонтажников, 2 инженера КИПиА — закрываем весь цикл работ своими силами.</p>
-                </div>
-            </div>
-
-            <div class="flex gap-4 p-6 rounded-2xl border border-gray-100 hover:border-primary/30 hover:shadow-md transition">
-                <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <i class="fa-solid fa-check text-primary text-sm"></i>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-900 mb-1">Гарантия 60 месяцев</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">На все выполненные работы предоставляем гарантию 5 лет с момента подписания акта приёмки.</p>
-                </div>
-            </div>
-
-            <div class="flex gap-4 p-6 rounded-2xl border border-gray-100 hover:border-primary/30 hover:shadow-md transition">
-                <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <i class="fa-solid fa-check text-primary text-sm"></i>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-900 mb-1">Сдача под ключ</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Берём на себя все согласования и сдачу объекта — клиент получает готовый, сданный тепловой пункт.</p>
                 </div>
             </div>
 
@@ -180,20 +155,17 @@
             <p class="text-gray-500 max-w-xl mx-auto">Полный цикл — от технических условий до гарантийного обслуживания</p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
 
             @php
             $steps = [
                 ['num' => '01', 'title' => 'Технические условия', 'icon' => 'fa-file-signature'],
-                ['num' => '02', 'title' => 'Разработка проекта', 'icon' => 'fa-drafting-compass'],
-                ['num' => '03', 'title' => 'Согласование', 'icon' => 'fa-stamp'],
-                ['num' => '04', 'title' => 'Комплектация', 'icon' => 'fa-boxes-stacked'],
-                ['num' => '05', 'title' => 'Сварочный монтаж', 'icon' => 'fa-fire-flame-curved'],
-                ['num' => '06', 'title' => 'Электромонтаж', 'icon' => 'fa-bolt'],
-                ['num' => '07', 'title' => 'Пуско-наладка', 'icon' => 'fa-sliders'],
-                ['num' => '08', 'title' => 'Сдача инспекции', 'icon' => 'fa-clipboard-check'],
-                ['num' => '09', 'title' => 'Обслуживание', 'icon' => 'fa-wrench'],
-                ['num' => '10', 'title' => 'Гарантийный период', 'icon' => 'fa-shield-halved'],
+                ['num' => '02', 'title' => 'Разработка технического решения', 'icon' => 'fa-drafting-compass'],
+                ['num' => '03', 'title' => 'Сопровождение проекта на всех этапах', 'icon' => 'fa-clipboard-list'],
+                ['num' => '04', 'title' => 'Производство и поставка', 'icon' => 'fa-industry'],
+                ['num' => '05', 'title' => 'Монтаж, пуско-наладка', 'icon' => 'fa-screwdriver-wrench'],
+                ['num' => '06', 'title' => 'Обслуживание', 'icon' => 'fa-wrench'],
+                ['num' => '07', 'title' => 'Гарантийный период', 'icon' => 'fa-shield-halved'],
             ];
             @endphp
 

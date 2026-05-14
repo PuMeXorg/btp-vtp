@@ -371,25 +371,10 @@
                 @endif
 
                 {{-- Проектирование --}}
-                @if($menuProektirovanie->count())
-                    <div class="has-dropdown relative">
-                        <a href="{{ route('services') }}"
-                            class="nav-link flex items-center gap-1.5 text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">
-                            Проектирование
-                            <svg class="w-3 h-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </a>
-                        <div class="dropdown hidden absolute top-full left-0 bg-white rounded-b-xl shadow-2xl py-2 z-40 min-w-[300px] border-t-2 border-primary">
-                            @foreach($menuProektirovanie as $service)
-                                <a href="{{ route('service', $service->slug) }}"
-                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50 leading-snug">
-                                    {{ $service->title }}
-                                </a>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
+                <a href="{{ route('service', 'proektirovanie') }}"
+                    class="nav-link text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">
+                    Проектирование
+                </a>
 
                 <a href="{{ route('prices') }}"
                     class="nav-link text-white px-5 py-3.5 text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition">
@@ -506,31 +491,10 @@
                 </div>
             @endif
 
-            @if($menuProektirovanie->count())
-                <div x-data="{ open: false }">
-                    <div class="flex items-center">
-                        <a href="{{ route('services') }}"
-                            class="flex-1 px-3 py-2.5 rounded-l-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
-                            Проектирование
-                        </a>
-                        <button @click="open = !open"
-                            class="px-2 py-2.5 text-gray-400 hover:text-primary transition"
-                            :aria-expanded="open">
-                            <svg class="w-4 h-4 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div x-show="open" class="ml-3 border-l border-blue-100 pl-2 space-y-0.5">
-                        @foreach($menuProektirovanie as $service)
-                            <a href="{{ route('service', $service->slug) }}"
-                                class="block px-3 py-2 text-sm rounded-lg text-gray-600 hover:bg-blue-50 hover:text-primary transition">
-                                {{ $service->title }}
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
+            <a href="{{ route('service', 'proektirovanie') }}"
+                class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
+                Проектирование
+            </a>
 
             <a href="{{ route('prices') }}"
                 class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">

@@ -129,12 +129,11 @@
                                 <select id="calcObject" name="object_type"
                                     class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
                                     <option value="">Не выбрано</option>
-                                    <option value="Управляющая компания">Управляющая компания</option>
-                                    <option value="Застройщик">Застройщик</option>
-                                    <option value="Подрядчик">Подрядчик</option>
-                                    <option value="Промышленный объект">Промышленный объект</option>
-                                    <option value="Коммерческая недвижимость">Коммерческая недвижимость</option>
-                                    <option value="Госзаказ / тендер">Госзаказ / тендер</option>
+                                    <option value="Жилое строительство">Жилое строительство</option>
+                                    <option value="Социально-административный">Социально-административный</option>
+                                    <option value="Спортивный">Спортивный</option>
+                                    <option value="Промышленный">Промышленный</option>
+                                    <option value="ТРЦ, БЦ">ТРЦ, БЦ</option>
                                 </select>
                             </div>
 
