@@ -45,53 +45,53 @@ class PageController extends Controller
         $certificates = [
             [
                 'title' => 'Сертификат ВТП Инжиниринг 2026',
-                'preview' => 'certificates/previews/sertifikat-vtp-2026.png',
-                'file' => 'certificates/sertifikat-vtp-2026.pdf',
+                'preview' => '/public/certificates/previews/sertifikat-vtp-2026.png',
+                'file' => '/public/certificates/sertifikat-vtp-2026.pdf',
             ],
             [
                 'title' => 'Сертификат генерального дистрибьютора (тепловое оборудование)',
-                'preview' => 'certificates/previews/sertifikat-distribytor.png',
-                'file' => 'certificates/sertifikat-distribytor.pdf',
+                'preview' => '/public/certificates/previews/sertifikat-distribytor.png',
+                'file' => '/public/certificates/sertifikat-distribytor.pdf',
             ],
             [
                 'title' => 'Свидетельство СРО В.01485.23',
-                'preview' => 'certificates/previews/svidetelstvo-sro.png',
-                'file' => 'certificates/svidetelstvo-sro.pdf',
+                'preview' => '/public/certificates/previews/svidetelstvo-sro.png',
+                'file' => '/public/certificates/svidetelstvo-sro.pdf',
             ],
             [
                 'title' => 'Декларация о соответствии БТП',
-                'preview' => 'certificates/previews/deklaracia-btp.png',
-                'file' => 'certificates/deklaracia-btp.pdf',
+                'preview' => '/public/certificates/previews/deklaracia-btp.png',
+                'file' => '/public/certificates/deklaracia-btp.pdf',
             ],
             [
                 'title' => 'Декларация о соответствии',
-                'preview' => 'certificates/previews/deklaracia.png',
-                'file' => 'certificates/deklaracia.pdf',
+                'preview' => '/public/certificates/previews/deklaracia.png',
+                'file' => '/public/certificates/deklaracia.pdf',
             ],
             [
                 'title' => 'Декларация ЕАЭС: коллекторы из нержавеющей стали',
-                'preview' => 'certificates/previews/sertifikat-vtp-4.png',
-                'file' => 'certificates/sertifikat-vtp-4.pdf',
+                'preview' => '/public/certificates/previews/sertifikat-vtp-4.png',
+                'file' => '/public/certificates/sertifikat-vtp-4.pdf',
             ],
             [
                 'title' => 'Декларация ЕАЭС: шкаф с узлом присоединения',
-                'preview' => 'certificates/previews/sertifikat-vtp-5.png',
-                'file' => 'certificates/sertifikat-vtp-5.pdf',
+                'preview' => '/public/certificates/previews/sertifikat-vtp-5.png',
+                'file' => '/public/certificates/sertifikat-vtp-5.pdf',
             ],
             [
                 'title' => 'Сертификат ВТП №1',
-                'preview' => 'certificates/previews/sertifikat-vtp-1.png',
-                'file' => 'certificates/sertifikat-vtp-1.pdf',
+                'preview' => '/public/certificates/previews/sertifikat-vtp-1.png',
+                'file' => '/public/certificates/sertifikat-vtp-1.pdf',
             ],
             [
                 'title' => 'Сертификат ВТП №2',
-                'preview' => 'certificates/previews/sertifikat-vtp-2.png',
-                'file' => 'certificates/sertifikat-vtp-2.pdf',
+                'preview' => '/public/certificates/previews/sertifikat-vtp-2.png',
+                'file' => '/public/certificates/sertifikat-vtp-2.pdf',
             ],
             [
                 'title' => 'Сертификат ВТП №3',
-                'preview' => 'certificates/previews/sertifikat-vtp-3.png',
-                'file' => 'certificates/sertifikat-vtp-3.pdf',
+                'preview' => '/public/certificates/previews/sertifikat-vtp-3.png',
+                'file' => '/public/certificates/sertifikat-vtp-3.pdf',
             ],
         ];
 
