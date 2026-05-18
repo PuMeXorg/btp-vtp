@@ -44,6 +44,41 @@ class PageController extends Controller
     {
         $certificates = [
             [
+                'title' => 'Сертификат ВТП Инжиниринг 2026',
+                'preview' => 'certificates/previews/sertifikat-vtp-2026.png',
+                'file' => 'certificates/sertifikat-vtp-2026.pdf',
+            ],
+            [
+                'title' => 'Сертификат генерального дистрибьютора (тепловое оборудование)',
+                'preview' => 'certificates/previews/sertifikat-distribytor.png',
+                'file' => 'certificates/sertifikat-distribytor.pdf',
+            ],
+            [
+                'title' => 'Свидетельство СРО В.01485.23',
+                'preview' => 'certificates/previews/svidetelstvo-sro.png',
+                'file' => 'certificates/svidetelstvo-sro.pdf',
+            ],
+            [
+                'title' => 'Декларация о соответствии БТП',
+                'preview' => 'certificates/previews/deklaracia-btp.png',
+                'file' => 'certificates/deklaracia-btp.pdf',
+            ],
+            [
+                'title' => 'Декларация о соответствии',
+                'preview' => 'certificates/previews/deklaracia.png',
+                'file' => 'certificates/deklaracia.pdf',
+            ],
+            [
+                'title' => 'Сертификат ВТП №4',
+                'preview' => 'certificates/previews/sertifikat-vtp-4.png',
+                'file' => 'certificates/sertifikat-vtp-4.pdf',
+            ],
+            [
+                'title' => 'Сертификат ВТП №5',
+                'preview' => 'certificates/previews/sertifikat-vtp-5.png',
+                'file' => 'certificates/sertifikat-vtp-5.pdf',
+            ],
+            [
                 'title' => 'Сертификат ВТП №1',
                 'preview' => 'certificates/previews/sertifikat-vtp-1.png',
                 'file' => 'certificates/sertifikat-vtp-1.pdf',
