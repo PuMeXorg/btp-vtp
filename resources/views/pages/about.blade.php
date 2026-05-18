@@ -75,26 +75,21 @@
 {{-- Цифры --}}
 <section class="py-14 bg-gray-50">
     <div class="container mx-auto max-w-7xl px-4">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             <div class="text-center bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                 <div class="text-4xl font-bold text-primary mb-2">150+</div>
-                <div class="text-sm text-gray-500 leading-snug">смонтированных тепловых пунктов</div>
+                <div class="text-sm text-gray-500 leading-snug">произведённых тепловых пунктов</div>
             </div>
 
             <div class="text-center bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                 <div class="text-4xl font-bold text-primary mb-2">25+</div>
-                <div class="text-sm text-gray-500 leading-snug">объектов в работе одновременно</div>
+                <div class="text-sm text-gray-500 leading-snug">объектов в работе одновременно по всей РФ</div>
             </div>
 
             <div class="text-center bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                <div class="text-4xl font-bold text-primary mb-2">60</div>
+                <div class="text-4xl font-bold text-primary mb-2">до 32</div>
                 <div class="text-sm text-gray-500 leading-snug">месяцев гарантии на все работы</div>
-            </div>
-
-            <div class="text-center bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                <div class="text-4xl font-bold text-primary mb-2">10+</div>
-                <div class="text-sm text-gray-500 leading-snug">бригад специалистов в штате</div>
             </div>
 
         </div>

@@ -239,6 +239,21 @@
                     <i class="fas fa-calculator"></i>
                     Подбор онлайн
                 </a>
+
+                <div class="flex items-center gap-1.5">
+                    <a href="https://vk.com/vtp_inj" target="_blank" rel="noopener" aria-label="ВКонтакте"
+                        class="w-9 h-9 rounded-lg bg-gray-100 hover:bg-[#0077FF] hover:text-white text-gray-600 flex items-center justify-center transition">
+                        <i class="fab fa-vk"></i>
+                    </a>
+                    <a href="https://wa.me/74951622505" target="_blank" rel="noopener" aria-label="WhatsApp"
+                        class="w-9 h-9 rounded-lg bg-gray-100 hover:bg-[#25D366] hover:text-white text-gray-600 flex items-center justify-center transition">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://t.me/vtp_inj" target="_blank" rel="noopener" aria-label="Telegram"
+                        class="w-9 h-9 rounded-lg bg-gray-100 hover:bg-[#229ED9] hover:text-white text-gray-600 flex items-center justify-center transition">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
             </div>
 
             {{-- Бургер --}}
@@ -559,6 +574,21 @@
                 <i class="fas fa-calculator"></i>
                 Подбор онлайн
             </a>
+
+            <div class="flex items-center justify-center gap-3 pt-2">
+                <a href="https://vk.com/vtp_inj" target="_blank" rel="noopener" aria-label="ВКонтакте"
+                    class="w-11 h-11 rounded-xl bg-gray-100 hover:bg-[#0077FF] hover:text-white text-gray-700 flex items-center justify-center transition text-lg">
+                    <i class="fab fa-vk"></i>
+                </a>
+                <a href="https://wa.me/74951622505" target="_blank" rel="noopener" aria-label="WhatsApp"
+                    class="w-11 h-11 rounded-xl bg-gray-100 hover:bg-[#25D366] hover:text-white text-gray-700 flex items-center justify-center transition text-lg">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://t.me/vtp_inj" target="_blank" rel="noopener" aria-label="Telegram"
+                    class="w-11 h-11 rounded-xl bg-gray-100 hover:bg-[#229ED9] hover:text-white text-gray-700 flex items-center justify-center transition text-lg">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
         </div>
     </div>
 
