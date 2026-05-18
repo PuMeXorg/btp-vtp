@@ -69,12 +69,12 @@ class PageController extends Controller
                 'file' => 'certificates/deklaracia.pdf',
             ],
             [
-                'title' => 'Сертификат ВТП №4',
+                'title' => 'Декларация ЕАЭС: коллекторы из нержавеющей стали',
                 'preview' => 'certificates/previews/sertifikat-vtp-4.png',
                 'file' => 'certificates/sertifikat-vtp-4.pdf',
             ],
             [
-                'title' => 'Сертификат ВТП №5',
+                'title' => 'Декларация ЕАЭС: шкаф с узлом присоединения',
                 'preview' => 'certificates/previews/sertifikat-vtp-5.png',
                 'file' => 'certificates/sertifikat-vtp-5.pdf',
             ],
