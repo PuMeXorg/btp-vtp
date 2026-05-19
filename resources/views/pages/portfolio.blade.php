@@ -13,9 +13,11 @@
         <a href="{{ route('portfolio.item', $item->slug) }}"
             class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
             @if($item->image)
-                <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="w-full h-52 object-cover group-hover:scale-105 transition duration-300">
+                <img src="{{ str_starts_with($item->image, '/') || str_starts_with($item->image, 'http') ? $item->image : asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="w-full h-52 object-cover group-hover:scale-105 transition duration-300">
             @else
-                <div class="w-full h-52 bg-gray-100 flex items-center justify-center text-4xl">🏗️</div>
+                <div class="w-full h-52 bg-gray-100 flex items-center justify-center">
+                    <i class="fa-solid fa-building text-gray-400 text-5xl"></i>
+                </div>
             @endif
             <div class="p-4">
                 @if($item->category)
