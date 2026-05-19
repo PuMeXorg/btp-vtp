@@ -25,17 +25,17 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @foreach($children as $child)
                 <a href="{{ route('service', $child->slug) }}"
-                    class="border rounded-xl p-4 hover:border-primary hover:shadow-sm transition group flex gap-4 items-start">
+                    class="border border-primary/20 bg-primary/5 backdrop-blur-sm rounded-xl p-4 hover:bg-primary/10 hover:border-primary/40 hover:shadow-md transition group flex gap-4 items-start">
                     @if($child->image)
-                        <div class="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                        <div class="w-20 h-20 rounded-lg overflow-hidden bg-white/60 flex-shrink-0">
                             <img src="{{ str_starts_with($child->image, '/') || str_starts_with($child->image, 'http') ? $child->image : asset('storage/' . $child->image) }}"
                                  alt="{{ $child->title }}"
                                  class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         </div>
                     @endif
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-medium group-hover:text-primary transition leading-snug">{{ $child->title }}</h3>
-                        @if($child->excerpt)<p class="text-sm text-gray-500 mt-1">{{ $child->excerpt }}</p>@endif
+                        <h3 class="font-semibold text-gray-900 group-hover:text-primary transition leading-snug">{{ $child->title }}</h3>
+                        @if($child->excerpt)<p class="text-sm text-gray-600 mt-1">{{ $child->excerpt }}</p>@endif
                     </div>
                 </a>
                 @endforeach
