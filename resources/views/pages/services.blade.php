@@ -14,9 +14,11 @@
         <a href="{{ route('service', $service->slug) }}"
             class="group bg-white border rounded-xl overflow-hidden hover:shadow-lg transition">
             @if($service->image)
-                <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->title }}" class="w-full h-48 object-cover">
+                <img src="{{ str_starts_with($service->image, '/') || str_starts_with($service->image, 'http') ? $service->image : asset('storage/' . $service->image) }}" alt="{{ $service->title }}" class="w-full h-48 object-cover">
             @else
-                <div class="w-full h-48 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center text-5xl">⚙️</div>
+                <div class="w-full h-48 bg-gradient-to-br from-red-50 to-gray-100 flex items-center justify-center">
+                    <i class="fa-solid fa-gears text-primary/40 text-5xl"></i>
+                </div>
             @endif
             <div class="p-5">
                 <h2 class="font-bold text-lg mb-2 group-hover:text-primary transition">{{ $service->title }}</h2>

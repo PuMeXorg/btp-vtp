@@ -14,7 +14,7 @@
             <div class="relative rounded-xl overflow-hidden cursor-pointer aspect-video bg-gray-900"
                 @click="playing = true">
                 <img x-show="!playing" src="{{ $video->thumbnail }}" alt="{{ $video->title }}"
-                    class="w-full h-full object-cover">
+                    class="w-full h-full {{ str_contains($video->thumbnail, 'logo-vtp') ? 'object-contain p-6' : 'object-cover' }}">
                 <div x-show="!playing" class="absolute inset-0 flex items-center justify-center">
                     <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-xl">
                         <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">

@@ -17,7 +17,7 @@
         <div class="lg:col-span-2">
             <h1 class="text-3xl font-bold mb-6">{{ $page->title }}</h1>
             @if($page->image)
-            <img src="{{ asset('storage/' . $page->image) }}" alt="{{ $page->title }}" class="w-full rounded-xl mb-6 max-h-96 object-cover">
+            <img src="{{ str_starts_with($page->image, '/') || str_starts_with($page->image, 'http') ? $page->image : asset('storage/' . $page->image) }}" alt="{{ $page->title }}" class="w-full rounded-xl mb-6 max-h-96 object-cover">
             @endif
             <div class="prose prose-lg max-w-none text-gray-700">{!! $page->content !!}</div>
             @if($children->count())
