@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Сертификаты ВТП')
-@section('description', 'Сертификаты и документы ВТП Инжиниринг.')
+@section('title', 'Сертификаты')
+@section('description', 'Сертификаты и документы Инженерный комфорт.')
 
 @section('content')
 
@@ -12,7 +12,7 @@
             <span class="mx-2">/</span>
             <a href="{{ route('about') }}" class="hover:text-primary">О компании</a>
             <span class="mx-2">/</span>
-            <span class="text-gray-600">Сертификаты ВТП</span>
+            <span class="text-gray-600">Сертификаты</span>
         </nav>
 
         <div class="max-w-3xl">
@@ -21,11 +21,11 @@
             </div>
 
             <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-6">
-                Сертификаты ВТП
+                Сертификаты
             </h1>
 
             <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
-                Документы, подтверждающие качество, соответствие и надёжность решений ВТП Инжиниринг.
+                Документы, подтверждающие качество, соответствие и надёжность решений Инженерный комфорт.
             </p>
         </div>
     </div>

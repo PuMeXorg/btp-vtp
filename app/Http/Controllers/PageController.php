@@ -44,7 +44,7 @@ class PageController extends Controller
     {
         $certificates = [
             [
-                'title' => 'Сертификат ВТП Инжиниринг 2026',
+                'title' => 'Сертификат соответствия 2026',
                 'preview' => '/public/certificates/previews/sertifikat-vtp-2026.png',
                 'file' => '/public/certificates/sertifikat-vtp-2026.pdf',
             ],
@@ -79,17 +79,17 @@ class PageController extends Controller
                 'file' => '/public/certificates/sertifikat-vtp-5.pdf',
             ],
             [
-                'title' => 'Сертификат ВТП №1',
+                'title' => 'Сертификат №1',
                 'preview' => '/public/certificates/previews/sertifikat-vtp-1.png',
                 'file' => '/public/certificates/sertifikat-vtp-1.pdf',
             ],
             [
-                'title' => 'Сертификат ВТП №2',
+                'title' => 'Сертификат №2',
                 'preview' => '/public/certificates/previews/sertifikat-vtp-2.png',
                 'file' => '/public/certificates/sertifikat-vtp-2.pdf',
             ],
             [
-                'title' => 'Сертификат ВТП №3',
+                'title' => 'Сертификат №3',
                 'preview' => '/public/certificates/previews/sertifikat-vtp-3.png',
                 'file' => '/public/certificates/sertifikat-vtp-3.pdf',
             ],

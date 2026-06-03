@@ -6,8 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', $siteName) | {{ $siteName }}</title>
     <meta name="description" content="@yield('description', '')">
-    <link rel="icon" type="image/png" href="{{ asset('/public/images/favicon-vtp-transparent.png') }}">
-    <link rel="shortcut icon" type="image/png" href="{{ asset('/public/images/favicon-vtp-transparent.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('/public/images/favicon-ik.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('/public/images/favicon-ik.png') }}">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -86,9 +86,11 @@
             ym({{ $yandexMetrika }},"init",{
                 clickmap:true,
                 trackLinks:true,
-                accurateTrackBounce:true
+                accurateTrackBounce:true,
+                webvisor:true
             });
         </script>
+        <noscript><div><img src="https://mc.yandex.ru/watch/{{ $yandexMetrika }}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     @endif
 </head>
 
@@ -137,8 +139,8 @@
             {{-- Логотип --}}
         <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center">
             <img
-        src="{{ asset('/public/images/logo-vtp-transparent.png') }}"
-        alt="ВТП Инжиниринг"
+        src="{{ asset('/public/images/logo-ik.png') }}"
+        alt="Инженерный комфорт"
         class="h-[52px] w-auto">
         </a>
 
@@ -298,7 +300,7 @@
                         <a href="{{ route('certificates') }}"
                             class="flex items-center gap-2 px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition border-b border-gray-50">
                             <i class="fa-solid fa-certificate text-primary opacity-60 w-4"></i>
-                            Сертификаты ВТП
+                            Сертификаты
                         </a>
 
                         <a href="{{ route('requisites') }}"
@@ -431,7 +433,7 @@
 
             <a href="{{ route('certificates') }}"
                 class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-primary font-medium transition">
-                Сертификаты ВТП
+                Сертификаты
             </a>
 
             <a href="{{ route('requisites') }}"
@@ -735,9 +737,9 @@
 
             <div>
                 <div class="flex items-center gap-[10px] mb-4">
-                    <img src="/public/images/logo-vtp-transparent.png"
-                         alt="ВТП Инжиниринг"
-                         class="h-12 w-auto object-contain flex-shrink-0">
+                    <img src="/public/images/logo-ik.png"
+                         alt="Инженерный комфорт"
+                         class="h-12 w-auto object-contain flex-shrink-0 bg-white rounded-lg p-1.5">
                 </div>
 
                 <p class="text-sm text-gray-500 mb-4 leading-relaxed">
