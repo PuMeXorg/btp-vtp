@@ -11,14 +11,18 @@ use Illuminate\Support\Facades\Mail;
 
 class LeadController extends Controller
 {
+    /** Формат, который выдаёт маска на фронте: +7 (XXX) XXX-XX-XX */
+    private const PHONE_RULE = 'regex:/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/';
+    private const PHONE_MESSAGE = 'Введите телефон в формате +7 (XXX) XXX-XX-XX.';
+
     public function __construct(protected Bitrix24Service $bitrix24) {}
 
     public function callback(Request $request)
     {
         $validated = $request->validate([
-            'phone' => 'required|string|max:20',
+            'phone' => ['required', 'string', 'max:20', self::PHONE_RULE],
             'name'  => 'nullable|string|max:100',
-        ]);
+        ], ['phone.regex' => self::PHONE_MESSAGE]);
 
         $lead = Lead::create([
             'name'       => $validated['name'] ?? null,
@@ -46,10 +50,10 @@ class LeadController extends Controller
     {
         $validated = $request->validate([
             'name'    => 'required|string|max:100',
-            'phone'   => 'required|string|max:20',
+            'phone'   => ['required', 'string', 'max:20', self::PHONE_RULE],
             'email'   => 'nullable|email|max:100',
             'comment' => 'nullable|string|max:2000',
-        ]);
+        ], ['phone.regex' => self::PHONE_MESSAGE]);
 
         $lead = Lead::create([
             'name'       => $validated['name'],

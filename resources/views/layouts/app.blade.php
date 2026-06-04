@@ -886,11 +886,46 @@ async function submitForm(formId, url, successId) {
             if (successBlock) {
                 successBlock.classList.remove('hidden');
             }
+        } else if (json && json.errors) {
+            alert(Object.values(json.errors).flat().join('\n'));
         }
     } catch(e) {
         console.error(e);
     }
 }
+</script>
+
+<script>
+(function () {
+    // Маска телефона: любой ввод → +7 (XXX) XXX-XX-XX
+    function maskPhone(value) {
+        var d = value.replace(/\D/g, '');
+        if (!d) return '';
+        if (d[0] === '8') d = '7' + d.slice(1);
+        if (d[0] !== '7') d = '7' + d;
+        d = d.slice(0, 11);
+        var rest = d.slice(1);
+        var out = '+7';
+        if (rest.length > 0) out += ' (' + rest.slice(0, 3);
+        if (rest.length >= 3) out += ') ' + rest.slice(3, 6);
+        if (rest.length >= 6) out += '-' + rest.slice(6, 8);
+        if (rest.length >= 8) out += '-' + rest.slice(8, 10);
+        return out;
+    }
+    function isPhone(el) {
+        return el && el.tagName === 'INPUT' && el.name === 'phone';
+    }
+    document.addEventListener('input', function (e) {
+        if (isPhone(e.target)) e.target.value = maskPhone(e.target.value);
+    });
+    document.addEventListener('focus', function (e) {
+        if (isPhone(e.target) && !e.target.value) e.target.value = '+7 (';
+    }, true);
+    document.addEventListener('blur', function (e) {
+        // если пользователь зашёл в поле, но не ввёл цифры — очистим, чтобы работал required
+        if (isPhone(e.target) && e.target.value.replace(/\D/g, '').length <= 1) e.target.value = '';
+    }, true);
+}());
 </script>
 
 </body>
