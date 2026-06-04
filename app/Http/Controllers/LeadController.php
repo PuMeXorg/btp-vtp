@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LeadReceived;
 use App\Models\Lead;
 use App\Services\Bitrix24Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class LeadController extends Controller
 {
@@ -27,6 +30,7 @@ class LeadController extends Controller
         ]);
 
         $this->bitrix24->createLead($lead);
+        $this->notifyByEmail($lead);
 
         if ($request->ajax()) {
             return response()->json([
@@ -59,6 +63,7 @@ class LeadController extends Controller
         ]);
 
         $this->bitrix24->createLead($lead);
+        $this->notifyByEmail($lead);
 
         if ($request->ajax()) {
             return response()->json([
@@ -68,5 +73,26 @@ class LeadController extends Controller
         }
 
         return back()->with('success', 'Заявка принята! Мы свяжемся с вами в ближайшее время.');
+    }
+
+    /**
+     * Уведомление о новой заявке на email. Сбой почты не должен ломать
+     * отправку формы — поэтому всё в try/catch с логированием.
+     */
+    private function notifyByEmail(Lead $lead): void
+    {
+        $to = config('mail.lead_notify');
+        if (empty($to)) {
+            return;
+        }
+
+        try {
+            Mail::to($to)->send(new LeadReceived($lead));
+        } catch (\Throwable $e) {
+            Log::error('Lead email notify failed', [
+                'lead_id' => $lead->id,
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 }
