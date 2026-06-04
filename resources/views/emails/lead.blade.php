@@ -17,7 +17,12 @@
             <tr style="border-top:1px solid #f0f0f0;"><td style="padding:10px 24px; color:#6b7280;">Email</td><td style="padding:10px 24px;"><a href="mailto:{{ $lead->email }}" style="color:#cc0000;">{{ $lead->email }}</a></td></tr>
             @endif
             @if($lead->comment)
-            <tr style="border-top:1px solid #f0f0f0;"><td style="padding:10px 24px; color:#6b7280;">Комментарий</td><td style="padding:10px 24px;">{{ $lead->comment }}</td></tr>
+            <tr style="border-top:1px solid #f0f0f0;">
+                <td colspan="2" style="padding:10px 24px;">
+                    <div style="color:#6b7280; margin-bottom:6px;">Комментарий</div>
+                    <div style="white-space:pre-wrap; word-break:break-word; color:#1a1a1a;">{{ $lead->comment }}</div>
+                </td>
+            </tr>
             @endif
             @if($lead->region)
             <tr style="border-top:1px solid #f0f0f0;"><td style="padding:10px 24px; color:#6b7280;">Регион</td><td style="padding:10px 24px;">{{ $lead->region }}</td></tr>
