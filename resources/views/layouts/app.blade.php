@@ -137,11 +137,12 @@
         <div class="flex items-center justify-between py-4 gap-4">
 
             {{-- Логотип --}}
-        <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center">
+        <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center gap-3">
             <img
-        src="{{ asset('/public/images/logo-ik.png') }}"
-        alt="Инженерный комфорт"
-        class="h-[52px] w-auto">
+                src="{{ asset('/public/images/logo-ik-icon.png') }}"
+                alt="Инженерный комфорт"
+                class="h-[52px] w-auto">
+            <span class="text-xl md:text-2xl font-bold text-gray-900 leading-tight">Инженерный&nbsp;комфорт</span>
         </a>
 
             {{-- Регион desktop --}}
@@ -736,10 +737,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
             <div>
-                <div class="flex items-center gap-[10px] mb-4">
-                    <img src="/public/images/logo-ik.png"
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="/public/images/logo-ik-icon.png"
                          alt="Инженерный комфорт"
                          class="h-12 w-auto object-contain flex-shrink-0 bg-white rounded-lg p-1.5">
+                    <span class="text-lg font-bold text-white leading-tight">Инженерный комфорт</span>
                 </div>
 
                 <p class="text-sm text-gray-500 mb-4 leading-relaxed">

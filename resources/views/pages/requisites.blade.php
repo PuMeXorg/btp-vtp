@@ -33,7 +33,7 @@
 
                 <div class="grid grid-cols-2 px-6 py-4 gap-4">
                     <span class="text-sm text-gray-500 font-medium">Юридический адрес</span>
-                    <span class="text-sm text-gray-800">117041, г. Москва, вн.тер.г. Муниципальный округ Южное Бутово, ул. Адмирала Руднева, д. 4, помещ. 26Н/5</span>
+                    <span class="text-sm text-gray-800">г. Москва, ул. Дорожная, д. 60Ас1</span>
                 </div>
 
                 <div class="grid grid-cols-2 px-6 py-4 gap-4">

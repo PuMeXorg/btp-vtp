@@ -18,7 +18,7 @@ class Video extends Model
     {
         if ($this->preview) return $this->preview;
         return match($this->platform ?? 'youtube') {
-            'rutube' => '/public/images/logo-vtp-transparent.png',
+            'rutube' => '/public/images/logo-ik-icon.png',
             default  => 'https://img.youtube.com/vi/' . $this->youtube_id . '/hqdefault.jpg',
         };
     }
