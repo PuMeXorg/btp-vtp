@@ -122,9 +122,10 @@ return [
     |
     | Адрес, на который уходит уведомление о каждой заявке с сайта.
     | Можно переопределить в .env через LEAD_NOTIFY_EMAIL.
+    | Несколько адресов — через запятую: "a@x.ru,b@y.ru".
     |
     */
 
-    'lead_notify' => env('LEAD_NOTIFY_EMAIL', 'region@vtp-inz.ru'),
+    'lead_notify' => env('LEAD_NOTIFY_EMAIL', 'region@vtp-inz.ru,info@btp-vtp.ru'),
 
 ];

@@ -81,13 +81,18 @@ class LeadController extends Controller
      */
     private function notifyByEmail(Lead $lead): void
     {
-        $to = config('mail.lead_notify');
-        if (empty($to)) {
+        $recipients = collect(explode(',', (string) config('mail.lead_notify')))
+            ->map(fn ($email) => trim($email))
+            ->filter()
+            ->values()
+            ->all();
+
+        if (empty($recipients)) {
             return;
         }
 
         try {
-            Mail::to($to)->send(new LeadReceived($lead));
+            Mail::to($recipients)->send(new LeadReceived($lead));
         } catch (\Throwable $e) {
             Log::error('Lead email notify failed', [
                 'lead_id' => $lead->id,
