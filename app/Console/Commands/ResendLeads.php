@@ -12,6 +12,7 @@ class ResendLeads extends Command
 {
     protected $signature = 'leads:resend
         {--each : Отправить каждую заявку отдельным письмом (как новые, с Reply-To)}
+        {--ids= : Только заявки с этими ID (через запятую), напр. --ids=11 или --ids=11,12}
         {--since= : Только заявки с даты YYYY-MM-DD}
         {--force : Без подтверждения}';
 
@@ -31,6 +32,10 @@ class ResendLeads extends Command
         }
 
         $query = Lead::query()->orderBy('created_at');
+        if ($ids = $this->option('ids')) {
+            $list = collect(explode(',', $ids))->map(fn ($i) => (int) trim($i))->filter()->all();
+            $query->whereIn('id', $list);
+        }
         if ($since = $this->option('since')) {
             $query->whereDate('created_at', '>=', $since);
         }
