@@ -83,4 +83,24 @@ class ContactsTest extends TestCase
             ->assertSee('Санкт-Петербург')
             ->assertSee('href="mailto:spb@example.com"', false);
     }
+
+    public function test_spb_phone_migration_sets_the_shared_toll_free_number(): void
+    {
+        Region::create([
+            'name' => 'Санкт-Петербург',
+            'slug' => 'spb',
+            'phone' => '+78122000000',
+            'phone_display' => '+7 (812) 200-00-00',
+            'is_active' => true,
+        ]);
+
+        $migration = require database_path('migrations/2026_06_10_000002_update_spb_phone.php');
+        $migration->up();
+
+        $this->assertDatabaseHas('regions', [
+            'slug' => 'spb',
+            'phone' => '+78003019501',
+            'phone_display' => '+7 (800) 301-95-01',
+        ]);
+    }
 }
