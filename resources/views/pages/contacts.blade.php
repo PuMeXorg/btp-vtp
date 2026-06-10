@@ -104,7 +104,11 @@
                         </p>
                         @endif
                         @if($region->email)
-                        <p class="text-sm text-gray-600">✉️ {{ $region->email }}</p>
+                        <p class="text-sm text-gray-600">
+                            ✉️
+                            <a href="mailto:{{ $region->email }}"
+                                class="text-primary font-medium hover:underline">{{ $region->email }}</a>
+                        </p>
                         @endif
                     </div>
                     @endforeach
