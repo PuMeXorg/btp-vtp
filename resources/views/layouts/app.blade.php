@@ -199,9 +199,11 @@
                     {{ $regionPhone }}
                 </a>
 
-                <p class="text-xs text-gray-400 mt-0.5 ml-7">
-                    {{ $regionHours }}
-                </p>
+                <a href="mailto:{{ $regionEmail }}"
+                    class="flex items-center justify-end gap-1 text-xs text-gray-400 hover:text-primary transition mt-0.5">
+                    <i class="fa-regular fa-envelope"></i>
+                    {{ $regionEmail }}
+                </a>
             </div>
 
             {{-- Поиск + кнопки --}}
