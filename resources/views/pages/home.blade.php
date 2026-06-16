@@ -12,6 +12,33 @@
     $cta = $blocksByType->get('cta');
     $advantagesBlock = $blocksByType->get('advantages');
     $processBlock = $blocksByType->get('process');
+
+    $mainDirections = [
+        [
+            'icon' => 'fa-industry',
+            'title' => 'Блочные тепловые пункты',
+            'desc' => '',
+            'url' => route('service', 'blochnyy-teplovoy-punkt'),
+        ],
+        [
+            'icon' => 'fa-water',
+            'title' => 'Насосные станции',
+            'desc' => 'Повысительные, пожаротушения',
+            'url' => route('service', 'nasosnye-stantsii'),
+        ],
+        [
+            'icon' => 'fa-microchip',
+            'title' => 'Автоматические установки поддержания давления',
+            'desc' => '',
+            'url' => route('service', 'avtomaticheskie-ustanovki-podderzhania-davleniya'),
+        ],
+        [
+            'icon' => 'fa-pen-ruler',
+            'title' => 'НКУ',
+            'desc' => 'Электрощитовое оборудование для автоматизации инженерных систем',
+            'url' => route('service', 'shkafy-avtomatiki'),
+        ],
+    ];
 @endphp
 
 {{-- HERO --}}
@@ -93,44 +120,21 @@
                         </div>
 
                         <div class="space-y-4">
-                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100">
-                                <div class="w-11 h-11 rounded-xl bg-red-100 text-primary flex items-center justify-center flex-shrink-0">
-                                    <i class="fa-solid fa-industry"></i>
-                                </div>
-                                <div>
-                                    <div class="font-bold text-gray-900">Блочные тепловые пункты</div>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100">
-                                <div class="w-11 h-11 rounded-xl bg-red-100 text-primary flex items-center justify-center flex-shrink-0">
-                                    <i class="fa-solid fa-water"></i>
-                                </div>
-                                <div>
-                                    <div class="font-bold text-gray-900">Насосные станции</div>
-                                    <div class="text-sm text-gray-500">Повысительные, пожаротушения</div>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100">
-                                <div class="w-11 h-11 rounded-xl bg-red-100 text-primary flex items-center justify-center flex-shrink-0">
-                                    <i class="fa-solid fa-microchip"></i>
-                                </div>
-                                <div>
-                                    <div class="font-bold text-gray-900">Автоматические установки поддержания давления</div>
-                                    <div class="text-sm text-gray-500"></div>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100">
-                                <div class="w-11 h-11 rounded-xl bg-red-100 text-primary flex items-center justify-center flex-shrink-0">
-                                    <i class="fa-solid fa-pen-ruler"></i>
-                                </div>
-                                <div>
-                                    <div class="font-bold text-gray-900">НКУ</div>
-                                    <div class="text-sm text-gray-500">Электрощитовое оборудование для автоматизации инженерных систем</div>
-                                </div>
-                            </div>
+                            @foreach($mainDirections as $direction)
+                                <a href="{{ $direction['url'] }}"
+                                   class="group flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-primary/40 hover:bg-white hover:shadow-lg transition">
+                                    <div class="w-11 h-11 rounded-xl bg-red-100 text-primary flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition">
+                                        <i class="fa-solid {{ $direction['icon'] }}"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <div class="font-bold text-gray-900 group-hover:text-primary transition">{{ $direction['title'] }}</div>
+                                        @if($direction['desc'])
+                                            <div class="text-sm text-gray-500">{{ $direction['desc'] }}</div>
+                                        @endif
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-gray-300 ml-auto mt-1 group-hover:text-primary group-hover:translate-x-1 transition"></i>
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
