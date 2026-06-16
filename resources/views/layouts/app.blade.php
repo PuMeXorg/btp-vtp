@@ -142,7 +142,9 @@
                 src="{{ asset('/public/images/logo-ik-icon.png') }}"
                 alt="Инженерный комфорт"
                 class="h-[52px] w-auto">
-            <span class="text-xl md:text-2xl font-bold text-gray-900 leading-tight">Инженерный&nbsp;комфорт</span>
+            <span class="text-base md:text-lg font-bold text-gray-900 leading-[1.05]">
+                Инженерный<br>комфорт
+            </span>
         </a>
 
             {{-- Регион desktop --}}
@@ -741,7 +743,9 @@
                     <img src="/public/images/logo-ik-icon.png"
                          alt="Инженерный комфорт"
                          class="h-12 w-auto object-contain flex-shrink-0 bg-white rounded-lg p-1.5">
-                    <span class="text-lg font-bold text-white leading-tight">Инженерный комфорт</span>
+                    <span class="text-base font-bold text-white leading-[1.05]">
+                        Инженерный<br>комфорт
+                    </span>
                 </div>
 
                 <p class="text-sm text-gray-500 mb-4 leading-relaxed">
