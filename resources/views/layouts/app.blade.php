@@ -200,10 +200,14 @@
                 </a>
 
                 <a href="mailto:{{ $regionEmail }}"
-                    class="flex items-center justify-end gap-1 text-xs text-gray-400 hover:text-primary transition mt-0.5">
-                    <i class="fa-regular fa-envelope"></i>
+                    class="flex items-center justify-end gap-2 text-xl font-bold text-gray-900 hover:text-primary transition mt-1">
+                    <i class="fa-regular fa-envelope text-primary"></i>
                     {{ $regionEmail }}
                 </a>
+
+                <p class="text-xs text-gray-400 mt-0.5">
+                    {{ $regionHours }} по МСК
+                </p>
             </div>
 
             {{-- Поиск + кнопки --}}
@@ -933,6 +937,28 @@ async function submitForm(formId, url, successId) {
         // если пользователь зашёл в поле, но не ввёл цифры — очистим, чтобы работал required
         if (isPhone(e.target) && e.target.value.replace(/\D/g, '').length <= 1) e.target.value = '';
     }, true);
+}());
+</script>
+
+<script>
+(function () {
+    function reachEmailGoal(eventName) {
+        if (typeof ym === 'function') {
+            ym(109607430, 'reachGoal', 'emailbind');
+        }
+
+        console.log(eventName);
+    }
+
+    document.addEventListener('copy', function (event) {
+        var link = event.target.closest && event.target.closest('a[href*="mailto"]');
+        if (link) reachEmailGoal('email-copy');
+    });
+
+    document.addEventListener('click', function (event) {
+        var link = event.target.closest && event.target.closest('a[href*="mailto"]');
+        if (link) reachEmailGoal('email-click');
+    });
 }());
 </script>
 
