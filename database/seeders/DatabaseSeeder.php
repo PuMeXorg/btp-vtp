@@ -12,50 +12,50 @@ class DatabaseSeeder extends Seeder
         // Регионы
         $regions = [
             [
-                'name'          => 'Казань',
-                'slug'          => 'kazan',
-                'phone'         => '+78432000000',
-                'phone_display' => '+7 (843) 200-00-00',
-                'email'         => 'kazan@company.ru',
-                'address'       => 'г. Казань, ул. Примерная, 1',
+                'name' => 'Казань',
+                'slug' => 'kazan',
+                'phone' => '+79919877947',
+                'phone_display' => '+7 991 987 79 47',
+                'email' => 'kazan@company.ru',
+                'address' => 'г. Казань, ул. Примерная, 1',
                 'working_hours' => 'Пн-пт: 09:00–18:00',
-                'sort'          => 1,
+                'sort' => 1,
             ],
             [
-                'name'          => 'Самара',
-                'slug'          => 'samara',
-                'phone'         => '+78462000000',
-                'phone_display' => '+7 (846) 200-00-00',
-                'email'         => 'samara@company.ru',
-                'address'       => 'г. Самара, ул. Примерная, 1',
+                'name' => 'Самара',
+                'slug' => 'samara',
+                'phone' => '+79919877947',
+                'phone_display' => '+7 991 987 79 47',
+                'email' => 'samara@company.ru',
+                'address' => 'г. Самара, ул. Примерная, 1',
                 'working_hours' => 'Пн-пт: 09:00–18:00',
-                'sort'          => 2,
+                'sort' => 2,
             ],
             [
-                'name'          => 'Ростов-на-Дону',
-                'slug'          => 'rostov',
-                'phone'         => '+78632000000',
-                'phone_display' => '+7 (863) 200-00-00',
-                'email'         => 'rostov@company.ru',
-                'address'       => 'г. Ростов-на-Дону, ул. Примерная, 1',
+                'name' => 'Ростов-на-Дону',
+                'slug' => 'rostov',
+                'phone' => '+79919877947',
+                'phone_display' => '+7 991 987 79 47',
+                'email' => 'rostov@company.ru',
+                'address' => 'г. Ростов-на-Дону, ул. Примерная, 1',
                 'working_hours' => 'Пн-пт: 09:00–18:00',
-                'sort'          => 3,
+                'sort' => 3,
             ],
             [
-                'name'          => 'Санкт-Петербург',
-                'slug'          => 'spb',
-                'phone'         => '+78122000000',
-                'phone_display' => '+7 (812) 200-00-00',
-                'email'         => 'spb@company.ru',
-                'address'       => 'г. Санкт-Петербург, ул. Примерная, 1',
+                'name' => 'Санкт-Петербург',
+                'slug' => 'spb',
+                'phone' => '+79919877947',
+                'phone_display' => '+7 991 987 79 47',
+                'email' => 'spb@company.ru',
+                'address' => 'г. Санкт-Петербург, ул. Примерная, 1',
                 'working_hours' => 'Пн-пт: 09:00–18:00',
-                'sort'          => 4,
+                'sort' => 4,
             ],
         ];
 
         foreach ($regions as $region) {
             DB::table('regions')->insert(array_merge($region, [
-                'is_active'  => true,
+                'is_active' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]));
@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
         $settings = [
             ['key' => 'site_name',        'value' => 'Название компании',       'label' => 'Название сайта',     'group' => 'general',   'type' => 'string'],
             ['key' => 'site_description', 'value' => 'Описание компании',       'label' => 'Описание сайта',     'group' => 'general',   'type' => 'text'],
-            ['key' => 'default_phone',    'value' => '+7 (000) 000-00-00',      'label' => 'Телефон (общий)',    'group' => 'contacts',  'type' => 'string'],
+            ['key' => 'default_phone',    'value' => '+7 991 987 79 47',        'label' => 'Телефон (общий)',    'group' => 'contacts',  'type' => 'string'],
             ['key' => 'default_email',    'value' => 'info@company.ru',         'label' => 'Email (общий)',      'group' => 'contacts',  'type' => 'string'],
             ['key' => 'default_address',  'value' => 'г. Москва, ул. ...',      'label' => 'Адрес (общий)',      'group' => 'contacts',  'type' => 'string'],
             ['key' => 'working_hours',    'value' => 'Пн-пт: 09:00–18:00',     'label' => 'Время работы',       'group' => 'contacts',  'type' => 'string'],
@@ -83,14 +83,14 @@ class DatabaseSeeder extends Seeder
         // Базовые страницы
         $pages = [
             ['title' => 'О компании', 'slug' => 'o-kompanii', 'type' => 'page',    'content' => '<p>Информация о компании</p>', 'sort' => 1],
-            ['title' => 'Сертификаты','slug' => 'sertifikaty', 'type' => 'page',   'content' => '<p>Наши сертификаты</p>',      'sort' => 2],
+            ['title' => 'Сертификаты', 'slug' => 'sertifikaty', 'type' => 'page',   'content' => '<p>Наши сертификаты</p>',      'sort' => 2],
             ['title' => 'Реквизиты',  'slug' => 'rekvizity',  'type' => 'page',    'content' => '<p>Реквизиты компании</p>',    'sort' => 3],
             ['title' => 'Цены',       'slug' => 'tseny',       'type' => 'page',   'content' => '<p>Прайс-лист</p>',            'sort' => 4],
         ];
 
         foreach ($pages as $page) {
             DB::table('pages')->insert(array_merge($page, [
-                'is_active'  => true,
+                'is_active' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]));

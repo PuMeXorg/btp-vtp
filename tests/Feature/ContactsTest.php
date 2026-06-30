@@ -84,7 +84,7 @@ class ContactsTest extends TestCase
             ->assertSee('href="mailto:spb@example.com"', false);
     }
 
-    public function test_spb_phone_migration_sets_the_shared_toll_free_number(): void
+    public function test_mobile_phone_migration_sets_the_shared_number_for_all_regions(): void
     {
         Region::create([
             'name' => 'Санкт-Петербург',
@@ -94,13 +94,27 @@ class ContactsTest extends TestCase
             'is_active' => true,
         ]);
 
-        $migration = require database_path('migrations/2026_06_10_000002_update_spb_phone.php');
+        Region::create([
+            'name' => 'Казань',
+            'slug' => 'kazan',
+            'phone' => '+78432000000',
+            'phone_display' => '+7 (843) 200-00-00',
+            'is_active' => true,
+        ]);
+
+        $migration = require database_path('migrations/2026_06_30_000001_update_all_contacts_phone_to_mobile.php');
         $migration->up();
 
         $this->assertDatabaseHas('regions', [
             'slug' => 'spb',
-            'phone' => '+78003019501',
-            'phone_display' => '+7 (800) 301-95-01',
+            'phone' => '+79919877947',
+            'phone_display' => '+7 991 987 79 47',
+        ]);
+
+        $this->assertDatabaseHas('regions', [
+            'slug' => 'kazan',
+            'phone' => '+79919877947',
+            'phone_display' => '+7 991 987 79 47',
         ]);
     }
 }

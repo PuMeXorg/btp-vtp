@@ -256,7 +256,7 @@
                         class="w-9 h-9 rounded-lg bg-gray-100 hover:bg-[#0077FF] hover:text-white text-gray-600 flex items-center justify-center transition">
                         <i class="fab fa-vk"></i>
                     </a>
-                    <a href="https://wa.me/78003019501" target="_blank" rel="noopener" aria-label="WhatsApp"
+                    <a href="https://wa.me/79919877947" target="_blank" rel="noopener" aria-label="WhatsApp"
                         class="w-9 h-9 rounded-lg bg-gray-100 hover:bg-[#25D366] hover:text-white text-gray-600 flex items-center justify-center transition">
                         <i class="fab fa-whatsapp"></i>
                     </a>
@@ -591,7 +591,7 @@
                     class="w-11 h-11 rounded-xl bg-gray-100 hover:bg-[#0077FF] hover:text-white text-gray-700 flex items-center justify-center transition text-lg">
                     <i class="fab fa-vk"></i>
                 </a>
-                <a href="https://wa.me/78003019501" target="_blank" rel="noopener" aria-label="WhatsApp"
+                <a href="https://wa.me/79919877947" target="_blank" rel="noopener" aria-label="WhatsApp"
                     class="w-11 h-11 rounded-xl bg-gray-100 hover:bg-[#25D366] hover:text-white text-gray-700 flex items-center justify-center transition text-lg">
                     <i class="fab fa-whatsapp"></i>
                 </a>
