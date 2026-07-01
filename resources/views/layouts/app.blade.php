@@ -159,13 +159,9 @@
                 <div x-show="open" @click.away="open = false" x-cloak
                     class="absolute mt-1 bg-white border border-gray-100 rounded-xl shadow-xl py-2 z-50 min-w-[200px]">
 
-                    <form method="POST" action="{{ route('region.set') }}" class="contents">
-                        @csrf
-
-                        <input type="hidden" name="redirect" value="{{ url()->current() }}">
-
+                    <div class="contents">
                         @foreach($allRegions as $region)
-                            <button type="submit" name="region" value="{{ $region->slug }}"
+                            <a href="{{ route('region.set-link', ['region' => $region->slug, 'redirect' => url()->current()]) }}"
                                 class="flex items-center gap-3 w-full text-left px-4 py-2.5 text-sm hover:bg-blue-50 hover:text-primary transition
                                 {{ ($currentRegion && $currentRegion->slug === $region->slug) ? 'text-primary font-semibold bg-blue-50' : 'text-gray-700' }}">
 
@@ -176,18 +172,18 @@
                                 @endif
 
                                 {{ $region->name }}
-                            </button>
+                            </a>
                         @endforeach
 
                         @if($currentRegion)
                             <hr class="my-1 border-gray-100">
 
-                            <button type="submit" name="region" value="default"
+                            <a href="{{ route('region.set-link', ['region' => 'default', 'redirect' => url()->current()]) }}"
                                 class="w-full text-left px-4 py-2 text-xs text-gray-400 hover:text-gray-600 transition">
                                 Сбросить регион
-                            </button>
+                            </a>
                         @endif
-                    </form>
+                    </div>
                 </div>
             </div>
 
@@ -557,23 +553,22 @@
                 {{ $regionPhone }}
             </a>
 
-            <form method="POST" action="{{ route('region.set') }}">
-                @csrf
-
-                <input type="hidden" name="redirect" value="{{ url()->current() }}">
-
-                <select name="region" onchange="this.form.submit()"
+            <div>
+                <select onchange="if (this.value) window.location.href = this.value"
                     class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
                     <option value="">Выбрать регион</option>
+                    @if($currentRegion)
+                        <option value="{{ route('region.set-link', ['region' => 'default', 'redirect' => url()->current()]) }}">Все регионы</option>
+                    @endif
 
                     @foreach($allRegions as $region)
-                        <option value="{{ $region->slug }}"
+                        <option value="{{ route('region.set-link', ['region' => $region->slug, 'redirect' => url()->current()]) }}"
                             {{ ($currentRegion && $currentRegion->slug === $region->slug) ? 'selected' : '' }}>
                             {{ $region->name }}
                         </option>
                     @endforeach
                 </select>
-            </form>
+            </div>
 
             <button @click="modalOpen = true; modalType = 'callback'; mobileOpen = false"
                 class="w-full border-2 border-primary text-primary py-2.5 rounded-lg font-medium">

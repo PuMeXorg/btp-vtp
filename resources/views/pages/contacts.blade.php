@@ -15,25 +15,17 @@
 
     {{-- Переключение регионов --}}
     <div class="flex flex-wrap gap-2 mb-10">
-        <form method="POST" action="{{ route('region.set') }}" class="inline">
-            @csrf
-            <input type="hidden" name="redirect" value="{{ route('contacts') }}">
-            <button type="submit" name="region" value="default"
-                class="px-4 py-2 rounded-full border text-sm font-medium transition
-                    {{ !$currentRegion ? 'bg-primary text-white border-primary' : 'bg-white text-gray-600 border-gray-300 hover:border-primary hover:text-primary' }}">
-                Все регионы
-            </button>
-        </form>
+        <a href="{{ route('region.set-link', ['region' => 'default', 'redirect' => route('contacts')]) }}"
+            class="px-4 py-2 rounded-full border text-sm font-medium transition
+                {{ !$currentRegion ? 'bg-primary text-white border-primary' : 'bg-white text-gray-600 border-gray-300 hover:border-primary hover:text-primary' }}">
+            Все регионы
+        </a>
         @foreach($allRegions as $region)
-        <form method="POST" action="{{ route('region.set') }}" class="inline">
-            @csrf
-            <input type="hidden" name="redirect" value="{{ route('contacts') }}">
-            <button type="submit" name="region" value="{{ $region->slug }}"
+        <a href="{{ route('region.set-link', ['region' => $region->slug, 'redirect' => route('contacts')]) }}"
                 class="px-4 py-2 rounded-full border text-sm font-medium transition
                     {{ ($currentRegion && $currentRegion->slug === $region->slug) ? 'bg-primary text-white border-primary' : 'bg-white text-gray-600 border-gray-300 hover:border-primary hover:text-primary' }}">
                 {{ $region->name }}
-            </button>
-        </form>
+        </a>
         @endforeach
     </div>
 

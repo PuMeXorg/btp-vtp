@@ -84,6 +84,21 @@ class ContactsTest extends TestCase
             ->assertSee('href="mailto:spb@example.com"', false);
     }
 
+    public function test_region_can_be_selected_without_submitting_a_form(): void
+    {
+        Region::create([
+            'name' => 'Санкт-Петербург',
+            'slug' => 'spb',
+            'email' => 'spb@example.com',
+            'is_active' => true,
+            'sort' => 1,
+        ]);
+
+        $this->get(route('region.set-link', ['region' => 'spb', 'redirect' => route('contacts')]))
+            ->assertRedirect(route('contacts'))
+            ->assertSessionHas('region', 'spb');
+    }
+
     public function test_mobile_phone_migration_sets_the_shared_number_for_all_regions(): void
     {
         Region::create([
