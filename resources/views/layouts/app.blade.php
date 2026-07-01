@@ -222,17 +222,18 @@
                     <div x-show="open" @click.away="open = false" x-cloak
                         class="absolute right-0 top-full mt-2 w-72 bg-white border border-gray-200 rounded-xl shadow-xl p-3 z-50">
 
-                        <form action="{{ route('services') }}" method="GET" class="flex gap-2">
+                        <div class="flex gap-2" role="search">
                             <input x-ref="searchInput" type="text" name="q" placeholder="Поиск по сайту..."
+                                onkeydown="if (event.key === 'Enter') performHeaderSearch(this.value)"
                                 class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
 
-                            <button type="submit" class="bg-primary hover:bg-primary-dark text-white px-3 py-2 rounded-lg transition">
+                            <button type="button" onclick="performHeaderSearch(this.previousElementSibling.value)" class="bg-primary hover:bg-primary-dark text-white px-3 py-2 rounded-lg transition">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                                 </svg>
                             </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
 
@@ -863,6 +864,20 @@
 </footer>
 
 <script>
+const yandexMetrikaCounter = @json($yandexMetrika ? (int) $yandexMetrika : null);
+
+function performHeaderSearch(query) {
+    const params = new URLSearchParams();
+    const normalizedQuery = (query || '').trim();
+
+    if (normalizedQuery) {
+        params.set('q', normalizedQuery);
+    }
+
+    const targetUrl = '{{ route('services') }}' + (params.toString() ? '?' + params.toString() : '');
+    window.location.href = targetUrl;
+}
+
 async function submitForm(formId, url, successId) {
     const form = document.getElementById(formId);
 
@@ -892,6 +907,10 @@ async function submitForm(formId, url, successId) {
 
             if (successBlock) {
                 successBlock.classList.remove('hidden');
+            }
+
+            if (yandexMetrikaCounter && typeof ym === 'function') {
+                ym(yandexMetrikaCounter, 'reachGoal', 'lead_form_success');
             }
         } else if (json && json.errors) {
             alert(Object.values(json.errors).flat().join('\n'));
@@ -938,8 +957,8 @@ async function submitForm(formId, url, successId) {
 <script>
 (function () {
     function reachEmailGoal(eventName) {
-        if (typeof ym === 'function') {
-            ym(109607430, 'reachGoal', 'emailbind');
+        if (yandexMetrikaCounter && typeof ym === 'function') {
+            ym(yandexMetrikaCounter, 'reachGoal', 'emailbind');
         }
 
         console.log(eventName);

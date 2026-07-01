@@ -99,6 +99,17 @@ class ContactsTest extends TestCase
             ->assertSessionHas('region', 'spb');
     }
 
+    public function test_layout_controls_do_not_submit_technical_forms(): void
+    {
+        $this->get(route('contacts'))
+            ->assertOk()
+            ->assertDontSee('action="'.route('region.set').'"', false)
+            ->assertDontSee('name="region"', false)
+            ->assertDontSee('type="submit"', false)
+            ->assertDontSee('this.form.submit()', false)
+            ->assertDontSee('method="GET"', false);
+    }
+
     public function test_mobile_phone_migration_sets_the_shared_number_for_all_regions(): void
     {
         Region::create([
