@@ -30,7 +30,7 @@ class FullContentSeeder extends Seeder
 <h2>Контакты</h2>
 <p>г. Москва, Дорожная улица, 60Б<br>
 Телефон: +7 (991) 987-79-47<br>
-Email: zakaz@teplovoy-punkt.ru<br>
+Email: region@vtp-inz.ru<br>
 Режим работы: Пн-пт с 08:00 до 18:00</p>
             ',
         ]);

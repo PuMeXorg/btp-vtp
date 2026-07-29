@@ -40,7 +40,7 @@ class RegionHelper
     public static function email(): string
     {
         return static::current()?->email
-            ?? Setting::get('default_email', 'info@company.ru');
+            ?? Setting::get('default_email', 'region@vtp-inz.ru');
     }
 
     public static function address(): string
