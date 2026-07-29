@@ -126,6 +126,6 @@ return [
     |
     */
 
-    'lead_notify' => env('LEAD_NOTIFY_EMAIL', 'region@vtp-inz.ru'),
+    'lead_notify' => env('LEAD_NOTIFY_EMAIL', 'region@vtp-inz.ru,info@btp-vtp.ru'),
 
 ];
