@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Казань',
                 'slug' => 'kazan',
-                'phone' => '+79919877947',
-                'phone_display' => '+7 991 987 79 47',
+                'phone' => '+74952231925',
+                'phone_display' => '+7 (495) 223-19-25',
                 'email' => 'region@vtp-inz.ru',
                 'address' => 'г. Казань, ул. Примерная, 1',
                 'working_hours' => 'Пн-пт: 09:00–18:00',
@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Самара',
                 'slug' => 'samara',
-                'phone' => '+79919877947',
-                'phone_display' => '+7 991 987 79 47',
+                'phone' => '+74952231925',
+                'phone_display' => '+7 (495) 223-19-25',
                 'email' => 'region@vtp-inz.ru',
                 'address' => 'г. Самара, ул. Примерная, 1',
                 'working_hours' => 'Пн-пт: 09:00–18:00',
@@ -34,8 +34,8 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Ростов-на-Дону',
                 'slug' => 'rostov',
-                'phone' => '+79919877947',
-                'phone_display' => '+7 991 987 79 47',
+                'phone' => '+74952231925',
+                'phone_display' => '+7 (495) 223-19-25',
                 'email' => 'region@vtp-inz.ru',
                 'address' => 'г. Ростов-на-Дону, ул. Примерная, 1',
                 'working_hours' => 'Пн-пт: 09:00–18:00',
@@ -44,8 +44,8 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Санкт-Петербург',
                 'slug' => 'spb',
-                'phone' => '+79919877947',
-                'phone_display' => '+7 991 987 79 47',
+                'phone' => '+74952231925',
+                'phone_display' => '+7 (495) 223-19-25',
                 'email' => 'region@vtp-inz.ru',
                 'address' => 'г. Санкт-Петербург, ул. Примерная, 1',
                 'working_hours' => 'Пн-пт: 09:00–18:00',
@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
         $settings = [
             ['key' => 'site_name',        'value' => 'Название компании',       'label' => 'Название сайта',     'group' => 'general',   'type' => 'string'],
             ['key' => 'site_description', 'value' => 'Описание компании',       'label' => 'Описание сайта',     'group' => 'general',   'type' => 'text'],
-            ['key' => 'default_phone',    'value' => '+7 991 987 79 47',        'label' => 'Телефон (общий)',    'group' => 'contacts',  'type' => 'string'],
+            ['key' => 'default_phone',    'value' => '+7 (495) 223-19-25',      'label' => 'Телефон (общий)',    'group' => 'contacts',  'type' => 'string'],
             ['key' => 'default_email',    'value' => 'region@vtp-inz.ru',       'label' => 'Email (общий)',      'group' => 'contacts',  'type' => 'string'],
             ['key' => 'default_address',  'value' => 'г. Москва, ул. ...',      'label' => 'Адрес (общий)',      'group' => 'contacts',  'type' => 'string'],
             ['key' => 'working_hours',    'value' => 'Пн-пт: 09:00–18:00',     'label' => 'Время работы',       'group' => 'contacts',  'type' => 'string'],

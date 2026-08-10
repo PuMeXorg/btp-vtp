@@ -351,7 +351,7 @@ class ParseTeplovoyPunkt extends Command
     {
         $this->info('📍 Обновление контактов...');
 
-        DB::table('settings')->where('key', 'default_phone')->update(['value' => '+7 (991) 987-79-47']);
+        DB::table('settings')->where('key', 'default_phone')->update(['value' => '+7 (495) 223-19-25']);
         DB::table('settings')->where('key', 'default_email')->update(['value' => 'region@vtp-inz.ru']);
         DB::table('settings')->where('key', 'default_address')->update(['value' => 'г. Москва, Дорожная улица, 60Б']);
         DB::table('settings')->where('key', 'working_hours')->update(['value' => 'Пн-пт: 08:00–18:00']);

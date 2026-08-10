@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Region;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
@@ -141,6 +142,39 @@ class ContactsTest extends TestCase
             'slug' => 'kazan',
             'phone' => '+79919877947',
             'phone_display' => '+7 991 987 79 47',
+        ]);
+    }
+
+    public function test_moscow_phone_migration_updates_default_and_all_regions(): void
+    {
+        DB::table('settings')->insert([
+            'key' => 'default_phone',
+            'value' => '+7 991 987 79 47',
+            'type' => 'string',
+            'group' => 'contacts',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        Region::create([
+            'name' => 'Казань',
+            'slug' => 'kazan',
+            'phone' => '+79919877947',
+            'phone_display' => '+7 991 987 79 47',
+            'is_active' => true,
+        ]);
+
+        $migration = require database_path('migrations/2026_08_10_000001_update_public_phone_to_moscow.php');
+        $migration->up();
+
+        $this->assertDatabaseHas('settings', [
+            'key' => 'default_phone',
+            'value' => '+7 (495) 223-19-25',
+        ]);
+        $this->assertDatabaseHas('regions', [
+            'slug' => 'kazan',
+            'phone' => '+74952231925',
+            'phone_display' => '+7 (495) 223-19-25',
         ]);
     }
 }
