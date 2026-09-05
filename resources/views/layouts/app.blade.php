@@ -630,6 +630,7 @@
                 </div>
 
                 <form id="callbackForm" action="{{ route('lead.callback') }}" method="POST">
+                    <span aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden"><input type="text" name="website" tabindex="-1" autocomplete="off" value=""></span>
                     @csrf
 
                     <input type="hidden" name="source_url" value="{{ url()->current() }}">
@@ -681,6 +682,7 @@
                 </div>
 
                 <form id="orderForm" action="{{ route('lead.order') }}" method="POST">
+                    <span aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden"><input type="text" name="website" tabindex="-1" autocomplete="off" value=""></span>
                     @csrf
 
                     <input type="hidden" name="source_url" value="{{ url()->current() }}">

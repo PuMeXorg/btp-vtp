@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\LeadReceived;
 use App\Models\Lead;
 use App\Services\Bitrix24Service;
+use App\Support\SpamGuard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -23,6 +24,10 @@ class LeadController extends Controller
             'phone' => ['required', 'string', 'max:20', self::PHONE_RULE],
             'name'  => 'nullable|string|max:100',
         ], ['phone.regex' => self::PHONE_MESSAGE]);
+
+        if (SpamGuard::isSpam($request, ['name'])) {
+            return $this->fakeSuccess($request, 'Спасибо! Мы перезвоним вам в ближайшее время.');
+        }
 
         $lead = Lead::create([
             'name'       => $validated['name'] ?? null,
@@ -55,6 +60,10 @@ class LeadController extends Controller
             'comment' => 'nullable|string|max:2000',
         ], ['phone.regex' => self::PHONE_MESSAGE]);
 
+        if (SpamGuard::isSpam($request, ['name', 'comment'])) {
+            return $this->fakeSuccess($request, 'Заявка принята! Мы свяжемся с вами в ближайшее время.');
+        }
+
         $lead = Lead::create([
             'name'       => $validated['name'],
             'phone'      => $validated['phone'],
@@ -77,6 +86,19 @@ class LeadController extends Controller
         }
 
         return back()->with('success', 'Заявка принята! Мы свяжемся с вами в ближайшее время.');
+    }
+
+    /**
+     * Ответ для отсеянного спама: бот видит обычный «успех», но заявка не
+     * создаётся и письмо не отправляется.
+     */
+    private function fakeSuccess(Request $request, string $message)
+    {
+        if ($request->ajax()) {
+            return response()->json(['success' => true, 'message' => $message]);
+        }
+
+        return back()->with('success', $message);
     }
 
     /**

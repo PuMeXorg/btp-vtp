@@ -47,6 +47,7 @@
                 <h3 class="font-bold text-lg mb-3">Оставить заявку</h3>
                 <p class="text-blue-100 text-sm mb-4">Получите консультацию по данной услуге</p>
                 <form id="sideForm" action="{{ route('lead.order') }}" method="POST">
+                    <span aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden"><input type="text" name="website" tabindex="-1" autocomplete="off" value=""></span>
                     @csrf
                     <input type="hidden" name="source_url" value="{{ url()->current() }}">
                     <input type="hidden" name="comment" value="Интересует: {{ $page->title }}">

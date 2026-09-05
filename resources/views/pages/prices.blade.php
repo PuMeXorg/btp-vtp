@@ -80,6 +80,7 @@
                     </div>
 
                     <form id="priceCalcForm" action="{{ route('lead.order') }}" method="POST" class="space-y-6">
+                        <span aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden"><input type="text" name="website" tabindex="-1" autocomplete="off" value=""></span>
                         @csrf
                         <input type="hidden" name="source_url" value="{{ url()->current() }}">
                         <input type="hidden" name="comment" id="priceCalcComment">

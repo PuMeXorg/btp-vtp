@@ -113,6 +113,7 @@
             <div class="bg-gray-50 rounded-2xl p-8">
                 <h2 class="text-xl font-bold mb-6">Написать нам</h2>
                 <form id="contactForm" action="{{ route('lead.order') }}" method="POST">
+                    <span aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden"><input type="text" name="website" tabindex="-1" autocomplete="off" value=""></span>
                     @csrf
                     <input type="hidden" name="source_url" value="{{ url()->current() }}">
                     <div class="space-y-4">

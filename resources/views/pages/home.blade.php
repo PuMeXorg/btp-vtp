@@ -582,6 +582,7 @@
                 <p class="text-gray-500 text-sm mb-6">Ответим в рабочее время</p>
 
                 <form id="ctaForm" action="{{ route('lead.order') }}" method="POST" class="space-y-4">
+                    <span aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden"><input type="text" name="website" tabindex="-1" autocomplete="off" value=""></span>
                     @csrf
                     <input type="hidden" name="source_url" value="{{ url()->current() }}">
 
